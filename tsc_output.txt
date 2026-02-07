@@ -1,0 +1,27 @@
+app/(withLayout)/calculator/layout.tsx(4,58): error TS2503: Cannot find namespace 'React'.
+app/(withLayout)/formula-sheet/[name]/page.tsx(37,27): error TS2745: This JSX tag's 'children' prop expects type 'string' which requires multiple children, but only a single child was provided.
+app/(withLayout)/layout.tsx(3,61): error TS2503: Cannot find namespace 'React'.
+app/(withLayout)/layout.tsx(4,11): error TS2741: Property 'children' is missing in type '{}' but required in type '{ children: any; }'.
+app/layout.tsx(3,34): error TS2307: Cannot find module '@next/third-parties/google' or its corresponding type declarations.
+app/sitemap_calculators.xml/route.ts(2,16): error TS2307: Cannot find module 'fs' or its corresponding type declarations.
+app/sitemap_calculators.xml/route.ts(3,18): error TS2307: Cannot find module 'path' or its corresponding type declarations.
+app/sitemap_calculators.xml/route.ts(6,32): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+app/sitemap_pages.xml/route.ts(2,16): error TS2307: Cannot find module 'fs' or its corresponding type declarations.
+app/sitemap_pages.xml/route.ts(3,18): error TS2307: Cannot find module 'path' or its corresponding type declarations.
+app/sitemap_pages.xml/route.ts(6,32): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+components/blogs/BlogContent.tsx(76,27): error TS2322: Type '{ key: any; blog: any; }' is not assignable to type 'Props'.
+  Property 'key' does not exist on type 'Props'.
+components/blogs/FullBlogsPage.tsx(18,14): error TS2745: This JSX tag's 'children' prop expects type 'string' which requires multiple children, but only a single child was provided.
+components/CalculatorNotes.tsx(16,12): error TS2745: This JSX tag's 'children' prop expects type 'string' which requires multiple children, but only a single child was provided.
+components/calculators/Mode.tsx(159,19): error TS2538: Type 'unknown' cannot be used as an index type.
+components/calculators/XAndYIntercepts.tsx(11,46): error TS2307: Cannot find module '@yaffle/expression/index' or its corresponding type declarations.
+components/markdown-editor.tsx(176,14): error TS2745: This JSX tag's 'children' prop expects type 'string' which requires multiple children, but only a single child was provided.
+components/PageHeader/index.tsx(48,24): error TS2745: This JSX tag's 'children' prop expects type 'string' which requires multiple children, but only a single child was provided.
+components/QBanks/QuestionsPage.tsx(35,20): error TS2745: This JSX tag's 'children' prop expects type 'string' which requires multiple children, but only a single child was provided.
+components/QBanks/SolutionPage.tsx(77,16): error TS2745: This JSX tag's 'children' prop expects type 'string' which requires multiple children, but only a single child was provided.
+components/QBanks/SolutionPage.tsx(90,16): error TS2745: This JSX tag's 'children' prop expects type 'string' which requires multiple children, but only a single child was provided.
+helpers/server.ts(8,25): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+helpers/server.ts(28,25): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+service/config.ts(2,3): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+service/config.ts(12,3): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+utils/baseUrl.ts(2,2): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.

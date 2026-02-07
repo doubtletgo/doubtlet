@@ -1,0 +1,109 @@
+.pressureContainer {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.pressureLabel {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.pressureButton {
+    padding: 4px 8px;
+    border: 2px solid #007bff;
+    background-color: white;
+    color: #007bff;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    outline: none;
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+.pressureButton:hover {
+    background-color: #007bff;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.activePressure {
+    background-color: #007bff;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.inputField {
+    border: 2px solid #007bff !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+}
+
+.inputField:focus {
+    border-color: #0056b3 !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
+}
+
+@media (max-width: 576px) {
+    .pressureContainer {
+        gap: 4px;
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .pressureButton {
+        padding: 3px 6px;
+        font-size: 0.7rem;
+    }
+}
+
+.resultContainer {
+    margin-top: 30px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.inputWrapper {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.resultItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.resultItem:last-child {
+    border-bottom: none;
+}
+
+.resultLabel {
+    color: #444;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+.resultValue {
+    color: #007bff;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-align: left;
+}

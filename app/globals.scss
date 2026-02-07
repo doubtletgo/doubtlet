@@ -1,0 +1,66 @@
+@import "/styles/animate.min.scss";
+@import "/styles/bootstrap.min.scss";
+@import '~slick-carousel/slick/slick.css';
+@import '~slick-carousel/slick/slick-theme.css';
+
+
+
+/* Component Styles */
+
+/* Global and Responsive Styles */
+@import "/styles/responsive.scss";
+@import "/styles/style.scss";
+@import "/styles/component_styles/comment.scss";
+
+body {
+  overflow-x: hidden;
+}
+.subject-button {
+    max-width: 100%;
+    text-align: left;
+    font-size: 18px;
+    height: auto;
+    width: 33%;
+    display: inline-block;
+    border: 0.5px solid #0d6efd !important;
+    background-color: #4f6efa26;
+    border-radius: 8px;
+    box-shadow: 4px 5px 7px 1px #999;
+  }
+
+  @media (max-width: 992px) {
+    .subject-button {
+      width: calc(50% - 0.5rem);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .subject-button {
+      width: 100%;
+    }
+  }
+  
+  .text-shimmer {
+  background: linear-gradient(
+    135deg,
+    #ffffff 20%,
+    #cccccc 40%,
+    #ffffff 60%
+  );
+  font-size: 20px;
+  background-clip: text;
+  -webkit-background-clip: text; 
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  animation: shimmer 2.5s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

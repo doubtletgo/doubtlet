@@ -1,0 +1,39 @@
+
+.label {
+    text-align: left;
+}
+
+.inputContainer {
+    position: relative;
+}
+
+
+.errorIcon {
+    position: absolute;
+    right: 5%;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+.errorMessage {
+    color: #dc3545;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+}
+
+@media (max-width: 576px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .label {
+        text-align: left;
+        margin-bottom: 0.5rem;
+    }
+
+    .inputContainer {
+        width: 100%;
+    }
+}

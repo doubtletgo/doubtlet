@@ -1,0 +1,62 @@
+
+.centeredText {
+    text-align: center !important;
+    color: rgb(52, 118, 251) !important;
+    font-size: 2rem !important;
+    max-height: 3.5em !important;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    line-clamp: 1s;
+    -webkit-box-orient: vertical;
+  }
+  
+  /* Adjust styles for smaller screens */
+  @media (max-width: 1200px) {
+    .centeredText {
+      font-size: 1.8rem !important;
+      max-height: 5em !important;
+    }
+  
+    .centeredText > p {
+      font-size: 1.5rem !important;
+    }
+  }
+  
+  
+  
+  /* Adjust styles for smaller screens */
+  @media (max-width: 768px) {
+    .centeredText {
+      font-size: 1.5rem !important;
+      max-height: 4em !important;
+    }
+  
+    .centeredText > p {
+      font-size: 1.5rem !important;
+    }
+  }
+  
+  /* Further adjustments for very small screens (mobile) */
+  @media (max-width: 500px) {
+    .centeredText {
+      max-height: 5em !important;
+    }
+  
+    .centeredText > p {
+      font-size: 1.2rem !important;
+    }
+  }
+  
+  .centeredText > * {
+    text-align: center !important;
+    font-size: 2rem !important;
+    color: rgb(52, 118, 251) !important;
+    text-overflow: ellipsis;
+    display: none;
+  }
+  
+  .centeredText > p:nth-child(1) {
+    display: block !important;
+  }

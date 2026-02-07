@@ -1,0 +1,76 @@
+.commentbox {
+  $color_1: black;
+  $color_2: rgb(224, 219, 219);
+  $color_3: rgb(184, 183, 183);
+  $color_4: rgb(132, 137, 146);
+  $color_5: rgb(212, 208, 208);
+  $color_6: white;
+  $background-color_1: #ecb21f;
+  $background-color_2: unset;
+  $background-color_3: rgba(16, 46, 46, 0.973);
+  $background-color_4: black;
+  $border-color_1: #a88734 #9c7e31 #846a29;
+
+  .navbar-nav {
+    width: 100%;
+  }
+
+  span {
+    display: inline;
+    color: $color_3;
+  }
+  .userlogo {
+    width: 30px !important;
+    height: 30px !important;
+    background-color: #1d649d;
+    border-radius: 30px;
+    font-size: 20px;
+    text-transform: uppercase;
+    justify-content: center;
+    text-align: center;
+    padding-top: 3px;
+    color: #fff;
+  }
+  .username {
+    color: $color_3;
+    padding-left: 10px;
+    padding-top: 4px;
+  }
+  .Date {
+    padding-left: 10px;
+    padding-top: 7px;
+  }
+  .profilediv {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .darker {
+    box-shadow: 0px 0px 20px 7px rgba(10, 0, 35, 0.04);
+    float: right;
+    border-radius: 5px;
+    padding-left: 40px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+
+    padding-top: 10px;
+    h4 {
+      display: inline;
+    }
+
+    p {
+      color: black;
+    }
+
+    @media (min-width: 568px) {
+      .end {
+        margin-left: auto;
+      }
+    }
+    @media (max-width: 768px) {
+      #post {
+        width: 100%;
+      }
+    }
+  }
+}
