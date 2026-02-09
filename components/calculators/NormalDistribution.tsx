@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MathInput from 'react-math-keyboard';
@@ -17,15 +18,15 @@ import { MathField } from '@/types/mathfield.types';
 import { jStat } from 'jstat';
 
 const NormalDistribution = () => {
-  const [mean, setMean] = useState('15');
-  const [deviation, setDeviation] = useState('13');
-  const [score, setScore] = useState('4');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [mean, setMean] = useLocalStorage('NormalDistribution_mean', '15');
+  const [deviation, setDeviation] = useLocalStorage('NormalDistribution_deviation', '13');
+  const [score, setScore] = useLocalStorage('NormalDistribution_score', '4');
+  const [equation, setEquation] = useLocalStorage('NormalDistribution_equation', '');
+  const [solution, setSolution] = useLocalStorage('NormalDistribution_solution', '');
+  const [result, setResult] = useLocalStorage('NormalDistribution_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('NormalDistribution_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('NormalDistribution_showSteps', true);
+  const [note, setNote] = useLocalStorage('NormalDistribution_note', undefined);
   const mf1 = useRef<MathField | null>(null);
   const mf2 = useRef<MathField | null>(null);
   const mf3 = useRef<MathField | null>(null);

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -14,15 +15,15 @@ const WeightOnMarsCalculator = () => {
   // --------------------------
   // STATE HOOKS
   // --------------------------
-  const [weight, setWeight] = useState('70'); // weight on Earth (in selected unit)
-  const [weightUnit, setWeightUnit] = useState<WeightUnit>('Kg'); // Unit of input weight
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [note, setNote] = useState();
+  const [weight, setWeight] = useLocalStorage('WeightOnMars_weight', '70'); // weight on Earth (in selected unit)
+  const [weightUnit, setWeightUnit] = useLocalStorage<WeightUnit>('WeightOnMars_weightUnit', 'Kg'); // Unit of input weight
+  const [equation, setEquation] = useLocalStorage('WeightOnMars_equation', '');
+  const [solution, setSolution] = useLocalStorage('WeightOnMars_solution', '');
+  const [result, setResult] = useLocalStorage('WeightOnMars_result', undefined);
+  const [note, setNote] = useLocalStorage('WeightOnMars_note', undefined);
 
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
+  const [showResult, setShowResult] = useLocalStorage('WeightOnMars_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('WeightOnMars_showSteps', true);
 
   // ---------------------------------------------------
   // INPUT VALIDATION

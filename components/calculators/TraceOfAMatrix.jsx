@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -30,18 +31,18 @@ function evalLatex(expression) {
   }
 }
 const TraceOfAMatrix = () => {
-  const [row, setRow] = useState('2');
+  const [row, setRow] = useLocalStorage('TraceOfAMatrix_row', '2');
 
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('TraceOfAMatrix_frstMatrix', [
     ['1.5', '\\frac{2}{3}'],
     ['3', '-\\frac{2}{3}'],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('TraceOfAMatrix_equation', '');
+  const [solution, setSolution] = useLocalStorage('TraceOfAMatrix_solution', '');
+  const [result, setResult] = useLocalStorage('TraceOfAMatrix_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('TraceOfAMatrix_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('TraceOfAMatrix_showSteps', true);
+  const [note, setNote] = useLocalStorage('TraceOfAMatrix_note', undefined);
   useEffect(() => {
     setNote(
       renderSteps([

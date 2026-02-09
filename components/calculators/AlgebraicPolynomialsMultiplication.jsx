@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import MathInput from 'react-math-keyboard';
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
@@ -15,16 +16,16 @@ import {
 import algebrite from 'algebrite';
 
 const AlgebraicPolynomialsMultiplication = () => {
-  const [firstPoly, setFirstPoly] = useState('x^2 + 2');
-  const [secondPoly, setSecondPoly] = useState('-2x + 5');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState();
-  const [note, setNote] = useState();
-  const [firstInvalid, setFirstInvalid] = useState(false);
-  const [secondInvalid, setSecondInvalid] = useState(false);
+  const [firstPoly, setFirstPoly] = useLocalStorage('AlgebraicPolynomialsMultiplication_firstPoly', 'x^2 + 2');
+  const [secondPoly, setSecondPoly] = useLocalStorage('AlgebraicPolynomialsMultiplication_secondPoly', '-2x + 5');
+  const [equation, setEquation] = useLocalStorage('AlgebraicPolynomialsMultiplication_equation', '');
+  const [solution, setSolution] = useLocalStorage('AlgebraicPolynomialsMultiplication_solution', '');
+  const [result, setResult] = useLocalStorage('AlgebraicPolynomialsMultiplication_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('AlgebraicPolynomialsMultiplication_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('AlgebraicPolynomialsMultiplication_showSteps', undefined);
+  const [note, setNote] = useLocalStorage('AlgebraicPolynomialsMultiplication_note', undefined);
+  const [firstInvalid, setFirstInvalid] = useLocalStorage('AlgebraicPolynomialsMultiplication_firstInvalid', false);
+  const [secondInvalid, setSecondInvalid] = useLocalStorage('AlgebraicPolynomialsMultiplication_secondInvalid', false);
 
   function solve(expression) {
     if (!expression) return '';

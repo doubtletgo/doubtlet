@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -19,18 +20,18 @@ import { getSearchParams, putSpace } from '../../helpers/general';
 import KatexInput from '../common/katexInput';
 
 const DistanceBetweenTwoParallelPlanes = () => {
-  const [a, setA] = useState('1');
-  const [b, setB] = useState('2');
-  const [c, setC] = useState('\\sqrt{1}');
-  const [d1, setD1] = useState('e^5');
-  const [d2, setD2] = useState('4');
+  const [a, setA] = useLocalStorage('DistanceBetweenTwoParallelPlanes_a', '1');
+  const [b, setB] = useLocalStorage('DistanceBetweenTwoParallelPlanes_b', '2');
+  const [c, setC] = useLocalStorage('DistanceBetweenTwoParallelPlanes_c', '\\sqrt{1}');
+  const [d1, setD1] = useLocalStorage('DistanceBetweenTwoParallelPlanes_d1', 'e^5');
+  const [d2, setD2] = useLocalStorage('DistanceBetweenTwoParallelPlanes_d2', '4');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [result, setResult] = useState('');
+  const [equation, setEquation] = useLocalStorage('DistanceBetweenTwoParallelPlanes_equation', '');
+  const [solution, setSolution] = useLocalStorage('DistanceBetweenTwoParallelPlanes_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('DistanceBetweenTwoParallelPlanes_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('DistanceBetweenTwoParallelPlanes_showSteps', true);
+  const [note, setNote] = useLocalStorage('DistanceBetweenTwoParallelPlanes_note', undefined);
+  const [result, setResult] = useLocalStorage('DistanceBetweenTwoParallelPlanes_result', '');
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

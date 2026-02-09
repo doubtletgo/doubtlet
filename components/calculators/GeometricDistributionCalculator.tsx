@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import {
@@ -15,15 +16,15 @@ import { MathField } from '@/types/mathfield.types';
 import Input from '../common/input';
 
 const GeometricDistribution = () => {
-  const [a, setA] = useState('0.75');
-  const [b, setB] = useState('12');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [useTrial, setUseTrial] = useState(true);
+  const [a, setA] = useLocalStorage('GeometricDistributionCalculator_a', '0.75');
+  const [b, setB] = useLocalStorage('GeometricDistributionCalculator_b', '12');
+  const [equation, setEquation] = useLocalStorage('GeometricDistributionCalculator_equation', '');
+  const [solution, setSolution] = useLocalStorage('GeometricDistributionCalculator_solution', '');
+  const [result, setResult] = useLocalStorage('GeometricDistributionCalculator_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('GeometricDistributionCalculator_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('GeometricDistributionCalculator_showSteps', true);
+  const [note, setNote] = useLocalStorage('GeometricDistributionCalculator_note', undefined);
+  const [useTrial, setUseTrial] = useLocalStorage('GeometricDistributionCalculator_useTrial', true);
   const mf1 = useRef<MathField | null>(null);
 
   const aConverted = convertIntoLatex(convertFromLatex(a));

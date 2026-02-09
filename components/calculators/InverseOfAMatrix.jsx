@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -28,17 +29,17 @@ const config = {};
 const math = create(all, config);
 
 const InverseOfAMatrix = () => {
-  const [row, setRow] = useState('2');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('InverseOfAMatrix_row', '2');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('InverseOfAMatrix_frstMatrix', [
     ['1.5', '\\frac{2}{3}'],
     ['3', '\\frac{-2}{3}'],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('InverseOfAMatrix_equation', '');
+  const [solution, setSolution] = useLocalStorage('InverseOfAMatrix_solution', '');
+  const [result, setResult] = useLocalStorage('InverseOfAMatrix_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('InverseOfAMatrix_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('InverseOfAMatrix_showSteps', true);
+  const [note, setNote] = useLocalStorage('InverseOfAMatrix_note', undefined);
 
   useEffect(() => {
     const vals = getSearchParams(false);

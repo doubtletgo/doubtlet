@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { parseNumber } from '../../helpers/decimal';
@@ -18,18 +19,18 @@ import { convertToKatex } from '../../helpers/SolveRoot';
 const config = {};
 const math = create(all, config);
 const SphericalToCylindricalCoordinates = () => {
-  const [rho, setRho] = useState('5');
-  const [theta, setTheta] = useState('\\frac{\\pi}{3}');
-  const [phai, setPhai] = useState('\\frac{\\pi}{6}');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [rhoInvalid, setRhoInvalid] = useState(false);
-  const [thetaInvalid, setThetaInvalid] = useState(false);
-  const [phaiInvalid, setPhaiInvalid] = useState(false);
+  const [rho, setRho] = useLocalStorage('SphericalToCylindricalCoordinates_rho', '5');
+  const [theta, setTheta] = useLocalStorage('SphericalToCylindricalCoordinates_theta', '\\frac{\\pi}{3}');
+  const [phai, setPhai] = useLocalStorage('SphericalToCylindricalCoordinates_phai', '\\frac{\\pi}{6}');
+  const [equation, setEquation] = useLocalStorage('SphericalToCylindricalCoordinates_equation', '');
+  const [solution, setSolution] = useLocalStorage('SphericalToCylindricalCoordinates_solution', '');
+  const [result, setResult] = useLocalStorage('SphericalToCylindricalCoordinates_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('SphericalToCylindricalCoordinates_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('SphericalToCylindricalCoordinates_showSteps', true);
+  const [note, setNote] = useLocalStorage('SphericalToCylindricalCoordinates_note', undefined);
+  const [rhoInvalid, setRhoInvalid] = useLocalStorage('SphericalToCylindricalCoordinates_rhoInvalid', false);
+  const [thetaInvalid, setThetaInvalid] = useLocalStorage('SphericalToCylindricalCoordinates_thetaInvalid', false);
+  const [phaiInvalid, setPhaiInvalid] = useLocalStorage('SphericalToCylindricalCoordinates_phaiInvalid', false);
 
   useEffect(() => {
     setNote(

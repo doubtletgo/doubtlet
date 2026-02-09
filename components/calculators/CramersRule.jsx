@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -27,18 +28,18 @@ const math = create(all, config);
 const isSame = (a, b) => a.toString().replace(/[{}]/g, '') == b;
 
 const CramersRule = () => {
-  const [variables, setVariables] = useState('2');
-  const [eqnMatrix, setEqnMatrix] = useState([
+  const [variables, setVariables] = useLocalStorage('CramersRule_variables', '2');
+  const [eqnMatrix, setEqnMatrix] = useLocalStorage('CramersRule_eqnMatrix', [
     ['1.5', '\\frac{2}{3}'],
     ['3', '-\\frac{2}{3}'],
   ]);
-  const [resultMatrix, setResultMatrix] = useState([['2'], ['1']]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [resultMatrix, setResultMatrix] = useLocalStorage('CramersRule_resultMatrix', [['2'], ['1']]);
+  const [equation, setEquation] = useLocalStorage('CramersRule_equation', '');
+  const [solution, setSolution] = useLocalStorage('CramersRule_solution', '');
+  const [result, setResult] = useLocalStorage('CramersRule_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('CramersRule_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('CramersRule_showSteps', true);
+  const [note, setNote] = useLocalStorage('CramersRule_note', undefined);
   let varArr = ['x', 'y', 'z', 'p', 'q'];
   let abc = ['A', 'B', 'C', 'D', 'E'];
 

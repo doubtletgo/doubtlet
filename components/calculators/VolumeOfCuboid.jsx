@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 
@@ -15,16 +16,16 @@ import {
 } from '../../helpers/matrixHelper';
 
 const VolumeOfCuboid = () => {
-  const [h, setH] = useState('1');
-  const [b, setB] = useState('9');
-  const [l, setL] = useState('20');
+  const [h, setH] = useLocalStorage('VolumeOfCuboid_h', '1');
+  const [b, setB] = useLocalStorage('VolumeOfCuboid_b', '9');
+  const [l, setL] = useLocalStorage('VolumeOfCuboid_l', '20');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('VolumeOfCuboid_equation', '');
+  const [solution, setSolution] = useLocalStorage('VolumeOfCuboid_solution', '');
+  const [result, setResult] = useLocalStorage('VolumeOfCuboid_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('VolumeOfCuboid_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('VolumeOfCuboid_showSteps', true);
+  const [note, setNote] = useLocalStorage('VolumeOfCuboid_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

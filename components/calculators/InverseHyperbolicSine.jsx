@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -16,15 +17,15 @@ function putSpace(val) {
 }
 
 const InverseHyperbolicSine = () => {
-  const [latex, setLatex] = useState('\\frac{1}{3}');
-  const [a, setA] = useState('');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [input, setInput] = useState();
+  const [latex, setLatex] = useLocalStorage('InverseHyperbolicSine_latex', '\\frac{1}{3}');
+  const [a, setA] = useLocalStorage('InverseHyperbolicSine_a', '');
+  const [equation, setEquation] = useLocalStorage('InverseHyperbolicSine_equation', '');
+  const [solution, setSolution] = useLocalStorage('InverseHyperbolicSine_solution', '');
+  const [result, setResult] = useLocalStorage('InverseHyperbolicSine_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('InverseHyperbolicSine_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('InverseHyperbolicSine_showSteps', true);
+  const [note, setNote] = useLocalStorage('InverseHyperbolicSine_note', undefined);
+  const [input, setInput] = useLocalStorage('InverseHyperbolicSine_input', undefined);
 
   function evalLatex(expression) {
     try {

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -16,19 +17,19 @@ import NotesHelpButton from '../common/Notes/NotesHelpButton';
 import { isMatValid } from '../../helpers/Validations';
 
 const TransposeOfAMatrix = () => {
-  const [row, setRow] = useState('2');
-  const [column, setColumn] = useState('2');
+  const [row, setRow] = useLocalStorage('TransposeOfAMatrix_row', '2');
+  const [column, setColumn] = useLocalStorage('TransposeOfAMatrix_column', '2');
 
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('TransposeOfAMatrix_frstMatrix', [
     ['1.5', '\\frac{2}{3}'],
     ['3', '-\\frac{2}{3}'],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('TransposeOfAMatrix_equation', '');
+  const [solution, setSolution] = useLocalStorage('TransposeOfAMatrix_solution', '');
+  const [answer, setAnswer] = useLocalStorage('TransposeOfAMatrix_answer', undefined);
+  const [showResult, setShowResult] = useLocalStorage('TransposeOfAMatrix_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('TransposeOfAMatrix_showSteps', true);
+  const [note, setNote] = useLocalStorage('TransposeOfAMatrix_note', undefined);
 
   // List to matrix funtion
   function listToMatrix(list, elementsPerSubArray) {

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -17,18 +18,18 @@ import {
 import { addSymbol } from '../../helpers/decimal';
 
 const FootOfPerpendicularToGivenLine = () => {
-  const [a, setA] = useState('5');
-  const [b, setB] = useState('\\sqrt{7}');
-  const [p, setP] = useState('2');
-  const [c, setC] = useState('\\sqrt{9}');
-  const [q, setQ] = useState('2');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [result, setResult] = useState('');
-  const [note, setNote] = useState();
+  const [a, setA] = useLocalStorage('FootOfPerpendicularToGivenLine_a', '5');
+  const [b, setB] = useLocalStorage('FootOfPerpendicularToGivenLine_b', '\\sqrt{7}');
+  const [p, setP] = useLocalStorage('FootOfPerpendicularToGivenLine_p', '2');
+  const [c, setC] = useLocalStorage('FootOfPerpendicularToGivenLine_c', '\\sqrt{9}');
+  const [q, setQ] = useLocalStorage('FootOfPerpendicularToGivenLine_q', '2');
+  const [equation, setEquation] = useLocalStorage('FootOfPerpendicularToGivenLine_equation', '');
+  const [solution, setSolution] = useLocalStorage('FootOfPerpendicularToGivenLine_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('FootOfPerpendicularToGivenLine_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('FootOfPerpendicularToGivenLine_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('FootOfPerpendicularToGivenLine_isPointSame', false);
+  const [result, setResult] = useLocalStorage('FootOfPerpendicularToGivenLine_result', '');
+  const [note, setNote] = useLocalStorage('FootOfPerpendicularToGivenLine_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

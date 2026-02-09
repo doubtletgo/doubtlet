@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 
@@ -16,15 +17,15 @@ import {
 } from '../../helpers/matrixHelper';
 
 const CurvedSurfaceAreaOfCylinder = () => {
-  const [r, setR] = useState('\\sqrt{3}');
-  const [h, setH] = useState('\\pi');
+  const [r, setR] = useLocalStorage('CurvedSurfaceAreaOfCylinder_r', '\\sqrt{3}');
+  const [h, setH] = useLocalStorage('CurvedSurfaceAreaOfCylinder_h', '\\pi');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('CurvedSurfaceAreaOfCylinder_equation', '');
+  const [solution, setSolution] = useLocalStorage('CurvedSurfaceAreaOfCylinder_solution', '');
+  const [result, setResult] = useLocalStorage('CurvedSurfaceAreaOfCylinder_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('CurvedSurfaceAreaOfCylinder_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('CurvedSurfaceAreaOfCylinder_showSteps', true);
+  const [note, setNote] = useLocalStorage('CurvedSurfaceAreaOfCylinder_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   //to get values from other calculator

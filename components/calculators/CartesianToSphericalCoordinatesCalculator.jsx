@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import MathInput from 'react-math-keyboard';
 import { addSymbol, parseNumber, withSymbol } from '../../helpers/decimal';
 import { renderSteps } from '../../helpers/katex';
@@ -20,18 +21,18 @@ const config = {};
 const math = create(all, config);
 
 const CartesianToSphericalCoordinates = () => {
-  const [latex, setLatex] = useState('5');
-  const [latexX, setLatexX] = useState('7');
-  const [latexZ, setLatexZ] = useState('3');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [xInvalid, setXInvalid] = useState(false);
-  const [yInvalid, setYInvalid] = useState(false);
-  const [zInvalid, setZInvalid] = useState(false);
+  const [latex, setLatex] = useLocalStorage('CartesianToSphericalCoordinatesCalculator_latex', '5');
+  const [latexX, setLatexX] = useLocalStorage('CartesianToSphericalCoordinatesCalculator_latexX', '7');
+  const [latexZ, setLatexZ] = useLocalStorage('CartesianToSphericalCoordinatesCalculator_latexZ', '3');
+  const [equation, setEquation] = useLocalStorage('CartesianToSphericalCoordinatesCalculator_equation', '');
+  const [solution, setSolution] = useLocalStorage('CartesianToSphericalCoordinatesCalculator_solution', '');
+  const [result, setResult] = useLocalStorage('CartesianToSphericalCoordinatesCalculator_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('CartesianToSphericalCoordinatesCalculator_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('CartesianToSphericalCoordinatesCalculator_showSteps', true);
+  const [note, setNote] = useLocalStorage('CartesianToSphericalCoordinatesCalculator_note', undefined);
+  const [xInvalid, setXInvalid] = useLocalStorage('CartesianToSphericalCoordinatesCalculator_xInvalid', false);
+  const [yInvalid, setYInvalid] = useLocalStorage('CartesianToSphericalCoordinatesCalculator_yInvalid', false);
+  const [zInvalid, setZInvalid] = useLocalStorage('CartesianToSphericalCoordinatesCalculator_zInvalid', false);
   useEffect(() => {
     setNote(
       renderSteps([

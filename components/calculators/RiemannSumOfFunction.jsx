@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace, refValue } from '../../helpers/general';
@@ -52,18 +53,18 @@ function hasMultipleVariables(expression) {
 }
 
 const RiemannSumOfFunction = () => {
-  const [expression, setExpression] = useState('e^x');
-  const [lowerKatex, setLowerKatex] = useState('1');
-  const [upperKatex, setUpperKatex] = useState('3');
-  const [interval, setSubIntervals] = useState('4');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [invalidInput, setInvalidInput] = useState(false);
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [sumType, setSumType] = useState('left');
+  const [expression, setExpression] = useLocalStorage('RiemannSumOfFunction_expression', 'e^x');
+  const [lowerKatex, setLowerKatex] = useLocalStorage('RiemannSumOfFunction_lowerKatex', '1');
+  const [upperKatex, setUpperKatex] = useLocalStorage('RiemannSumOfFunction_upperKatex', '3');
+  const [interval, setSubIntervals] = useLocalStorage('RiemannSumOfFunction_interval', '4');
+  const [equation, setEquation] = useLocalStorage('RiemannSumOfFunction_equation', '');
+  const [solution, setSolution] = useLocalStorage('RiemannSumOfFunction_solution', '');
+  const [answer, setAnswer] = useLocalStorage('RiemannSumOfFunction_answer', undefined);
+  const [invalidInput, setInvalidInput] = useLocalStorage('RiemannSumOfFunction_invalidInput', false);
+  const [showResult, setShowResult] = useLocalStorage('RiemannSumOfFunction_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('RiemannSumOfFunction_showSteps', true);
+  const [note, setNote] = useLocalStorage('RiemannSumOfFunction_note', undefined);
+  const [sumType, setSumType] = useLocalStorage('RiemannSumOfFunction_sumType', 'left');
 
   const left_Right = sumType == 'left' ? 'Left' : 'Right';
   useEffect(() => {

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -9,13 +10,13 @@ import { abs } from '../../helpers/decimal';
 import { putSpace } from '../../helpers/general';
 
 const DecimalToFraction = () => {
-  const [a, setA] = useState('345.435');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [a, setA] = useLocalStorage('DecimalToFraction_a', '345.435');
+  const [equation, setEquation] = useLocalStorage('DecimalToFraction_equation', '');
+  const [solution, setSolution] = useLocalStorage('DecimalToFraction_solution', '');
+  const [result, setResult] = useLocalStorage('DecimalToFraction_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('DecimalToFraction_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('DecimalToFraction_showSteps', true);
+  const [note, setNote] = useLocalStorage('DecimalToFraction_note', undefined);
   useEffect(() => {
     setNote(
       renderSteps([

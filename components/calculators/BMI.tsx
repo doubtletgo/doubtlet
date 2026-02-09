@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -8,19 +9,19 @@ import Input from '../common/input';
 import BMIMeter from '../graph/bmi-meter';
 
 const BMI = () => {
-  const [unit, setUnit] = useState<'Metric' | 'US'>('Metric');
-  const [gender, setGender] = useState<'Male' | 'Female'>('Male');
-  const [age, setAge] = useState('25');
-  const [inches, setInches] = useState('30');
-  const [height, setHeight] = useState('178');
-  const [weight, setWeight] = useState('78');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [ans, setAns] = useState<string | null>(null);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [unit, setUnit] = useLocalStorage<'Metric' | 'US'>('BMI_unit', 'Metric');
+  const [gender, setGender] = useLocalStorage<'Male' | 'Female'>('BMI_gender', 'Male');
+  const [age, setAge] = useLocalStorage('BMI_age', '25');
+  const [inches, setInches] = useLocalStorage('BMI_inches', '30');
+  const [height, setHeight] = useLocalStorage('BMI_height', '178');
+  const [weight, setWeight] = useLocalStorage('BMI_weight', '78');
+  const [equation, setEquation] = useLocalStorage('BMI_equation', '');
+  const [solution, setSolution] = useLocalStorage('BMI_solution', '');
+  const [result, setResult] = useLocalStorage('BMI_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('BMI_showResult', true);
+  const [ans, setAns] = useLocalStorage<string | null>('BMI_ans', null);
+  const [showSteps, setShowSteps] = useLocalStorage('BMI_showSteps', true);
+  const [note, setNote] = useLocalStorage('BMI_note', undefined);
 
   const hasValue =
     age && height && weight && +age > 0 && +height > 0 && +weight > 0;

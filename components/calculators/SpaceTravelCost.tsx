@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -14,18 +15,18 @@ const SpaceTravelCalculator = () => {
   // --------------------------
   // STATE HOOKS
   // --------------------------
-  const [distance, setDistance] = useState('500000'); // distance in miles
-  const [passengers, setPassengers] = useState('4'); // number of passengers
-  const [daysInSpace, setDaysInSpace] = useState('10'); // days aboard spacecraft
-  const [travelClass, setTravelClass] = useState<SpaceTravelClass>('Economy');
+  const [distance, setDistance] = useLocalStorage('SpaceTravelCost_distance', '500000'); // distance in miles
+  const [passengers, setPassengers] = useLocalStorage('SpaceTravelCost_passengers', '4'); // number of passengers
+  const [daysInSpace, setDaysInSpace] = useLocalStorage('SpaceTravelCost_daysInSpace', '10'); // days aboard spacecraft
+  const [travelClass, setTravelClass] = useLocalStorage<SpaceTravelClass>('SpaceTravelCost_travelClass', 'Economy');
 
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('SpaceTravelCost_equation', '');
+  const [solution, setSolution] = useLocalStorage('SpaceTravelCost_solution', '');
+  const [result, setResult] = useLocalStorage('SpaceTravelCost_result', undefined);
+  const [note, setNote] = useLocalStorage('SpaceTravelCost_note', undefined);
 
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
+  const [showResult, setShowResult] = useLocalStorage('SpaceTravelCost_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('SpaceTravelCost_showSteps', true);
 
   // ---------------------------------------------------
   // INPUT VALIDATION

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -9,15 +10,15 @@ import { parseNumber } from '../../helpers/decimal';
 import { factorial } from 'mathjs';
 
 const Permutation = () => {
-  const [p, setP] = useState('8');
-  const [q, setQ] = useState('3');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [order, setOrder] = useState('Without-Repetition');
+  const [p, setP] = useLocalStorage('Permutation_p', '8');
+  const [q, setQ] = useLocalStorage('Permutation_q', '3');
+  const [equation, setEquation] = useLocalStorage('Permutation_equation', '');
+  const [solution, setSolution] = useLocalStorage('Permutation_solution', '');
+  const [result, setResult] = useLocalStorage('Permutation_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('Permutation_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('Permutation_showSteps', true);
+  const [note, setNote] = useLocalStorage('Permutation_note', undefined);
+  const [order, setOrder] = useLocalStorage('Permutation_order', 'Without-Repetition');
   // const ourArray = [""];
   useEffect(() => {
     setNote(

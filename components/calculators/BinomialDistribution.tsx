@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -15,15 +16,15 @@ import Input from '../common/input';
 import { jStat } from 'jstat';
 
 const BinomialDistribution = () => {
-  const [n, setN] = useState('25');
-  const [x, setX] = useState('7');
-  const [p, setP] = useState('0.5');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [n, setN] = useLocalStorage('BinomialDistribution_n', '25');
+  const [x, setX] = useLocalStorage('BinomialDistribution_x', '7');
+  const [p, setP] = useLocalStorage('BinomialDistribution_p', '0.5');
+  const [equation, setEquation] = useLocalStorage('BinomialDistribution_equation', '');
+  const [solution, setSolution] = useLocalStorage('BinomialDistribution_solution', '');
+  const [result, setResult] = useLocalStorage('BinomialDistribution_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('BinomialDistribution_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('BinomialDistribution_showSteps', true);
+  const [note, setNote] = useLocalStorage('BinomialDistribution_note', undefined);
 
   useEffect(() => {
     const vals: Record<string, string> = getSearchParams(false);

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -16,15 +17,15 @@ import {
 } from '../../helpers/matrixHelper';
 
 const AreaOfRhombus = () => {
-  const [d1, setD1] = useState('\\sqrt{3}');
-  const [d2, setD2] = useState('\\pi');
+  const [d1, setD1] = useLocalStorage('AreaOfRhombus_d1', '\\sqrt{3}');
+  const [d2, setD2] = useLocalStorage('AreaOfRhombus_d2', '\\pi');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('AreaOfRhombus_equation', '');
+  const [solution, setSolution] = useLocalStorage('AreaOfRhombus_solution', '');
+  const [result, setResult] = useLocalStorage('AreaOfRhombus_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('AreaOfRhombus_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('AreaOfRhombus_showSteps', true);
+  const [note, setNote] = useLocalStorage('AreaOfRhombus_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   //to get values from other calculator

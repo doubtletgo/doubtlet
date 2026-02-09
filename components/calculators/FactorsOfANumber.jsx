@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -9,13 +10,13 @@ import { parseNumber } from '../../helpers/decimal';
 import { getSearchParams } from '../../helpers/general';
 
 const FactorsOfANumber = () => {
-  const [a, setA] = useState('12');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [a, setA] = useLocalStorage('FactorsOfANumber_a', '12');
+  const [equation, setEquation] = useLocalStorage('FactorsOfANumber_equation', '');
+  const [solution, setSolution] = useLocalStorage('FactorsOfANumber_solution', '');
+  const [result, setResult] = useLocalStorage('FactorsOfANumber_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('FactorsOfANumber_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('FactorsOfANumber_showSteps', true);
+  const [note, setNote] = useLocalStorage('FactorsOfANumber_note', undefined);
 
   //to get values from other calculator
   useEffect(() => {

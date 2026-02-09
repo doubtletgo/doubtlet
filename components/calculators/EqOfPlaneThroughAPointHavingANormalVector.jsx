@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { addSymbol, minusSymbol, withSymbol } from '../../helpers/decimal';
@@ -17,21 +18,21 @@ import {
 import { putSpace } from '../../helpers/general';
 
 const EqOfPlaneThroughAPointHavingANormalVector = () => {
-  const [x1, setX1] = useState('4');
-  const [y1, setY1] = useState('5');
-  const [z1, setZ1] = useState('3');
-  const [a, setA] = useState('5');
-  const [b, setB] = useState('2');
-  const [c, setC] = useState('7');
-  const [x, setX] = useState('2');
-  const [y, setY] = useState('8');
-  const [z, setZ] = useState('7');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [x1, setX1] = useLocalStorage('EqOfPlaneThroughAPointHavingANormalVector_x1', '4');
+  const [y1, setY1] = useLocalStorage('EqOfPlaneThroughAPointHavingANormalVector_y1', '5');
+  const [z1, setZ1] = useLocalStorage('EqOfPlaneThroughAPointHavingANormalVector_z1', '3');
+  const [a, setA] = useLocalStorage('EqOfPlaneThroughAPointHavingANormalVector_a', '5');
+  const [b, setB] = useLocalStorage('EqOfPlaneThroughAPointHavingANormalVector_b', '2');
+  const [c, setC] = useLocalStorage('EqOfPlaneThroughAPointHavingANormalVector_c', '7');
+  const [x, setX] = useLocalStorage('EqOfPlaneThroughAPointHavingANormalVector_x', '2');
+  const [y, setY] = useLocalStorage('EqOfPlaneThroughAPointHavingANormalVector_y', '8');
+  const [z, setZ] = useLocalStorage('EqOfPlaneThroughAPointHavingANormalVector_z', '7');
+  const [equation, setEquation] = useLocalStorage('EqOfPlaneThroughAPointHavingANormalVector_equation', '');
+  const [solution, setSolution] = useLocalStorage('EqOfPlaneThroughAPointHavingANormalVector_solution', '');
+  const [result, setResult] = useLocalStorage('EqOfPlaneThroughAPointHavingANormalVector_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('EqOfPlaneThroughAPointHavingANormalVector_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('EqOfPlaneThroughAPointHavingANormalVector_showSteps', true);
+  const [note, setNote] = useLocalStorage('EqOfPlaneThroughAPointHavingANormalVector_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

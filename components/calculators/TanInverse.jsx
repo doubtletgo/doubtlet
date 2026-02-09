@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState, useRef } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import MathInput from 'react-math-keyboard';
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
@@ -12,16 +13,16 @@ import { getSearchParams, putSpace } from '../../helpers/general';
 const config = {};
 const math = create(all, config);
 const TanInverse = () => {
-  const [latex, setLatex] = useState('-2');
-  const [n, setN] = useState('');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [degree, setDegree] = useState('Degree');
-  const [input, setInput] = useState();
+  const [latex, setLatex] = useLocalStorage('TanInverse_latex', '-2');
+  const [n, setN] = useLocalStorage('TanInverse_n', '');
+  const [equation, setEquation] = useLocalStorage('TanInverse_equation', '');
+  const [solution, setSolution] = useLocalStorage('TanInverse_solution', '');
+  const [result, setResult] = useLocalStorage('TanInverse_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('TanInverse_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('TanInverse_showSteps', true);
+  const [note, setNote] = useLocalStorage('TanInverse_note', undefined);
+  const [degree, setDegree] = useLocalStorage('TanInverse_degree', 'Degree');
+  const [input, setInput] = useLocalStorage('TanInverse_input', undefined);
   const mf1 = useRef();
 
   useEffect(() => {

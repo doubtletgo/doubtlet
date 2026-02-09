@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState, useRef } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import MathInput from 'react-math-keyboard';
 import { parseNumber } from '../../helpers/decimal';
 import { renderSteps } from '../../helpers/katex';
@@ -18,18 +19,18 @@ const config = {};
 const math = create(all, config);
 
 const CylindricalToCartesianCoordinates = () => {
-  const [latexR, setLatexR] = useState('5');
-  const [theta, setTheta] = useState('3');
-  const [z, setZ] = useState('4');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [xInvalid, setXInvalid] = useState(false);
-  const [yInvalid, setYInvalid] = useState(false);
-  const [zInvalid, setZInvalid] = useState(false);
+  const [latexR, setLatexR] = useLocalStorage('CylindricalToCartesianCoordinates_latexR', '5');
+  const [theta, setTheta] = useLocalStorage('CylindricalToCartesianCoordinates_theta', '3');
+  const [z, setZ] = useLocalStorage('CylindricalToCartesianCoordinates_z', '4');
+  const [equation, setEquation] = useLocalStorage('CylindricalToCartesianCoordinates_equation', '');
+  const [solution, setSolution] = useLocalStorage('CylindricalToCartesianCoordinates_solution', '');
+  const [result, setResult] = useLocalStorage('CylindricalToCartesianCoordinates_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('CylindricalToCartesianCoordinates_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('CylindricalToCartesianCoordinates_showSteps', true);
+  const [note, setNote] = useLocalStorage('CylindricalToCartesianCoordinates_note', undefined);
+  const [xInvalid, setXInvalid] = useLocalStorage('CylindricalToCartesianCoordinates_xInvalid', false);
+  const [yInvalid, setYInvalid] = useLocalStorage('CylindricalToCartesianCoordinates_yInvalid', false);
+  const [zInvalid, setZInvalid] = useLocalStorage('CylindricalToCartesianCoordinates_zInvalid', false);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

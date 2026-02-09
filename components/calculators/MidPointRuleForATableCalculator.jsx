@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -17,16 +18,16 @@ import { isMatValid } from '../../helpers/Validations';
 import MatrixInput from '../MatrixInput';
 
 const MidPointRuleForATableCalculator = () => {
-  const [xPoints, setXPoints] = useState([['0', '3', '6', '9', '12']]);
-  const [fPoints, setFPoints] = useState([['-7', '5', '-9', '10', '-15']]);
-  const [interval, setSubIntervals] = useState('5');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [invalidInput, setInvalidInput] = useState(false);
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [xPoints, setXPoints] = useLocalStorage('MidPointRuleForATableCalculator_xPoints', [['0', '3', '6', '9', '12']]);
+  const [fPoints, setFPoints] = useLocalStorage('MidPointRuleForATableCalculator_fPoints', [['-7', '5', '-9', '10', '-15']]);
+  const [interval, setSubIntervals] = useLocalStorage('MidPointRuleForATableCalculator_interval', '5');
+  const [equation, setEquation] = useLocalStorage('MidPointRuleForATableCalculator_equation', '');
+  const [solution, setSolution] = useLocalStorage('MidPointRuleForATableCalculator_solution', '');
+  const [answer, setAnswer] = useLocalStorage('MidPointRuleForATableCalculator_answer', undefined);
+  const [invalidInput, setInvalidInput] = useLocalStorage('MidPointRuleForATableCalculator_invalidInput', false);
+  const [showResult, setShowResult] = useLocalStorage('MidPointRuleForATableCalculator_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('MidPointRuleForATableCalculator_showSteps', true);
+  const [note, setNote] = useLocalStorage('MidPointRuleForATableCalculator_note', undefined);
 
   useEffect(() => {
     const sortedF = JSON.parse(JSON.stringify(fPoints.flat()));

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -313,18 +314,18 @@ function makeUpperTriangularZero(mat) {
   }
 }
 const ReducedRowEchelonForm = () => {
-  const [row, setRow] = useState('2');
-  const [column, setColumn] = useState('3');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('ReducedRowEchelonForm_row', '2');
+  const [column, setColumn] = useLocalStorage('ReducedRowEchelonForm_column', '3');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('ReducedRowEchelonForm_frstMatrix', [
     [1, 5, 1],
     [2, 11, 5],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('ReducedRowEchelonForm_equation', '');
+  const [solution, setSolution] = useLocalStorage('ReducedRowEchelonForm_solution', '');
+  const [answer, setAnswer] = useLocalStorage('ReducedRowEchelonForm_answer', undefined);
+  const [showResult, setShowResult] = useLocalStorage('ReducedRowEchelonForm_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('ReducedRowEchelonForm_showSteps', true);
+  const [note, setNote] = useLocalStorage('ReducedRowEchelonForm_note', undefined);
 
   useEffect(() => {
     const vals = getSearchParams(false);

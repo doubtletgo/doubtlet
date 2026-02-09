@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -26,18 +27,18 @@ const config = {};
 const math = create(all, config);
 
 const NewCoordinatesByRotationOfAxes = () => {
-  const [x, setX] = useState('4');
-  const [y, setY] = useState('3');
-  const [r, setR] = useState('20');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [usePI, setUsePI] = useState(false);
-  const [order, setOrder] = useState('Degree');
-  const [clock, setClock] = useState('Clockwise');
+  const [x, setX] = useLocalStorage('NewCoordinatesByRotationOfAxes_x', '4');
+  const [y, setY] = useLocalStorage('NewCoordinatesByRotationOfAxes_y', '3');
+  const [r, setR] = useLocalStorage('NewCoordinatesByRotationOfAxes_r', '20');
+  const [equation, setEquation] = useLocalStorage('NewCoordinatesByRotationOfAxes_equation', '');
+  const [solution, setSolution] = useLocalStorage('NewCoordinatesByRotationOfAxes_solution', '');
+  const [result, setResult] = useLocalStorage('NewCoordinatesByRotationOfAxes_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('NewCoordinatesByRotationOfAxes_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('NewCoordinatesByRotationOfAxes_showSteps', true);
+  const [note, setNote] = useLocalStorage('NewCoordinatesByRotationOfAxes_note', undefined);
+  const [usePI, setUsePI] = useLocalStorage('NewCoordinatesByRotationOfAxes_usePI', false);
+  const [order, setOrder] = useLocalStorage('NewCoordinatesByRotationOfAxes_order', 'Degree');
+  const [clock, setClock] = useLocalStorage('NewCoordinatesByRotationOfAxes_clock', 'Clockwise');
   const isDegree = order === 'Degree';
   const isClokwise = clock === 'Clockwise';
   let [p, q = 1] = r.split('/');

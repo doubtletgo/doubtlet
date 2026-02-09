@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -15,13 +16,13 @@ const validateInput = (input: string) => {
 };
 
 const RangeOfDataSet = () => {
-  const [values, setValues] = useState('5.3,11,6,-2,-8,0,7,3/2,-5,1.6,16');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [values, setValues] = useLocalStorage('RangeOfDataSet_values', '5.3,11,6,-2,-8,0,7,3/2,-5,1.6,16');
+  const [equation, setEquation] = useLocalStorage('RangeOfDataSet_equation', '');
+  const [solution, setSolution] = useLocalStorage('RangeOfDataSet_solution', '');
+  const [result, setResult] = useLocalStorage('RangeOfDataSet_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('RangeOfDataSet_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('RangeOfDataSet_showSteps', true);
+  const [note, setNote] = useLocalStorage('RangeOfDataSet_note', undefined);
 
   useEffect(() => {
     const vals: Record<string, string> = getSearchParams(false);

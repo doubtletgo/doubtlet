@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace, simplifyKatex } from '../../helpers/general';
@@ -19,17 +20,17 @@ import MatrixInput from '../MatrixInput';
 import Input from '../common/input';
 
 const AdjointOfAMatrix = () => {
-  const [row, setRow] = useState(2);
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('AdjointOfAMatrix_row', 2);
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('AdjointOfAMatrix_frstMatrix', [
     ['\\sqrt{3}', '7'],
     ['4', '2'],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState('');
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState('');
+  const [equation, setEquation] = useLocalStorage('AdjointOfAMatrix_equation', '');
+  const [solution, setSolution] = useLocalStorage('AdjointOfAMatrix_solution', '');
+  const [result, setResult] = useLocalStorage('AdjointOfAMatrix_result', '');
+  const [showResult, setShowResult] = useLocalStorage('AdjointOfAMatrix_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('AdjointOfAMatrix_showSteps', true);
+  const [note, setNote] = useLocalStorage('AdjointOfAMatrix_note', '');
 
   //to get values from other calculator
   useEffect(() => {

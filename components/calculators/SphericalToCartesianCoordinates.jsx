@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { parseNumber } from '../../helpers/decimal';
@@ -17,18 +18,18 @@ import { convertToKatex } from '../../helpers/SolveRoot';
 const config = {};
 const math = create(all, config);
 const SphericalToCartesianCoordinates = () => {
-  const [rho, setRho] = useState('1');
-  const [theta, setTheta] = useState('45');
-  const [phai, setPhai] = useState('45');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [rhoInvalid, setRhoInvalid] = useState(false);
-  const [thetaInvalid, setThetaInvalid] = useState(false);
-  const [phaiInvalid, setPhaiInvalid] = useState(false);
+  const [rho, setRho] = useLocalStorage('SphericalToCartesianCoordinates_rho', '1');
+  const [theta, setTheta] = useLocalStorage('SphericalToCartesianCoordinates_theta', '45');
+  const [phai, setPhai] = useLocalStorage('SphericalToCartesianCoordinates_phai', '45');
+  const [equation, setEquation] = useLocalStorage('SphericalToCartesianCoordinates_equation', '');
+  const [solution, setSolution] = useLocalStorage('SphericalToCartesianCoordinates_solution', '');
+  const [result, setResult] = useLocalStorage('SphericalToCartesianCoordinates_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('SphericalToCartesianCoordinates_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('SphericalToCartesianCoordinates_showSteps', true);
+  const [note, setNote] = useLocalStorage('SphericalToCartesianCoordinates_note', undefined);
+  const [rhoInvalid, setRhoInvalid] = useLocalStorage('SphericalToCartesianCoordinates_rhoInvalid', false);
+  const [thetaInvalid, setThetaInvalid] = useLocalStorage('SphericalToCartesianCoordinates_thetaInvalid', false);
+  const [phaiInvalid, setPhaiInvalid] = useLocalStorage('SphericalToCartesianCoordinates_phaiInvalid', false);
 
   useEffect(() => {
     setNote(

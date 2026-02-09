@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -17,21 +18,21 @@ import {
 } from '../../helpers/matrixHelper';
 
 const VectorProjectionOfVector = () => {
-  const [x1, setX1] = useState('1');
-  const [y1, setY1] = useState('7');
-  const [z1, setZ1] = useState('3');
-  const [x2, setX2] = useState('4');
-  const [y2, setY2] = useState('5');
-  const [z2, setZ2] = useState('6');
+  const [x1, setX1] = useLocalStorage('VectorProjectionOfVector_x1', '1');
+  const [y1, setY1] = useLocalStorage('VectorProjectionOfVector_y1', '7');
+  const [z1, setZ1] = useLocalStorage('VectorProjectionOfVector_z1', '3');
+  const [x2, setX2] = useLocalStorage('VectorProjectionOfVector_x2', '4');
+  const [y2, setY2] = useLocalStorage('VectorProjectionOfVector_y2', '5');
+  const [z2, setZ2] = useLocalStorage('VectorProjectionOfVector_z2', '6');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [note, setNote] = useState();
-  const [answer, setAnswer] = useState('');
-  const [projection, setProjection] = useState('Vector');
+  const [equation, setEquation] = useLocalStorage('VectorProjectionOfVector_equation', '');
+  const [solution, setSolution] = useLocalStorage('VectorProjectionOfVector_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('VectorProjectionOfVector_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('VectorProjectionOfVector_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('VectorProjectionOfVector_isPointSame', false);
+  const [note, setNote] = useLocalStorage('VectorProjectionOfVector_note', undefined);
+  const [answer, setAnswer] = useLocalStorage('VectorProjectionOfVector_answer', '');
+  const [projection, setProjection] = useLocalStorage('VectorProjectionOfVector_projection', 'Vector');
   const isScalar = projection === 'Scalar';
 
   const mf1 = useRef();

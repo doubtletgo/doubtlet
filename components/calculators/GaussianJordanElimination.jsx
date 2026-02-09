@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -27,19 +28,19 @@ const addVerticalLine = (mat) => {
 };
 
 const GaussianJordanElimination = () => {
-  const [row, setRow] = useState('3');
-  const [column, setColumn] = useState('4');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('GaussianJordanElimination_row', '3');
+  const [column, setColumn] = useLocalStorage('GaussianJordanElimination_column', '4');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('GaussianJordanElimination_frstMatrix', [
     [2, 3, 1, 9],
     [1, 2, 3, 8],
     [3, 1, 2, 3],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('GaussianJordanElimination_equation', '');
+  const [solution, setSolution] = useLocalStorage('GaussianJordanElimination_solution', '');
+  const [answer, setAnswer] = useLocalStorage('GaussianJordanElimination_answer', undefined);
+  const [showResult, setShowResult] = useLocalStorage('GaussianJordanElimination_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('GaussianJordanElimination_showSteps', true);
+  const [note, setNote] = useLocalStorage('GaussianJordanElimination_note', undefined);
 
   useEffect(() => {
     const vals = getSearchParams(false);

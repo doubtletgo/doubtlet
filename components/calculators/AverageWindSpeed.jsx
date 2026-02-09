@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import awsKmphData from '../../utils/constants/awskmph.json';
 import awsKnotsData from '../../utils/constants/awsknotsph.json';
@@ -12,15 +13,15 @@ const parseWithDecimals = (num, digits = 1) =>
   parseFloat(parseNumber(num, {}, digits)).toFixed(digits);
 
 const AverageWindSpeed = () => {
-  const [duration, setDuration] = useState('');
-  const [current, setCurrent] = useState('');
-  const [previous, setPrevious] = useState('');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(false);
-  const [note, setNote] = useState();
+  const [duration, setDuration] = useLocalStorage('AverageWindSpeed_duration', '');
+  const [current, setCurrent] = useLocalStorage('AverageWindSpeed_current', '');
+  const [previous, setPrevious] = useLocalStorage('AverageWindSpeed_previous', '');
+  const [equation, setEquation] = useLocalStorage('AverageWindSpeed_equation', '');
+  const [solution, setSolution] = useLocalStorage('AverageWindSpeed_solution', '');
+  const [result, setResult] = useLocalStorage('AverageWindSpeed_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('AverageWindSpeed_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('AverageWindSpeed_showSteps', false);
+  const [note, setNote] = useLocalStorage('AverageWindSpeed_note', undefined);
 
   useEffect(() => {
     setNote(

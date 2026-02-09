@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import MathInput from 'react-math-keyboard';
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
@@ -13,16 +14,16 @@ const config = {};
 const math = create(all, config);
 
 const CosInverse = () => {
-  const [latex, setLatex] = useState('-1');
-  const [n, setN] = useState('');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [degree, setDegree] = useState('Degree');
-  const [input, setInput] = useState();
+  const [latex, setLatex] = useLocalStorage('CosInverse_latex', '-1');
+  const [n, setN] = useLocalStorage('CosInverse_n', '');
+  const [equation, setEquation] = useLocalStorage('CosInverse_equation', '');
+  const [solution, setSolution] = useLocalStorage('CosInverse_solution', '');
+  const [result, setResult] = useLocalStorage('CosInverse_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('CosInverse_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('CosInverse_showSteps', true);
+  const [note, setNote] = useLocalStorage('CosInverse_note', undefined);
+  const [degree, setDegree] = useLocalStorage('CosInverse_degree', 'Degree');
+  const [input, setInput] = useLocalStorage('CosInverse_input', undefined);
 
   function radToDeg(radians) {
     var pi = Math.PI;

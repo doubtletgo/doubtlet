@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -18,14 +19,14 @@ const validateInput = (input: string) => {
 };
 
 const QuadraticRegression = () => {
-  const [xValues, setXValues] = useState('5,-8,1,7');
-  const [yValues, setYValues] = useState('2,7,6,-2');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [xValues, setXValues] = useLocalStorage('QuadraticRegression_xValues', '5,-8,1,7');
+  const [yValues, setYValues] = useLocalStorage('QuadraticRegression_yValues', '2,7,6,-2');
+  const [equation, setEquation] = useLocalStorage('QuadraticRegression_equation', '');
+  const [solution, setSolution] = useLocalStorage('QuadraticRegression_solution', '');
+  const [result, setResult] = useLocalStorage('QuadraticRegression_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('QuadraticRegression_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('QuadraticRegression_showSteps', true);
+  const [note, setNote] = useLocalStorage('QuadraticRegression_note', undefined);
 
   useEffect(() => {
     const xVals: Record<string, string> = getSearchParams(false);

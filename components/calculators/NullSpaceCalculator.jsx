@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -302,9 +303,9 @@ const simplifyVectorMatrix = (matrix) => {
 };
 
 const NullSpaceOfAMatrix = () => {
-  const [row, setRow] = useState('2');
-  const [column, setColumn] = useState('3');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('NullSpaceCalculator_row', '2');
+  const [column, setColumn] = useLocalStorage('NullSpaceCalculator_column', '3');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('NullSpaceCalculator_frstMatrix', [
     [6, 12, 18],
     [3, 6, 9],
     // [1, 2, 3],
@@ -322,12 +323,12 @@ const NullSpaceOfAMatrix = () => {
     // ["1", "3", "6", "0"],
     // ["0", "1", "4", "-5"],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('NullSpaceCalculator_equation', '');
+  const [solution, setSolution] = useLocalStorage('NullSpaceCalculator_solution', '');
+  const [answer, setAnswer] = useLocalStorage('NullSpaceCalculator_answer', undefined);
+  const [showResult, setShowResult] = useLocalStorage('NullSpaceCalculator_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('NullSpaceCalculator_showSteps', true);
+  const [note, setNote] = useLocalStorage('NullSpaceCalculator_note', undefined);
 
   useEffect(() => {
     const vals = getSearchParams(false);

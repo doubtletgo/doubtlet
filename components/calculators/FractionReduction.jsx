@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -9,13 +10,13 @@ import { abs, parseNumber } from '../../helpers/decimal';
 import { getSearchParams } from '../../helpers/general';
 
 const FractionReduction = () => {
-  const [l, setL] = useState('2/4');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [l, setL] = useLocalStorage('FractionReduction_l', '2/4');
+  const [equation, setEquation] = useLocalStorage('FractionReduction_equation', '');
+  const [solution, setSolution] = useLocalStorage('FractionReduction_solution', '');
+  const [result, setResult] = useLocalStorage('FractionReduction_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('FractionReduction_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('FractionReduction_showSteps', true);
+  const [note, setNote] = useLocalStorage('FractionReduction_note', undefined);
 
   let [p, q] = l.split('/');
   useEffect(() => {

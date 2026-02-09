@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import MathInput from 'react-math-keyboard';
 import { addSymbol, parseNumber, withSymbol } from '../../helpers/decimal';
 import { renderSteps } from '../../helpers/katex';
@@ -17,16 +18,16 @@ const config = {};
 const math = create(all, config);
 
 const CartesianToPolarCoordinates = () => {
-  const [latex, setLatex] = useState('8');
-  const [r, setR] = useState('3');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [xInvalid, setXInvalid] = useState(true);
-  const [yInvalid, setYInvalid] = useState(true);
+  const [latex, setLatex] = useLocalStorage('CartesianToPolarCoordinates_latex', '8');
+  const [r, setR] = useLocalStorage('CartesianToPolarCoordinates_r', '3');
+  const [equation, setEquation] = useLocalStorage('CartesianToPolarCoordinates_equation', '');
+  const [solution, setSolution] = useLocalStorage('CartesianToPolarCoordinates_solution', '');
+  const [result, setResult] = useLocalStorage('CartesianToPolarCoordinates_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('CartesianToPolarCoordinates_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('CartesianToPolarCoordinates_showSteps', true);
+  const [note, setNote] = useLocalStorage('CartesianToPolarCoordinates_note', undefined);
+  const [xInvalid, setXInvalid] = useLocalStorage('CartesianToPolarCoordinates_xInvalid', true);
+  const [yInvalid, setYInvalid] = useLocalStorage('CartesianToPolarCoordinates_yInvalid', true);
   const mf1 = useRef();
   const mf2 = useRef();
 

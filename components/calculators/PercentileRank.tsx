@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -19,14 +20,14 @@ const validateInput = (input: string) => {
 };
 
 const PercentileRank = () => {
-  const [values, setValues] = useState('5.3,11,6,-2,-8,0,6,3/2,-5,1.6,6');
-  const [p, setP] = useState('6');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [values, setValues] = useLocalStorage('PercentileRank_values', '5.3,11,6,-2,-8,0,6,3/2,-5,1.6,6');
+  const [p, setP] = useLocalStorage('PercentileRank_p', '6');
+  const [equation, setEquation] = useLocalStorage('PercentileRank_equation', '');
+  const [solution, setSolution] = useLocalStorage('PercentileRank_solution', '');
+  const [result, setResult] = useLocalStorage('PercentileRank_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('PercentileRank_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('PercentileRank_showSteps', true);
+  const [note, setNote] = useLocalStorage('PercentileRank_note', undefined);
 
   useEffect(() => {
     setNote(

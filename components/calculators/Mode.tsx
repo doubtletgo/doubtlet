@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -14,13 +15,13 @@ const validateInput = (input: string) => {
 };
 
 const Mode = () => {
-  const [values, setValues] = useState('5,3,-2,11,6,-2,-8,6,11,3/2,6,-2,6,-2');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [values, setValues] = useLocalStorage('Mode_values', '5,3,-2,11,6,-2,-8,6,11,3/2,6,-2,6,-2');
+  const [equation, setEquation] = useLocalStorage('Mode_equation', '');
+  const [solution, setSolution] = useLocalStorage('Mode_solution', '');
+  const [result, setResult] = useLocalStorage('Mode_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('Mode_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('Mode_showSteps', true);
+  const [note, setNote] = useLocalStorage('Mode_note', undefined);
 
   useEffect(() => {
     const vals: Record<string, string> = getSearchParams(false);

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState, useRef } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import MathInput from 'react-math-keyboard';
 import { parseNumber } from '../../helpers/decimal';
 import { renderSteps } from '../../helpers/katex';
@@ -17,16 +18,16 @@ import {
 const config = {};
 const math = create(all, config);
 const PolartoCartesianCoordinates = () => {
-  const [note, setNote] = useState();
-  const [latexR, setLatexR] = useState('3');
-  const [theta, setTheta] = useState('6');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [rInvalid, setRInvalid] = useState(false);
-  const [thetaInvalid, setThetaInvalid] = useState(false);
+  const [note, setNote] = useLocalStorage('PolartoCartesianCoordinates_note', undefined);
+  const [latexR, setLatexR] = useLocalStorage('PolartoCartesianCoordinates_latexR', '3');
+  const [theta, setTheta] = useLocalStorage('PolartoCartesianCoordinates_theta', '6');
+  const [equation, setEquation] = useLocalStorage('PolartoCartesianCoordinates_equation', '');
+  const [solution, setSolution] = useLocalStorage('PolartoCartesianCoordinates_solution', '');
+  const [result, setResult] = useLocalStorage('PolartoCartesianCoordinates_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('PolartoCartesianCoordinates_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('PolartoCartesianCoordinates_showSteps', true);
+  const [rInvalid, setRInvalid] = useLocalStorage('PolartoCartesianCoordinates_rInvalid', false);
+  const [thetaInvalid, setThetaInvalid] = useLocalStorage('PolartoCartesianCoordinates_thetaInvalid', false);
   const mf1 = useRef();
   const mf2 = useRef();
 

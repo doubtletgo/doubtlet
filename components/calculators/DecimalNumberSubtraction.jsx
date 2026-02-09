@@ -2,24 +2,25 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { abs, parseNumber } from '../../helpers/decimal';
 import { getSearchParams } from '../../helpers/general';
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 
 const DecimalNumberSubtraction = () => {
-  const [a, setA] = useState('9.63,4.76');
-  const [value, setValue] = useState([]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [maxDec, setMaxDec] = useState(1);
-  const [maxZero, setMaxZero] = useState(1);
-  const [isMinus, setIsMinus] = useState(false);
-  const [tempArr, setTempArr] = useState([]);
+  const [a, setA] = useLocalStorage('DecimalNumberSubtraction_a', '9.63,4.76');
+  const [value, setValue] = useLocalStorage('DecimalNumberSubtraction_value', []);
+  const [equation, setEquation] = useLocalStorage('DecimalNumberSubtraction_equation', '');
+  const [solution, setSolution] = useLocalStorage('DecimalNumberSubtraction_solution', '');
+  const [result, setResult] = useLocalStorage('DecimalNumberSubtraction_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('DecimalNumberSubtraction_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('DecimalNumberSubtraction_showSteps', true);
+  const [note, setNote] = useLocalStorage('DecimalNumberSubtraction_note', undefined);
+  const [maxDec, setMaxDec] = useLocalStorage('DecimalNumberSubtraction_maxDec', 1);
+  const [maxZero, setMaxZero] = useLocalStorage('DecimalNumberSubtraction_maxZero', 1);
+  const [isMinus, setIsMinus] = useLocalStorage('DecimalNumberSubtraction_isMinus', false);
+  const [tempArr, setTempArr] = useLocalStorage('DecimalNumberSubtraction_tempArr', []);
 
   useEffect(() => {
     const vals = getSearchParams(false);

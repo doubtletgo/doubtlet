@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -35,12 +36,13 @@ const rhData: Record<number, any> = {
 };
 
 const DewPoint = () => {
-  const [dB, setDB] = useState('26');
-  const [wB, setWB] = useState('25');
-  const [pressure, setPressure] = useState(1000);
-  const [result, setResult] = useState<any>(null);
-  const [showResult, setShowResult] = useState(true);
-  const [note, setNote] = useState<any>();
+  const [dB, setDB] = useLocalStorage('DewPoint_dB', '26');
+  const [wB, setWB] = useLocalStorage('DewPoint_wB', '25');
+  const [pressure, setPressure] = useLocalStorage('DewPoint_pressure', 1000);
+  const [result, setResult] = useLocalStorage<any>('DewPoint_result', null);
+  const [showResult, setShowResult] = useLocalStorage('DewPoint_showResult', true);
+  const [note, setNote] = useLocalStorage<any>('DewPoint_note', undefined);
+  const [calculatedValues, setCalculatedValues] = useLocalStorage<any>('DewPoint_calculatedValues', {});
 
   useEffect(() => {
     setNote(
@@ -142,6 +144,15 @@ const DewPoint = () => {
               if (vpVal !== null) {
                 vpInHpa = vpVal;
               }
+
+              // Update calculated values for other calculators
+              setCalculatedValues({
+                result: 'success',
+                dryBulb: dB, // Dry bulb input
+                dewPoint: dp.toFixed(1),
+                relativeHumidity: rh ? Math.round(rh).toString() : '',
+                vapourPressure: typeof vpInHpa === 'number' ? vpInHpa.toFixed(1) : vpInHpa
+              });
             }
           }
         }

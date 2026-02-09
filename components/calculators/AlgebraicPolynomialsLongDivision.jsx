@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import MathInput from 'react-math-keyboard';
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
@@ -49,14 +50,14 @@ function swap(expression) {
   return expression;
 }
 const AlgebraicPolynomialsLongDivision = () => {
-  const [dividend, setDividend] = useState('2x^4 + 3x^3 + x^2 + 5x + 7');
-  const [divisor, setDivisor] = useState('3x + 4');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [dividend, setDividend] = useLocalStorage('AlgebraicPolynomialsLongDivision_dividend', '2x^4 + 3x^3 + x^2 + 5x + 7');
+  const [divisor, setDivisor] = useLocalStorage('AlgebraicPolynomialsLongDivision_divisor', '3x + 4');
+  const [equation, setEquation] = useLocalStorage('AlgebraicPolynomialsLongDivision_equation', '');
+  const [solution, setSolution] = useLocalStorage('AlgebraicPolynomialsLongDivision_solution', '');
+  const [result, setResult] = useLocalStorage('AlgebraicPolynomialsLongDivision_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('AlgebraicPolynomialsLongDivision_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('AlgebraicPolynomialsLongDivision_showSteps', true);
+  const [note, setNote] = useLocalStorage('AlgebraicPolynomialsLongDivision_note', undefined);
 
   function solve(expression) {
     if (!expression) return '';

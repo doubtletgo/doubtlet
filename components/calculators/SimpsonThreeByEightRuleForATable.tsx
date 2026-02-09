@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -17,20 +18,20 @@ import { isMatValid } from '../../helpers/Validations';
 import MatrixInput from '../MatrixInput';
 
 const SimpsonThreeByEightRuleForATable = () => {
-  const [xPoints, setXPoints] = useState([
+  const [xPoints, setXPoints] = useLocalStorage('SimpsonThreeByEightRuleForATable_xPoints', [
     ['0', '3', '6', '9', '12', '15', '18'],
   ]);
-  const [fPoints, setFPoints] = useState([
+  const [fPoints, setFPoints] = useLocalStorage('SimpsonThreeByEightRuleForATable_fPoints', [
     ['-7', '5', '-9', '10', '-15', '14', '-17'],
   ]);
-  const [interval, setSubIntervals] = useState(7);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [invalidInput, setInvalidInput] = useState(false);
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [interval, setSubIntervals] = useLocalStorage('SimpsonThreeByEightRuleForATable_interval', 7);
+  const [equation, setEquation] = useLocalStorage('SimpsonThreeByEightRuleForATable_equation', '');
+  const [solution, setSolution] = useLocalStorage('SimpsonThreeByEightRuleForATable_solution', '');
+  const [answer, setAnswer] = useLocalStorage('SimpsonThreeByEightRuleForATable_answer', undefined);
+  const [invalidInput, setInvalidInput] = useLocalStorage('SimpsonThreeByEightRuleForATable_invalidInput', false);
+  const [showResult, setShowResult] = useLocalStorage('SimpsonThreeByEightRuleForATable_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('SimpsonThreeByEightRuleForATable_showSteps', true);
+  const [note, setNote] = useLocalStorage('SimpsonThreeByEightRuleForATable_note', undefined);
 
   useEffect(() => {
     const sortedF = JSON.parse(JSON.stringify(fPoints.flat()));

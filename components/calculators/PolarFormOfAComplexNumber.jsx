@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import MathInput from 'react-math-keyboard';
 import { addSymbol, parseNumber, withSymbol } from '../../helpers/decimal';
 import { renderSteps } from '../../helpers/katex';
@@ -22,16 +23,16 @@ const config = {};
 const math = create(all, config);
 
 const CartesianToPolarCoordinates = () => {
-  const [latex, setLatex] = useState('5');
-  const [r, setR] = useState('3');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [xInvalid, setXInvalid] = useState(true);
-  const [yInvalid, setYInvalid] = useState(true);
+  const [latex, setLatex] = useLocalStorage('PolarFormOfAComplexNumber_latex', '5');
+  const [r, setR] = useLocalStorage('PolarFormOfAComplexNumber_r', '3');
+  const [equation, setEquation] = useLocalStorage('PolarFormOfAComplexNumber_equation', '');
+  const [solution, setSolution] = useLocalStorage('PolarFormOfAComplexNumber_solution', '');
+  const [result, setResult] = useLocalStorage('PolarFormOfAComplexNumber_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('PolarFormOfAComplexNumber_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('PolarFormOfAComplexNumber_showSteps', true);
+  const [note, setNote] = useLocalStorage('PolarFormOfAComplexNumber_note', undefined);
+  const [xInvalid, setXInvalid] = useLocalStorage('PolarFormOfAComplexNumber_xInvalid', true);
+  const [yInvalid, setYInvalid] = useLocalStorage('PolarFormOfAComplexNumber_yInvalid', true);
   const mf1 = useRef();
   const mf2 = useRef();
 

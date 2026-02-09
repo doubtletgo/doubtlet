@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -16,15 +17,15 @@ import {
 } from '../../helpers/matrixHelper';
 
 const AreaOfRegularPentagon = () => {
-  const [p, setP] = useState('\\sqrt{3}');
-  const [l, setL] = useState('\\pi');
+  const [p, setP] = useLocalStorage('AreaOfRegularPentagon_p', '\\sqrt{3}');
+  const [l, setL] = useLocalStorage('AreaOfRegularPentagon_l', '\\pi');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('AreaOfRegularPentagon_equation', '');
+  const [solution, setSolution] = useLocalStorage('AreaOfRegularPentagon_solution', '');
+  const [result, setResult] = useLocalStorage('AreaOfRegularPentagon_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('AreaOfRegularPentagon_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('AreaOfRegularPentagon_showSteps', true);
+  const [note, setNote] = useLocalStorage('AreaOfRegularPentagon_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   //to get values from other calculator

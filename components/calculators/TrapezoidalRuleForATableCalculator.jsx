@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -17,16 +18,16 @@ import { isMatValid } from '../../helpers/Validations';
 import MatrixInput from '../MatrixInput';
 
 const TrapezoidalRuleForATableCalculator = () => {
-  const [xPoints, setXPoints] = useState([['0', '3', '6', '9', '12']]);
-  const [fPoints, setFPoints] = useState([['-7', '5', '-9', '10', '-15']]);
-  const [interval, setSubIntervals] = useState('5');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [invalidInput, setInvalidInput] = useState(false);
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [xPoints, setXPoints] = useLocalStorage('TrapezoidalRuleForATableCalculator_xPoints', [['0', '3', '6', '9', '12']]);
+  const [fPoints, setFPoints] = useLocalStorage('TrapezoidalRuleForATableCalculator_fPoints', [['-7', '5', '-9', '10', '-15']]);
+  const [interval, setSubIntervals] = useLocalStorage('TrapezoidalRuleForATableCalculator_interval', '5');
+  const [equation, setEquation] = useLocalStorage('TrapezoidalRuleForATableCalculator_equation', '');
+  const [solution, setSolution] = useLocalStorage('TrapezoidalRuleForATableCalculator_solution', '');
+  const [answer, setAnswer] = useLocalStorage('TrapezoidalRuleForATableCalculator_answer', undefined);
+  const [invalidInput, setInvalidInput] = useLocalStorage('TrapezoidalRuleForATableCalculator_invalidInput', false);
+  const [showResult, setShowResult] = useLocalStorage('TrapezoidalRuleForATableCalculator_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('TrapezoidalRuleForATableCalculator_showSteps', true);
+  const [note, setNote] = useLocalStorage('TrapezoidalRuleForATableCalculator_note', undefined);
 
   useEffect(() => {
     const sortedF = JSON.parse(JSON.stringify(fPoints.flat()));

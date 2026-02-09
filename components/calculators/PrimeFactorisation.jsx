@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -9,15 +10,15 @@ import { parseNumber } from '../../helpers/decimal';
 import { getSearchParams, putSpace } from '../../helpers/general';
 
 const PrimeFactorisation = () => {
-  const [a, setA] = useState('40');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [arr, setArr] = useState([]);
-  const [divisonArr, setDivisonArr] = useState([]);
+  const [a, setA] = useLocalStorage('PrimeFactorisation_a', '40');
+  const [equation, setEquation] = useLocalStorage('PrimeFactorisation_equation', '');
+  const [solution, setSolution] = useLocalStorage('PrimeFactorisation_solution', '');
+  const [result, setResult] = useLocalStorage('PrimeFactorisation_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('PrimeFactorisation_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('PrimeFactorisation_showSteps', true);
+  const [note, setNote] = useLocalStorage('PrimeFactorisation_note', undefined);
+  const [arr, setArr] = useLocalStorage('PrimeFactorisation_arr', []);
+  const [divisonArr, setDivisonArr] = useLocalStorage('PrimeFactorisation_divisonArr', []);
 
   //to get values from other calculator
   useEffect(() => {

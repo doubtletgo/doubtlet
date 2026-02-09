@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -16,14 +17,14 @@ import { isInputInvalid } from '@/helpers/Validations';
 import { MathField } from '@/types/mathfield.types';
 
 const ExponentialFunction = () => {
-  const [value, setValue] = useState('e');
-  const [exponent, setExponent] = useState('\\sqrt{2}');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [value, setValue] = useLocalStorage('ExponentialFunction_value', 'e');
+  const [exponent, setExponent] = useLocalStorage('ExponentialFunction_exponent', '\\sqrt{2}');
+  const [equation, setEquation] = useLocalStorage('ExponentialFunction_equation', '');
+  const [solution, setSolution] = useLocalStorage('ExponentialFunction_solution', '');
+  const [result, setResult] = useLocalStorage('ExponentialFunction_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('ExponentialFunction_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('ExponentialFunction_showSteps', true);
+  const [note, setNote] = useLocalStorage('ExponentialFunction_note', undefined);
   const valueRef = useRef<MathField>(null);
   const baseRef = useRef<MathField>(null);
 

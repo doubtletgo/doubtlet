@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -17,20 +18,20 @@ import {
 } from '../../helpers/matrixHelper';
 
 const TestOfCollinearityOfThree2DPoints = () => {
-  const [x1, setX1] = useState('4');
-  const [x2, setX2] = useState('\\sqrt{3}');
-  const [y1, setY1] = useState('5');
-  const [y2, setY2] = useState('1');
-  const [x3, setX3] = useState('5');
-  const [y3, setY3] = useState('1');
+  const [x1, setX1] = useLocalStorage('TestOfCollinearityOfThree2DPoints_x1', '4');
+  const [x2, setX2] = useLocalStorage('TestOfCollinearityOfThree2DPoints_x2', '\\sqrt{3}');
+  const [y1, setY1] = useLocalStorage('TestOfCollinearityOfThree2DPoints_y1', '5');
+  const [y2, setY2] = useLocalStorage('TestOfCollinearityOfThree2DPoints_y2', '1');
+  const [x3, setX3] = useLocalStorage('TestOfCollinearityOfThree2DPoints_x3', '5');
+  const [y3, setY3] = useLocalStorage('TestOfCollinearityOfThree2DPoints_y3', '1');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('TestOfCollinearityOfThree2DPoints_equation', '');
+  const [solution, setSolution] = useLocalStorage('TestOfCollinearityOfThree2DPoints_solution', '');
+  const [result, setResult] = useLocalStorage('TestOfCollinearityOfThree2DPoints_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('TestOfCollinearityOfThree2DPoints_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('TestOfCollinearityOfThree2DPoints_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('TestOfCollinearityOfThree2DPoints_isPointSame', false);
+  const [note, setNote] = useLocalStorage('TestOfCollinearityOfThree2DPoints_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

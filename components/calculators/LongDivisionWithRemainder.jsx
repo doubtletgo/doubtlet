@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -14,14 +15,14 @@ const space = (count = 1) => {
 const kSpace = (count = 1) => '\\space'.repeat(count);
 
 const LongDivisionWithRemainder = () => {
-  const [p, setP] = useState('487');
-  const [q, setQ] = useState('32');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [p, setP] = useLocalStorage('LongDivisionWithRemainder_p', '487');
+  const [q, setQ] = useLocalStorage('LongDivisionWithRemainder_q', '32');
+  const [equation, setEquation] = useLocalStorage('LongDivisionWithRemainder_equation', '');
+  const [solution, setSolution] = useLocalStorage('LongDivisionWithRemainder_solution', '');
+  const [result, setResult] = useLocalStorage('LongDivisionWithRemainder_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('LongDivisionWithRemainder_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('LongDivisionWithRemainder_showSteps', true);
+  const [note, setNote] = useLocalStorage('LongDivisionWithRemainder_note', undefined);
 
   useEffect(() => {
     const vals = getSearchParams(false);

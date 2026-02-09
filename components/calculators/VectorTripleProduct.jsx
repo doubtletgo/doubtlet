@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -16,23 +17,23 @@ import {
 } from '../../helpers/matrixHelper';
 
 const VectorTripleProduct = () => {
-  const [x1, setX1] = useState('1');
-  const [y1, setY1] = useState('2');
-  const [z1, setZ1] = useState('3');
-  const [x2, setX2] = useState('4');
-  const [y2, setY2] = useState('5');
-  const [z2, setZ2] = useState('6');
-  const [x3, setX3] = useState('7');
-  const [y3, setY3] = useState('8');
-  const [z3, setZ3] = useState('9');
-  const [result, setResult] = useState();
+  const [x1, setX1] = useLocalStorage('VectorTripleProduct_x1', '1');
+  const [y1, setY1] = useLocalStorage('VectorTripleProduct_y1', '2');
+  const [z1, setZ1] = useLocalStorage('VectorTripleProduct_z1', '3');
+  const [x2, setX2] = useLocalStorage('VectorTripleProduct_x2', '4');
+  const [y2, setY2] = useLocalStorage('VectorTripleProduct_y2', '5');
+  const [z2, setZ2] = useLocalStorage('VectorTripleProduct_z2', '6');
+  const [x3, setX3] = useLocalStorage('VectorTripleProduct_x3', '7');
+  const [y3, setY3] = useLocalStorage('VectorTripleProduct_y3', '8');
+  const [z3, setZ3] = useLocalStorage('VectorTripleProduct_z3', '9');
+  const [result, setResult] = useLocalStorage('VectorTripleProduct_result', undefined);
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('VectorTripleProduct_equation', '');
+  const [solution, setSolution] = useLocalStorage('VectorTripleProduct_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('VectorTripleProduct_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('VectorTripleProduct_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('VectorTripleProduct_isPointSame', false);
+  const [note, setNote] = useLocalStorage('VectorTripleProduct_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

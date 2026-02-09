@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -108,19 +109,19 @@ const findNullSpace = (matrix) => {
   return identityMatrix.slice(0, 1).map((itm) => itm.map(() => '0'));
 };
 const OrthogonalComplement = () => {
-  const [row, setRow] = useState('2');
-  const [column, setColumn] = useState('3');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('OrthogonalComplement_row', '2');
+  const [column, setColumn] = useLocalStorage('OrthogonalComplement_column', '3');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('OrthogonalComplement_frstMatrix', [
     ['1', '2', '3'],
     ['4', '1', '7'],
     ['0', '0', '0'],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('OrthogonalComplement_equation', '');
+  const [solution, setSolution] = useLocalStorage('OrthogonalComplement_solution', '');
+  const [result, setResult] = useLocalStorage('OrthogonalComplement_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('OrthogonalComplement_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('OrthogonalComplement_showSteps', true);
+  const [note, setNote] = useLocalStorage('OrthogonalComplement_note', undefined);
 
   const vectorsArr = Array.from({ length: row }, () => '');
   useEffect(() => {

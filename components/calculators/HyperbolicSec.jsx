@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -14,15 +15,15 @@ const config = {};
 const math = create(all, config);
 
 const HyperbolicSec = () => {
-  const [latex, setLatex] = useState('\\frac{1}{3}');
-  const [a, setA] = useState('');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [input, setInput] = useState();
+  const [latex, setLatex] = useLocalStorage('HyperbolicSec_latex', '\\frac{1}{3}');
+  const [a, setA] = useLocalStorage('HyperbolicSec_a', '');
+  const [equation, setEquation] = useLocalStorage('HyperbolicSec_equation', '');
+  const [solution, setSolution] = useLocalStorage('HyperbolicSec_solution', '');
+  const [result, setResult] = useLocalStorage('HyperbolicSec_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('HyperbolicSec_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('HyperbolicSec_showSteps', true);
+  const [note, setNote] = useLocalStorage('HyperbolicSec_note', undefined);
+  const [input, setInput] = useLocalStorage('HyperbolicSec_input', undefined);
 
   function evalLatex(expression) {
     try {

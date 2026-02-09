@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -17,18 +18,18 @@ import {
 } from '../../helpers/matrixHelper';
 
 const AngleBetweenTwoLines = () => {
-  const [c1, setC1] = useState('4');
-  const [m1, setM1] = useState('\\sqrt{3}');
-  const [c2, setC2] = useState('5');
-  const [m2, setM2] = useState('1');
+  const [c1, setC1] = useLocalStorage('AngleBetweenTwoLines_c1', '4');
+  const [m1, setM1] = useLocalStorage('AngleBetweenTwoLines_m1', '\\sqrt{3}');
+  const [c2, setC2] = useLocalStorage('AngleBetweenTwoLines_c2', '5');
+  const [m2, setM2] = useLocalStorage('AngleBetweenTwoLines_m2', '1');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('AngleBetweenTwoLines_equation', '');
+  const [solution, setSolution] = useLocalStorage('AngleBetweenTwoLines_solution', '');
+  const [result, setResult] = useLocalStorage('AngleBetweenTwoLines_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('AngleBetweenTwoLines_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('AngleBetweenTwoLines_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('AngleBetweenTwoLines_isPointSame', false);
+  const [note, setNote] = useLocalStorage('AngleBetweenTwoLines_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

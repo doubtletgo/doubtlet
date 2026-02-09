@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MathInput from 'react-math-keyboard';
@@ -17,14 +18,14 @@ import { create, all } from 'mathjs';
 import Input from '../common/input';
 
 const PoissonDistributionCalculator = () => {
-  const [a, setA] = useState('21');
-  const [b, setB] = useState('13');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [a, setA] = useLocalStorage('PoissonDistributionCalculator_a', '21');
+  const [b, setB] = useLocalStorage('PoissonDistributionCalculator_b', '13');
+  const [equation, setEquation] = useLocalStorage('PoissonDistributionCalculator_equation', '');
+  const [solution, setSolution] = useLocalStorage('PoissonDistributionCalculator_solution', '');
+  const [result, setResult] = useLocalStorage('PoissonDistributionCalculator_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('PoissonDistributionCalculator_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('PoissonDistributionCalculator_showSteps', true);
+  const [note, setNote] = useLocalStorage('PoissonDistributionCalculator_note', undefined);
   const mf1 = useRef<MathField | null>(null);
 
   const convertedA = convertIntoLatex(convertFromLatex(a));

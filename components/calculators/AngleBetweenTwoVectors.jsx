@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { addSymbol, parseNumber } from '../../helpers/decimal';
@@ -16,18 +17,18 @@ import {
 import { putSpace } from '../../helpers/general';
 
 const AngleBetweenTwoVectors = () => {
-  const [a, setA] = useState('2');
-  const [b, setB] = useState('3');
-  const [c, setC] = useState('4');
-  const [p, setP] = useState('8');
-  const [q, setQ] = useState('2.4');
-  const [r, setR] = useState('7');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [a, setA] = useLocalStorage('AngleBetweenTwoVectors_a', '2');
+  const [b, setB] = useLocalStorage('AngleBetweenTwoVectors_b', '3');
+  const [c, setC] = useLocalStorage('AngleBetweenTwoVectors_c', '4');
+  const [p, setP] = useLocalStorage('AngleBetweenTwoVectors_p', '8');
+  const [q, setQ] = useLocalStorage('AngleBetweenTwoVectors_q', '2.4');
+  const [r, setR] = useLocalStorage('AngleBetweenTwoVectors_r', '7');
+  const [equation, setEquation] = useLocalStorage('AngleBetweenTwoVectors_equation', '');
+  const [solution, setSolution] = useLocalStorage('AngleBetweenTwoVectors_solution', '');
+  const [result, setResult] = useLocalStorage('AngleBetweenTwoVectors_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('AngleBetweenTwoVectors_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('AngleBetweenTwoVectors_showSteps', true);
+  const [note, setNote] = useLocalStorage('AngleBetweenTwoVectors_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

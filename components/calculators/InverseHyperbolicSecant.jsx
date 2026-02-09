@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -16,15 +17,15 @@ function putSpace(val) {
 }
 
 const InverseHyperbolicSecant = () => {
-  const [latex, setLatex] = useState('\\frac{1}{3}');
-  const [a, setA] = useState('');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [input, setInput] = useState();
+  const [latex, setLatex] = useLocalStorage('InverseHyperbolicSecant_latex', '\\frac{1}{3}');
+  const [a, setA] = useLocalStorage('InverseHyperbolicSecant_a', '');
+  const [equation, setEquation] = useLocalStorage('InverseHyperbolicSecant_equation', '');
+  const [solution, setSolution] = useLocalStorage('InverseHyperbolicSecant_solution', '');
+  const [result, setResult] = useLocalStorage('InverseHyperbolicSecant_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('InverseHyperbolicSecant_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('InverseHyperbolicSecant_showSteps', true);
+  const [note, setNote] = useLocalStorage('InverseHyperbolicSecant_note', undefined);
+  const [input, setInput] = useLocalStorage('InverseHyperbolicSecant_input', undefined);
 
   function evalLatex(expression) {
     try {

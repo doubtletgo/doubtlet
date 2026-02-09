@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -15,13 +16,13 @@ const validateInput = (input: string) => {
 };
 
 const InterQuartile = () => {
-  const [values, setValues] = useState('5.3,11,6,-2,-8,0,7,3/2');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [values, setValues] = useLocalStorage('InterQuartile_values', '5.3,11,6,-2,-8,0,7,3/2');
+  const [equation, setEquation] = useLocalStorage('InterQuartile_equation', '');
+  const [solution, setSolution] = useLocalStorage('InterQuartile_solution', '');
+  const [result, setResult] = useLocalStorage('InterQuartile_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('InterQuartile_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('InterQuartile_showSteps', true);
+  const [note, setNote] = useLocalStorage('InterQuartile_note', undefined);
 
   useEffect(() => {
     const vals: Record<string, string> = getSearchParams(false);

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -16,14 +17,14 @@ import {
 import { MdErrorOutline } from 'react-icons/md';
 
 const FractionNumberToPercentage = () => {
-  const [fraction, setFraction] = useState('\\frac{-7}{4}');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [invalid, setInvalid] = useState(false);
+  const [fraction, setFraction] = useLocalStorage('FractionNumberToPercentage_fraction', '\\frac{-7}{4}');
+  const [equation, setEquation] = useLocalStorage('FractionNumberToPercentage_equation', '');
+  const [solution, setSolution] = useLocalStorage('FractionNumberToPercentage_solution', '');
+  const [result, setResult] = useLocalStorage('FractionNumberToPercentage_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('FractionNumberToPercentage_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('FractionNumberToPercentage_showSteps', true);
+  const [note, setNote] = useLocalStorage('FractionNumberToPercentage_note', undefined);
+  const [invalid, setInvalid] = useLocalStorage('FractionNumberToPercentage_invalid', false);
   const inputRef = useRef<MathField>(null);
 
   useEffect(() => {

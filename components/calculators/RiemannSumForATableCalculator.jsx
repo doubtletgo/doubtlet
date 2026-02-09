@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -16,16 +17,16 @@ import { isMatValid } from '../../helpers/Validations';
 import MatrixInput from '../MatrixInput';
 
 const RiemannSumOfATable = () => {
-  const [xPoints, setXPoints] = useState([['0', '3', '5', '-8', '7']]);
-  const [fPoints, setFPoints] = useState([['2', '-2', '7', '2.1', '3']]);
-  const [interval, setInterval] = useState('5');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [sumType, setSumType] = useState('left');
+  const [xPoints, setXPoints] = useLocalStorage('RiemannSumForATableCalculator_xPoints', [['0', '3', '5', '-8', '7']]);
+  const [fPoints, setFPoints] = useLocalStorage('RiemannSumForATableCalculator_fPoints', [['2', '-2', '7', '2.1', '3']]);
+  const [interval, setInterval] = useLocalStorage('RiemannSumForATableCalculator_interval', '5');
+  const [equation, setEquation] = useLocalStorage('RiemannSumForATableCalculator_equation', '');
+  const [solution, setSolution] = useLocalStorage('RiemannSumForATableCalculator_solution', '');
+  const [answer, setAnswer] = useLocalStorage('RiemannSumForATableCalculator_answer', undefined);
+  const [showResult, setShowResult] = useLocalStorage('RiemannSumForATableCalculator_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('RiemannSumForATableCalculator_showSteps', true);
+  const [note, setNote] = useLocalStorage('RiemannSumForATableCalculator_note', undefined);
+  const [sumType, setSumType] = useLocalStorage('RiemannSumForATableCalculator_sumType', 'left');
 
   const left_Right = sumType == 'left' ? 'Left' : 'Right';
 

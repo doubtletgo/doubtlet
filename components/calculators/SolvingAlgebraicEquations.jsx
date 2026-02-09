@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import {
@@ -35,14 +36,14 @@ function getRoots(expression) {
 }
 
 const SolvingAlgebraicEquations = () => {
-  const [expression, setExpression] = useState('x^5 + 2x +4');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [invalidInput, setInvalidInput] = useState(false);
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [expression, setExpression] = useLocalStorage('SolvingAlgebraicEquations_expression', 'x^5 + 2x +4');
+  const [equation, setEquation] = useLocalStorage('SolvingAlgebraicEquations_equation', '');
+  const [solution, setSolution] = useLocalStorage('SolvingAlgebraicEquations_solution', '');
+  const [answer, setAnswer] = useLocalStorage('SolvingAlgebraicEquations_answer', undefined);
+  const [invalidInput, setInvalidInput] = useLocalStorage('SolvingAlgebraicEquations_invalidInput', false);
+  const [showResult, setShowResult] = useLocalStorage('SolvingAlgebraicEquations_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('SolvingAlgebraicEquations_showSteps', true);
+  const [note, setNote] = useLocalStorage('SolvingAlgebraicEquations_note', undefined);
 
   useEffect(() => {
     const vals = getSearchParams();

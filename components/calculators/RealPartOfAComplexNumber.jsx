@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState, useRef } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams } from '../../helpers/general';
@@ -18,14 +19,14 @@ import MathInput from 'react-math-keyboard';
 import { addSymbol } from '../../helpers/decimal';
 
 const RealPartOfAComplexNumber = () => {
-  const [a, setA] = useState('9');
-  const [span, setB] = useState('2');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [a, setA] = useLocalStorage('RealPartOfAComplexNumber_a', '9');
+  const [span, setB] = useLocalStorage('RealPartOfAComplexNumber_span', '2');
+  const [equation, setEquation] = useLocalStorage('RealPartOfAComplexNumber_equation', '');
+  const [solution, setSolution] = useLocalStorage('RealPartOfAComplexNumber_solution', '');
+  const [result, setResult] = useLocalStorage('RealPartOfAComplexNumber_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('RealPartOfAComplexNumber_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('RealPartOfAComplexNumber_showSteps', true);
+  const [note, setNote] = useLocalStorage('RealPartOfAComplexNumber_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   useEffect(() => {

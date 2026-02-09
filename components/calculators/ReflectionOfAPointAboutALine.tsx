@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -18,18 +19,18 @@ import { addSymbol, minusSymbol } from '../../helpers/decimal';
 import { MathField } from '@/types/mathfield.types';
 
 const ReflectionOfAPointAboutALine = () => {
-  const [a, setA] = useState('-5');
-  const [b, setB] = useState('-7');
-  const [p, setP] = useState('2');
-  const [c, setC] = useState('9');
-  const [q, setQ] = useState('2');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [result, setResult] = useState('');
-  const [note, setNote] = useState();
+  const [a, setA] = useLocalStorage('ReflectionOfAPointAboutALine_a', '-5');
+  const [b, setB] = useLocalStorage('ReflectionOfAPointAboutALine_b', '-7');
+  const [p, setP] = useLocalStorage('ReflectionOfAPointAboutALine_p', '2');
+  const [c, setC] = useLocalStorage('ReflectionOfAPointAboutALine_c', '9');
+  const [q, setQ] = useLocalStorage('ReflectionOfAPointAboutALine_q', '2');
+  const [equation, setEquation] = useLocalStorage('ReflectionOfAPointAboutALine_equation', '');
+  const [solution, setSolution] = useLocalStorage('ReflectionOfAPointAboutALine_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('ReflectionOfAPointAboutALine_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('ReflectionOfAPointAboutALine_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('ReflectionOfAPointAboutALine_isPointSame', false);
+  const [result, setResult] = useLocalStorage('ReflectionOfAPointAboutALine_result', '');
+  const [note, setNote] = useLocalStorage('ReflectionOfAPointAboutALine_note', undefined);
   const mf1 = useRef<MathField>(null);
   const mf2 = useRef<MathField>(null);
   const mf3 = useRef<MathField>(null);

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -19,17 +20,17 @@ import { isMatValid } from '../../helpers/Validations';
 import algebrite from 'algebrite';
 
 const ParallelPerpendicularLine = () => {
-  const [p1, setP1] = useState('3');
-  const [p2, setP2] = useState('2');
-  const [y1, setY1] = useState('1');
-  const [y2, setY2] = useState('5');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [order, setOrder] = useState('Parallel');
+  const [p1, setP1] = useLocalStorage('ParallelPerpendicularLine_p1', '3');
+  const [p2, setP2] = useLocalStorage('ParallelPerpendicularLine_p2', '2');
+  const [y1, setY1] = useLocalStorage('ParallelPerpendicularLine_y1', '1');
+  const [y2, setY2] = useLocalStorage('ParallelPerpendicularLine_y2', '5');
+  const [equation, setEquation] = useLocalStorage('ParallelPerpendicularLine_equation', '');
+  const [solution, setSolution] = useLocalStorage('ParallelPerpendicularLine_solution', '');
+  const [result, setResult] = useLocalStorage('ParallelPerpendicularLine_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('ParallelPerpendicularLine_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('ParallelPerpendicularLine_showSteps', true);
+  const [note, setNote] = useLocalStorage('ParallelPerpendicularLine_note', undefined);
+  const [order, setOrder] = useLocalStorage('ParallelPerpendicularLine_order', 'Parallel');
   const isParallel = order === 'Parallel';
 
   const tempP2 = convertFromLatex(p2);

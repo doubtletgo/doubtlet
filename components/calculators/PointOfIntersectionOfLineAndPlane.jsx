@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { addSymbol, minusSymbol, negative } from '../../helpers/decimal';
@@ -16,22 +17,22 @@ import {
 import { putSpace } from '../../helpers/general';
 
 const PointOfIntersectionOfLineAndPlane = () => {
-  const [a, setA] = useState('2');
-  const [b, setB] = useState('5');
-  const [c, setC] = useState('3');
-  const [d, setD] = useState('5');
-  const [e, setE] = useState('4');
-  const [f, setF] = useState('7');
-  const [p, setP] = useState('2');
-  const [q, setQ] = useState('8');
-  const [r, setR] = useState('7');
-  const [s, setS] = useState('3');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [a, setA] = useLocalStorage('PointOfIntersectionOfLineAndPlane_a', '2');
+  const [b, setB] = useLocalStorage('PointOfIntersectionOfLineAndPlane_b', '5');
+  const [c, setC] = useLocalStorage('PointOfIntersectionOfLineAndPlane_c', '3');
+  const [d, setD] = useLocalStorage('PointOfIntersectionOfLineAndPlane_d', '5');
+  const [e, setE] = useLocalStorage('PointOfIntersectionOfLineAndPlane_e', '4');
+  const [f, setF] = useLocalStorage('PointOfIntersectionOfLineAndPlane_f', '7');
+  const [p, setP] = useLocalStorage('PointOfIntersectionOfLineAndPlane_p', '2');
+  const [q, setQ] = useLocalStorage('PointOfIntersectionOfLineAndPlane_q', '8');
+  const [r, setR] = useLocalStorage('PointOfIntersectionOfLineAndPlane_r', '7');
+  const [s, setS] = useLocalStorage('PointOfIntersectionOfLineAndPlane_s', '3');
+  const [equation, setEquation] = useLocalStorage('PointOfIntersectionOfLineAndPlane_equation', '');
+  const [solution, setSolution] = useLocalStorage('PointOfIntersectionOfLineAndPlane_solution', '');
+  const [result, setResult] = useLocalStorage('PointOfIntersectionOfLineAndPlane_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('PointOfIntersectionOfLineAndPlane_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('PointOfIntersectionOfLineAndPlane_showSteps', true);
+  const [note, setNote] = useLocalStorage('PointOfIntersectionOfLineAndPlane_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

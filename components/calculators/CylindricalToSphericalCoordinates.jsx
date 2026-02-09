@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import MathInput from 'react-math-keyboard';
 import { addSymbol, parseNumber, withSymbol } from '../../helpers/decimal';
 import { renderSteps } from '../../helpers/katex';
@@ -19,18 +20,18 @@ const config = {};
 const math = create(all, config);
 
 const CylindricalToSphericalCoordinate = () => {
-  const [theta, setTheta] = useState('');
-  const [latexR, setLatexR] = useState('');
-  const [latexZ, setLatexZ] = useState('');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [rInvalid, setRInvalid] = useState(false);
-  const [thetaInvalid, setThetaInvalid] = useState(false);
-  const [zInvalid, setZInvalid] = useState(false);
+  const [theta, setTheta] = useLocalStorage('CylindricalToSphericalCoordinates_theta', '');
+  const [latexR, setLatexR] = useLocalStorage('CylindricalToSphericalCoordinates_latexR', '');
+  const [latexZ, setLatexZ] = useLocalStorage('CylindricalToSphericalCoordinates_latexZ', '');
+  const [equation, setEquation] = useLocalStorage('CylindricalToSphericalCoordinates_equation', '');
+  const [solution, setSolution] = useLocalStorage('CylindricalToSphericalCoordinates_solution', '');
+  const [result, setResult] = useLocalStorage('CylindricalToSphericalCoordinates_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('CylindricalToSphericalCoordinates_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('CylindricalToSphericalCoordinates_showSteps', true);
+  const [note, setNote] = useLocalStorage('CylindricalToSphericalCoordinates_note', undefined);
+  const [rInvalid, setRInvalid] = useLocalStorage('CylindricalToSphericalCoordinates_rInvalid', false);
+  const [thetaInvalid, setThetaInvalid] = useLocalStorage('CylindricalToSphericalCoordinates_thetaInvalid', false);
+  const [zInvalid, setZInvalid] = useLocalStorage('CylindricalToSphericalCoordinates_zInvalid', false);
 
   useEffect(() => {
     setNote(

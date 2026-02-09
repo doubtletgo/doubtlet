@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -25,19 +26,19 @@ const findRowSpace = (mat = []) => {
   return nonZeroRow;
 };
 const LinearIndependenceOfVectors = () => {
-  const [row, setRow] = useState('3');
-  const [column, setColumn] = useState('3');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('LinearIndependenceOfVectors_row', '3');
+  const [column, setColumn] = useLocalStorage('LinearIndependenceOfVectors_column', '3');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('LinearIndependenceOfVectors_frstMatrix', [
     [3, 1, 2],
     [-4, 6, 7],
     [2, 8, 9],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('LinearIndependenceOfVectors_equation', '');
+  const [solution, setSolution] = useLocalStorage('LinearIndependenceOfVectors_solution', '');
+  const [answer, setAnswer] = useLocalStorage('LinearIndependenceOfVectors_answer', undefined);
+  const [showResult, setShowResult] = useLocalStorage('LinearIndependenceOfVectors_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('LinearIndependenceOfVectors_showSteps', true);
+  const [note, setNote] = useLocalStorage('LinearIndependenceOfVectors_note', undefined);
 
   const vectorsArr = Array.from({ length: row }, () => '');
 

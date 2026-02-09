@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -17,21 +18,21 @@ import {
 import { addSymbol } from '../../helpers/decimal';
 
 const VectorAdditionOrSubtraction = () => {
-  const [x1, setX1] = useState('2');
-  const [y1, setY1] = useState('5');
-  const [z1, setZ1] = useState('3');
-  const [x2, setX2] = useState('2');
-  const [y2, setY2] = useState('7');
-  const [z2, setZ2] = useState('7');
+  const [x1, setX1] = useLocalStorage('VectorAdditionOrSubtraction_x1', '2');
+  const [y1, setY1] = useLocalStorage('VectorAdditionOrSubtraction_y1', '5');
+  const [z1, setZ1] = useLocalStorage('VectorAdditionOrSubtraction_z1', '3');
+  const [x2, setX2] = useLocalStorage('VectorAdditionOrSubtraction_x2', '2');
+  const [y2, setY2] = useLocalStorage('VectorAdditionOrSubtraction_y2', '7');
+  const [z2, setZ2] = useLocalStorage('VectorAdditionOrSubtraction_z2', '7');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [note, setNote] = useState();
-  const [answer, setAnswer] = useState('');
-  const [order, setOrder] = useState('Addition');
+  const [equation, setEquation] = useLocalStorage('VectorAdditionOrSubtraction_equation', '');
+  const [solution, setSolution] = useLocalStorage('VectorAdditionOrSubtraction_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('VectorAdditionOrSubtraction_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('VectorAdditionOrSubtraction_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('VectorAdditionOrSubtraction_isPointSame', false);
+  const [note, setNote] = useLocalStorage('VectorAdditionOrSubtraction_note', undefined);
+  const [answer, setAnswer] = useLocalStorage('VectorAdditionOrSubtraction_answer', '');
+  const [order, setOrder] = useLocalStorage('VectorAdditionOrSubtraction_order', 'Addition');
   const isAdd = order === 'Addition';
   const mf1 = useRef();
   const mf2 = useRef();

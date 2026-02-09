@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -15,22 +16,22 @@ import {
 } from '../../helpers/matrixHelper';
 
 const CentroidOfTriangle = () => {
-  const [x1, setX1] = useState('e^2');
-  const [x2, setX2] = useState('4');
-  const [x3, setX3] = useState('7');
-  const [y1, setY1] = useState('\\sqrt{5}');
-  const [y2, setY2] = useState('\\sqrt{7}');
-  const [y3, setY3] = useState('5');
-  const [z1, setZ1] = useState('\\sqrt{5}');
-  const [z2, setZ2] = useState('\\sqrt{7}');
-  const [z3, setZ3] = useState('5');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [result, setResult] = useState('');
-  const [note, setNote] = useState();
+  const [x1, setX1] = useLocalStorage('CentroidOfTriangle_x1', 'e^2');
+  const [x2, setX2] = useLocalStorage('CentroidOfTriangle_x2', '4');
+  const [x3, setX3] = useLocalStorage('CentroidOfTriangle_x3', '7');
+  const [y1, setY1] = useLocalStorage('CentroidOfTriangle_y1', '\\sqrt{5}');
+  const [y2, setY2] = useLocalStorage('CentroidOfTriangle_y2', '\\sqrt{7}');
+  const [y3, setY3] = useLocalStorage('CentroidOfTriangle_y3', '5');
+  const [z1, setZ1] = useLocalStorage('CentroidOfTriangle_z1', '\\sqrt{5}');
+  const [z2, setZ2] = useLocalStorage('CentroidOfTriangle_z2', '\\sqrt{7}');
+  const [z3, setZ3] = useLocalStorage('CentroidOfTriangle_z3', '5');
+  const [equation, setEquation] = useLocalStorage('CentroidOfTriangle_equation', '');
+  const [solution, setSolution] = useLocalStorage('CentroidOfTriangle_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('CentroidOfTriangle_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('CentroidOfTriangle_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('CentroidOfTriangle_isPointSame', false);
+  const [result, setResult] = useLocalStorage('CentroidOfTriangle_result', '');
+  const [note, setNote] = useLocalStorage('CentroidOfTriangle_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

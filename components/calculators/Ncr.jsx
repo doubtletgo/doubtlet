@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -10,14 +11,14 @@ import { factorial } from 'mathjs';
 import { getSearchParams } from '../../helpers/general';
 
 const NCR = () => {
-  const [p, setP] = useState('10');
-  const [q, setQ] = useState('2');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [p, setP] = useLocalStorage('Ncr_p', '10');
+  const [q, setQ] = useLocalStorage('Ncr_q', '2');
+  const [equation, setEquation] = useLocalStorage('Ncr_equation', '');
+  const [solution, setSolution] = useLocalStorage('Ncr_solution', '');
+  const [result, setResult] = useLocalStorage('Ncr_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('Ncr_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('Ncr_showSteps', true);
+  const [note, setNote] = useLocalStorage('Ncr_note', undefined);
 
   useEffect(() => {
     const vals = getSearchParams(false);

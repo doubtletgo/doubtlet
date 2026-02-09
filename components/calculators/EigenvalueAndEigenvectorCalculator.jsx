@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -121,8 +122,8 @@ function eigen(mat) {
   }
 }
 const EigenValueAndEigenVectorCalculator = () => {
-  const [row, setRow] = useState('2');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('EigenvalueAndEigenvectorCalculator_row', '2');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('EigenvalueAndEigenvectorCalculator_frstMatrix', [
     // ["1", "1", "4"],
     // ["1", "5", "1"],
     // ["3", "1", "1"],
@@ -131,12 +132,12 @@ const EigenValueAndEigenVectorCalculator = () => {
     ['4', '2', '3'],
   ]);
 
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('EigenvalueAndEigenvectorCalculator_equation', '');
+  const [solution, setSolution] = useLocalStorage('EigenvalueAndEigenvectorCalculator_solution', '');
+  const [result, setResult] = useLocalStorage('EigenvalueAndEigenvectorCalculator_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('EigenvalueAndEigenvectorCalculator_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('EigenvalueAndEigenvectorCalculator_showSteps', true);
+  const [note, setNote] = useLocalStorage('EigenvalueAndEigenvectorCalculator_note', undefined);
   useEffect(() => {
     const vals = getSearchParams(false);
     if (vals.a) {

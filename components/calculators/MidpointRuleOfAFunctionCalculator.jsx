@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace, refValue } from '../../helpers/general';
@@ -53,17 +54,17 @@ function hasMultipleVariables(expression) {
 }
 
 const MidPointRuleOfAFunction = () => {
-  const [expression, setExpression] = useState('e^x');
-  const [lowerKatex, setLowerKatex] = useState('1');
-  const [upperKatex, setUpperKatex] = useState('3');
-  const [interval, setSubIntervals] = useState('4');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [invalidInput, setInvalidInput] = useState(false);
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [expression, setExpression] = useLocalStorage('MidpointRuleOfAFunctionCalculator_expression', 'e^x');
+  const [lowerKatex, setLowerKatex] = useLocalStorage('MidpointRuleOfAFunctionCalculator_lowerKatex', '1');
+  const [upperKatex, setUpperKatex] = useLocalStorage('MidpointRuleOfAFunctionCalculator_upperKatex', '3');
+  const [interval, setSubIntervals] = useLocalStorage('MidpointRuleOfAFunctionCalculator_interval', '4');
+  const [equation, setEquation] = useLocalStorage('MidpointRuleOfAFunctionCalculator_equation', '');
+  const [solution, setSolution] = useLocalStorage('MidpointRuleOfAFunctionCalculator_solution', '');
+  const [answer, setAnswer] = useLocalStorage('MidpointRuleOfAFunctionCalculator_answer', undefined);
+  const [invalidInput, setInvalidInput] = useLocalStorage('MidpointRuleOfAFunctionCalculator_invalidInput', false);
+  const [showResult, setShowResult] = useLocalStorage('MidpointRuleOfAFunctionCalculator_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('MidpointRuleOfAFunctionCalculator_showSteps', true);
+  const [note, setNote] = useLocalStorage('MidpointRuleOfAFunctionCalculator_note', undefined);
 
   useEffect(() => {
     setNote(

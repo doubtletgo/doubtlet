@@ -2,21 +2,22 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { parseNumber } from '../../helpers/decimal';
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams } from '../../helpers/general';
 
 const HighestCommonFactor = () => {
-  const [a, setA] = useState('2,4,6,8,6,9');
-  const [parsedNum, setParsedNum] = useState([]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [method, setMethod] = useState('PrimeFactors');
+  const [a, setA] = useLocalStorage('HighestCommonFactor_a', '2,4,6,8,6,9');
+  const [parsedNum, setParsedNum] = useLocalStorage('HighestCommonFactor_parsedNum', []);
+  const [equation, setEquation] = useLocalStorage('HighestCommonFactor_equation', '');
+  const [solution, setSolution] = useLocalStorage('HighestCommonFactor_solution', '');
+  const [result, setResult] = useLocalStorage('HighestCommonFactor_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('HighestCommonFactor_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('HighestCommonFactor_showSteps', true);
+  const [note, setNote] = useLocalStorage('HighestCommonFactor_note', undefined);
+  const [method, setMethod] = useLocalStorage('HighestCommonFactor_method', 'PrimeFactors');
   const isPrimeFactors = method === 'PrimeFactors';
 
   useEffect(() => {

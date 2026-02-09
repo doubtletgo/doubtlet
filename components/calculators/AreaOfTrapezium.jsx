@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -16,16 +17,16 @@ import {
 } from '../../helpers/matrixHelper';
 
 const AreaOfTrapezium = () => {
-  const [b1, setB1] = useState('1');
-  const [b2, setB2] = useState('9');
-  const [h, setH] = useState('20');
+  const [b1, setB1] = useLocalStorage('AreaOfTrapezium_b1', '1');
+  const [b2, setB2] = useLocalStorage('AreaOfTrapezium_b2', '9');
+  const [h, setH] = useLocalStorage('AreaOfTrapezium_h', '20');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('AreaOfTrapezium_equation', '');
+  const [solution, setSolution] = useLocalStorage('AreaOfTrapezium_solution', '');
+  const [result, setResult] = useLocalStorage('AreaOfTrapezium_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('AreaOfTrapezium_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('AreaOfTrapezium_showSteps', true);
+  const [note, setNote] = useLocalStorage('AreaOfTrapezium_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

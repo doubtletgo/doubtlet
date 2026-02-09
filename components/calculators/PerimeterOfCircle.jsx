@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 
@@ -16,14 +17,14 @@ import {
 } from '../../helpers/matrixHelper';
 
 const PerimeterOfCircle = () => {
-  const [a, setA] = useState('\\sqrt{4}');
+  const [a, setA] = useLocalStorage('PerimeterOfCircle_a', '\\sqrt{4}');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('PerimeterOfCircle_equation', '');
+  const [solution, setSolution] = useLocalStorage('PerimeterOfCircle_solution', '');
+  const [result, setResult] = useLocalStorage('PerimeterOfCircle_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('PerimeterOfCircle_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('PerimeterOfCircle_showSteps', true);
+  const [note, setNote] = useLocalStorage('PerimeterOfCircle_note', undefined);
   const mf1 = useRef();
 
   //to get values from other calculator

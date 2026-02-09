@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -11,16 +12,16 @@ import { abs, parseNumber } from '../../helpers/decimal';
 const kSpace = (count = 1) => '\\space'.repeat(count);
 
 const LongDivisionMethodWithDecimal = () => {
-  const [p, setP] = useState('32');
-  const [q, setQ] = useState('2');
-  const [r, setR] = useState('5');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [decimalValue, setDecimalValue] = useState('');
+  const [p, setP] = useLocalStorage('LongDivisionMethodWithDecimal_p', '32');
+  const [q, setQ] = useLocalStorage('LongDivisionMethodWithDecimal_q', '2');
+  const [r, setR] = useLocalStorage('LongDivisionMethodWithDecimal_r', '5');
+  const [equation, setEquation] = useLocalStorage('LongDivisionMethodWithDecimal_equation', '');
+  const [solution, setSolution] = useLocalStorage('LongDivisionMethodWithDecimal_solution', '');
+  const [result, setResult] = useLocalStorage('LongDivisionMethodWithDecimal_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('LongDivisionMethodWithDecimal_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('LongDivisionMethodWithDecimal_showSteps', true);
+  const [note, setNote] = useLocalStorage('LongDivisionMethodWithDecimal_note', undefined);
+  const [decimalValue, setDecimalValue] = useLocalStorage('LongDivisionMethodWithDecimal_decimalValue', '');
 
   useEffect(() => {
     setNote(

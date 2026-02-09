@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -18,12 +19,12 @@ import {
 } from '../../helpers/matrixHelper';
 
 const DistanceBetweenTwoPoints = () => {
-  const [x1, setX1] = useState('2');
-  const [y1, setY1] = useState('3');
-  const [z1, setZ1] = useState('0');
-  const [x2, setX2] = useState('5');
-  const [y2, setY2] = useState('7');
-  const [z2, setZ2] = useState('0');
+  const [x1, setX1] = useLocalStorage('DistanceBetweenTwoPoints_x1', '2');
+  const [y1, setY1] = useLocalStorage('DistanceBetweenTwoPoints_y1', '3');
+  const [z1, setZ1] = useLocalStorage('DistanceBetweenTwoPoints_z1', '0');
+  const [x2, setX2] = useLocalStorage('DistanceBetweenTwoPoints_x2', '5');
+  const [y2, setY2] = useLocalStorage('DistanceBetweenTwoPoints_y2', '7');
+  const [z2, setZ2] = useLocalStorage('DistanceBetweenTwoPoints_z2', '0');
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();
@@ -31,14 +32,14 @@ const DistanceBetweenTwoPoints = () => {
   const mf5 = useRef();
   const mf6 = useRef();
 
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [note, setNote] = useState();
-  const [dimension, setDimension] = useState('2D');
+  const [equation, setEquation] = useLocalStorage('DistanceBetweenTwoPoints_equation', '');
+  const [solution, setSolution] = useLocalStorage('DistanceBetweenTwoPoints_solution', '');
+  const [result, setResult] = useLocalStorage('DistanceBetweenTwoPoints_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('DistanceBetweenTwoPoints_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('DistanceBetweenTwoPoints_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('DistanceBetweenTwoPoints_isPointSame', false);
+  const [note, setNote] = useLocalStorage('DistanceBetweenTwoPoints_note', undefined);
+  const [dimension, setDimension] = useLocalStorage('DistanceBetweenTwoPoints_dimension', '2D');
   const is3d = dimension === '3D';
 
   //to get values from other calculator

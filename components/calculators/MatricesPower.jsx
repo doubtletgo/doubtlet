@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -71,18 +72,18 @@ function stringToArray(str) {
 }
 
 const MatricesPower = () => {
-  const [row, setRow] = useState('2');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('MatricesPower_row', '2');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('MatricesPower_frstMatrix', [
     ['1.5', '\\frac{2}{3}'],
     ['3', '\\frac{-2}{3}'],
   ]);
-  const [power, setPower] = useState('3');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [power, setPower] = useLocalStorage('MatricesPower_power', '3');
+  const [equation, setEquation] = useLocalStorage('MatricesPower_equation', '');
+  const [solution, setSolution] = useLocalStorage('MatricesPower_solution', '');
+  const [result, setResult] = useLocalStorage('MatricesPower_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('MatricesPower_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('MatricesPower_showSteps', true);
+  const [note, setNote] = useLocalStorage('MatricesPower_note', undefined);
 
   const repeatChar = (char, times) => char.repeat(times).split('').join('.');
   //end function

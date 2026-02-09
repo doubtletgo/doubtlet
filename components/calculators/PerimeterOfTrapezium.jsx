@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MathInput from 'react-math-keyboard';
@@ -15,16 +16,16 @@ import {
 import { putSpace } from '../../helpers/general';
 
 const PerimeterOfTrapezium = () => {
-  const [a, setA] = useState('2');
-  const [b, setB] = useState('\\pi');
-  const [c, setC] = useState('\\sqrt{7}');
-  const [d, setD] = useState('6');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [a, setA] = useLocalStorage('PerimeterOfTrapezium_a', '2');
+  const [b, setB] = useLocalStorage('PerimeterOfTrapezium_b', '\\pi');
+  const [c, setC] = useLocalStorage('PerimeterOfTrapezium_c', '\\sqrt{7}');
+  const [d, setD] = useLocalStorage('PerimeterOfTrapezium_d', '6');
+  const [equation, setEquation] = useLocalStorage('PerimeterOfTrapezium_equation', '');
+  const [solution, setSolution] = useLocalStorage('PerimeterOfTrapezium_solution', '');
+  const [result, setResult] = useLocalStorage('PerimeterOfTrapezium_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('PerimeterOfTrapezium_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('PerimeterOfTrapezium_showSteps', true);
+  const [note, setNote] = useLocalStorage('PerimeterOfTrapezium_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

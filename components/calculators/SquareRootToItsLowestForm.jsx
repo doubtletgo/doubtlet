@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -9,15 +10,15 @@ import { parseNumber } from '../../helpers/decimal';
 import { putSpace } from '../../helpers/general';
 
 const SquareRootToItsLowestForm = () => {
-  const [a, setA] = useState('400');
+  const [a, setA] = useLocalStorage('SquareRootToItsLowestForm_a', '400');
 
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [arr, setArr] = useState([]);
+  const [equation, setEquation] = useLocalStorage('SquareRootToItsLowestForm_equation', '');
+  const [solution, setSolution] = useLocalStorage('SquareRootToItsLowestForm_solution', '');
+  const [result, setResult] = useLocalStorage('SquareRootToItsLowestForm_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('SquareRootToItsLowestForm_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('SquareRootToItsLowestForm_showSteps', true);
+  const [note, setNote] = useLocalStorage('SquareRootToItsLowestForm_note', undefined);
+  const [arr, setArr] = useLocalStorage('SquareRootToItsLowestForm_arr', []);
 
   useEffect(() => {
     setNote(

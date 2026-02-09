@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -18,17 +19,15 @@ const validateInput = (input: string) => {
 };
 
 const Covariance = () => {
-  const [xValues, setXValues] = useState('5.3,11,6,-2,-8');
-  const [yValues, setYValues] = useState('1,-4,2.1,7,5');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [methodType, setMethodType] = useState<'Sample' | 'Population'>(
-    'Sample'
-  );
+  const [xValues, setXValues] = useLocalStorage('Covariance_xValues', '5.3,11,6,-2,-8');
+  const [yValues, setYValues] = useLocalStorage('Covariance_yValues', '1,-4,2.1,7,5');
+  const [equation, setEquation] = useLocalStorage('Covariance_equation', '');
+  const [solution, setSolution] = useLocalStorage('Covariance_solution', '');
+  const [result, setResult] = useLocalStorage('Covariance_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('Covariance_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('Covariance_showSteps', true);
+  const [note, setNote] = useLocalStorage('Covariance_note', undefined);
+  const [methodType, setMethodType] = useLocalStorage<'Sample' | 'Population'>('Covariance_methodType', 'Sample');
 
   useEffect(() => {
     const xVals: Record<string, string> = getSearchParams(false);

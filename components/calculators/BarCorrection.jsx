@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -11,9 +12,9 @@ import {
   parseNumber,
 } from '../../helpers/decimal';
 import getTemperatureOnBarCorrectionSubtractedKelvin from '../../utils/conversion/bar-correction-subtracted-kelvin';
-import getTemperatureOnBarCorrectionSubtractedDabok from '../../utils/conversion/bar-correction-subtracted-dabok';
+import getDabokSubtracted from '@/utils/conversion/bar-correction-subtracted-dabok';
 import getTemperatureOnBarCorrectionAddedKelvin from '../../utils/conversion/bar-correction-added-kelvin';
-import getTemperatureOnBarCorrectionAddedDabok from '../../utils/conversion/bar-correction-added-dabok';
+import getDabokAdded from '@/utils/conversion/bar-correction-added-dabok';
 import getTemperatureOnBarCorrectionAdded from '../../utils/conversion/bar-correction-added';
 import getTemperatureOnBarCorrectionSubtracted from '../../utils/conversion/bar-correction-subtracted';
 
@@ -104,18 +105,19 @@ const getDBC = (data, temperature, pressure) => {
 
 
 const BarCorrection = () => {
-  const [bt, setBt] = useState(299.4);
-  const [dbt, setDbt] = useState(27);
-  const [br, setBr] = useState(956.5);
-  const [indexError, setIndexError] = useState('-0.2');
-  const [previousSlp, setPreviousSlp] = useState(952.1);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(false);
-  const [note, setNote] = useState();
-  const [temperature, setTemperature] = useState('Dabok');
+  const [bt, setBt] = useLocalStorage('BarCorrection_bt', 299.4);
+  const [dbt, setDbt] = useLocalStorage('BarCorrection_dbt', 27);
+  const [br, setBr] = useLocalStorage('BarCorrection_br', 956.5);
+  const [indexError, setIndexError] = useLocalStorage('BarCorrection_indexError', '-0.2');
+  const [previousSlp, setPreviousSlp] = useLocalStorage('BarCorrection_previousSlp', 952.1);
+  const [equation, setEquation] = useLocalStorage('BarCorrection_equation', '');
+  const [solution, setSolution] = useLocalStorage('BarCorrection_solution', '');
+  const [result, setResult] = useLocalStorage('BarCorrection_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('BarCorrection_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('BarCorrection_showSteps', false);
+  const [note, setNote] = useLocalStorage('BarCorrection_note', undefined);
+  const [temperature, setTemperature] = useLocalStorage('BarCorrection_temperature', 'Dabok');
+  const [calculatedValues, setCalculatedValues] = useLocalStorage('BarCorrection_calculatedValues', {});
 
   const isDabok = temperature === 'Dabok';
 
@@ -183,32 +185,41 @@ const BarCorrection = () => {
 
     if (stationData) {
       // New Logic for added stations
-      correctionSubtracted = getRTC(stationData, Number(bt), correctedBaroMeterReading);
+      correctionSubtracted = Number(getRTC(stationData, Number(bt), correctedBaroMeterReading));
     } else if (isDabok) {
-      correctionSubtracted = getTemperatureOnBarCorrectionSubtractedDabok(
+      correctionSubtracted = Number(getDabokSubtracted(
         bt,
         correctedBaroMeterReading
-      );
+      ));
     } else {
       // Fallback or default
       // If someone somehow selects something else or code changes, default to Dabok or generic
-      correctionSubtracted = getTemperatureOnBarCorrectionSubtracted(bt, correctedBaroMeterReading);
+      correctionSubtracted = Number(getTemperatureOnBarCorrectionSubtracted(bt, correctedBaroMeterReading));
     }
 
     const stationLevelPressure =
       correctedBaroMeterReading - correctionSubtracted;
 
     if (stationData) {
-      correctionAdded = getDBC(stationData, Number(dbt), stationLevelPressure);
+      correctionAdded = Number(getDBC(stationData, Number(dbt), stationLevelPressure));
     } else if (isDabok) {
-      correctionAdded = getTemperatureOnBarCorrectionAddedDabok(dbt, '952.1');
+      correctionAdded = Number(getDabokAdded(dbt, '952.1'));
     } else {
       // Fallback
-      correctionAdded = getTemperatureOnBarCorrectionAdded(dbt, stationLevelPressure);
+      correctionAdded = Number(getTemperatureOnBarCorrectionAdded(dbt, stationLevelPressure));
     }
 
     const meanSeaLevelPressure = stationLevelPressure + correctionAdded;
     let changeInSLP = stationLevelPressure - previousSlp;
+
+    // Save numeric values for other calculators
+    setCalculatedValues({
+      slp: (stationLevelPressure ?? 0).toFixed(1),
+      mslp: (meanSeaLevelPressure ?? 0).toFixed(1),
+      pressureChange: (changeInSLP ?? 0).toFixed(1),
+      correctionAdded: (correctionAdded ?? 0).toFixed(1),
+      correctionSubtracted: (correctionSubtracted ?? 0).toFixed(1)
+    });
 
     const answerSteps = [
       'table',
@@ -241,6 +252,16 @@ const BarCorrection = () => {
       {
         type: 'td',
         value: `<b>${parseWithDecimals(meanSeaLevelPressure)}</b> hpa`,
+      },
+      '/tr',
+      'tr',
+      {
+        type: 'td',
+        value: `Pressure Correction:`,
+      },
+      {
+        type: 'td',
+        value: `<b>${addSymbol(changeInSLP)}${parseWithDecimals(abs(changeInSLP))}</b> hpa`,
       },
       '/tr',
       '/tbody',
@@ -285,7 +306,7 @@ const BarCorrection = () => {
           type: 'td',
         },
         {
-          value: `${addSymbol(abs.previousSlp)}<b>${parseWithDecimals(
+          value: `${addSymbol(previousSlp)}<b>${parseWithDecimals(
             previousSlp
           )}</b> hpa`,
           type: 'td',
@@ -298,7 +319,7 @@ const BarCorrection = () => {
           type: 'td',
         },
         {
-          value: `<b>${parseWithDecimals(changeInSLP)}</b> hpa`,
+          value: `<b>${addSymbol(changeInSLP)}${parseWithDecimals(abs(changeInSLP))}</b> hpa`,
           type: 'td',
           className: 'text-right',
         },

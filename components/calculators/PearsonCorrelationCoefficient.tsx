@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -18,14 +19,14 @@ const validateInput = (input: string) => {
 };
 
 const PearsonCorrelationCoefficient = () => {
-  const [xValues, setXValues] = useState('5.3,11,6,-2');
-  const [yValues, setYValues] = useState('1,-4,2.1,7');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [xValues, setXValues] = useLocalStorage('PearsonCorrelationCoefficient_xValues', '5.3,11,6,-2');
+  const [yValues, setYValues] = useLocalStorage('PearsonCorrelationCoefficient_yValues', '1,-4,2.1,7');
+  const [equation, setEquation] = useLocalStorage('PearsonCorrelationCoefficient_equation', '');
+  const [solution, setSolution] = useLocalStorage('PearsonCorrelationCoefficient_solution', '');
+  const [result, setResult] = useLocalStorage('PearsonCorrelationCoefficient_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('PearsonCorrelationCoefficient_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('PearsonCorrelationCoefficient_showSteps', true);
+  const [note, setNote] = useLocalStorage('PearsonCorrelationCoefficient_note', undefined);
 
   useEffect(() => {
     const xVals = xValues.split(',');

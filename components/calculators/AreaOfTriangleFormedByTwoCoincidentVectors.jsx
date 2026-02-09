@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { addSymbol, minusSymbol } from '../../helpers/decimal';
@@ -18,18 +19,18 @@ import {
 import { putSpace } from '../../helpers/general';
 
 const AreaOfTriangleFormedByTwoCoincidentVectors = () => {
-  const [x1, setX1] = useState('\\sqrt{7}');
-  const [y1, setY1] = useState('\\pi');
-  const [z1, setZ1] = useState('\\frac{2}{3}');
-  const [x2, setX2] = useState('5');
-  const [y2, setY2] = useState('2.4');
-  const [z2, setZ2] = useState('5');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [x1, setX1] = useLocalStorage('AreaOfTriangleFormedByTwoCoincidentVectors_x1', '\\sqrt{7}');
+  const [y1, setY1] = useLocalStorage('AreaOfTriangleFormedByTwoCoincidentVectors_y1', '\\pi');
+  const [z1, setZ1] = useLocalStorage('AreaOfTriangleFormedByTwoCoincidentVectors_z1', '\\frac{2}{3}');
+  const [x2, setX2] = useLocalStorage('AreaOfTriangleFormedByTwoCoincidentVectors_x2', '5');
+  const [y2, setY2] = useLocalStorage('AreaOfTriangleFormedByTwoCoincidentVectors_y2', '2.4');
+  const [z2, setZ2] = useLocalStorage('AreaOfTriangleFormedByTwoCoincidentVectors_z2', '5');
+  const [equation, setEquation] = useLocalStorage('AreaOfTriangleFormedByTwoCoincidentVectors_equation', '');
+  const [solution, setSolution] = useLocalStorage('AreaOfTriangleFormedByTwoCoincidentVectors_solution', '');
+  const [result, setResult] = useLocalStorage('AreaOfTriangleFormedByTwoCoincidentVectors_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('AreaOfTriangleFormedByTwoCoincidentVectors_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('AreaOfTriangleFormedByTwoCoincidentVectors_showSteps', true);
+  const [note, setNote] = useLocalStorage('AreaOfTriangleFormedByTwoCoincidentVectors_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

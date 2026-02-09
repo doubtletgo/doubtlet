@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -18,14 +19,14 @@ const validateInput = (input: string) => {
 };
 
 const LinearRegression = () => {
-  const [xValues, setXValues] = useState('5,-8,0,7');
-  const [yValues, setYValues] = useState('2,7,6,-2');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [xValues, setXValues] = useLocalStorage('LinearRegression_xValues', '5,-8,0,7');
+  const [yValues, setYValues] = useLocalStorage('LinearRegression_yValues', '2,7,6,-2');
+  const [equation, setEquation] = useLocalStorage('LinearRegression_equation', '');
+  const [solution, setSolution] = useLocalStorage('LinearRegression_solution', '');
+  const [result, setResult] = useLocalStorage('LinearRegression_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('LinearRegression_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('LinearRegression_showSteps', true);
+  const [note, setNote] = useLocalStorage('LinearRegression_note', undefined);
 
   useEffect(() => {
     const xVals: Record<string, string> = getSearchParams(false);

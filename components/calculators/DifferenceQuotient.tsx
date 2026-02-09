@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -33,14 +34,14 @@ const parseToLatex = (str: string) => {
 };
 
 const DifferenceQuotient = () => {
-  const [expression, setExpression] = useState('2x^2 + 3x - 1');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [invalidInput, setInvalidInput] = useState(false);
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [expression, setExpression] = useLocalStorage('DifferenceQuotient_expression', '2x^2 + 3x - 1');
+  const [equation, setEquation] = useLocalStorage('DifferenceQuotient_equation', '');
+  const [solution, setSolution] = useLocalStorage('DifferenceQuotient_solution', '');
+  const [answer, setAnswer] = useLocalStorage('DifferenceQuotient_answer', undefined);
+  const [invalidInput, setInvalidInput] = useLocalStorage('DifferenceQuotient_invalidInput', false);
+  const [showResult, setShowResult] = useLocalStorage('DifferenceQuotient_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('DifferenceQuotient_showSteps', true);
+  const [note, setNote] = useLocalStorage('DifferenceQuotient_note', undefined);
 
   useEffect(() => {
     const vals: Record<string, string> = getSearchParams(false);

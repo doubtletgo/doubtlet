@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -15,16 +16,16 @@ type CompoundType =
   | 'Weekly'
   | 'Daily';
 const CompoundInterest = () => {
-  const [principalAmount, setPrincipalAmount] = useState('100000');
-  const [rateOfInterest, setRateOfInterest] = useState('6.2');
-  const [timePeriod, setTimePeriod] = useState('5.5');
-  const [compoundedAs, setCompoundedAs] = useState<CompoundType>('Continuously');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [principalAmount, setPrincipalAmount] = useLocalStorage('CompoundInterest_principalAmount', '100000');
+  const [rateOfInterest, setRateOfInterest] = useLocalStorage('CompoundInterest_rateOfInterest', '6.2');
+  const [timePeriod, setTimePeriod] = useLocalStorage('CompoundInterest_timePeriod', '5.5');
+  const [compoundedAs, setCompoundedAs] = useLocalStorage<CompoundType>('CompoundInterest_compoundedAs', 'Continuously');
+  const [equation, setEquation] = useLocalStorage('CompoundInterest_equation', '');
+  const [solution, setSolution] = useLocalStorage('CompoundInterest_solution', '');
+  const [result, setResult] = useLocalStorage('CompoundInterest_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('CompoundInterest_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('CompoundInterest_showSteps', true);
+  const [note, setNote] = useLocalStorage('CompoundInterest_note', undefined);
 
   const hasValue =
     principalAmount &&

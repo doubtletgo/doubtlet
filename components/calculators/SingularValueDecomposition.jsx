@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -114,18 +115,18 @@ function eigen(mat) {
   }
 }
 const SingularValueDecomposition = () => {
-  const [row, setRow] = useState('2');
-  const [column, setColumn] = useState('2');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('SingularValueDecomposition_row', '2');
+  const [column, setColumn] = useLocalStorage('SingularValueDecomposition_column', '2');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('SingularValueDecomposition_frstMatrix', [
     ['5', '5'],
     ['-1', '7'],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('SingularValueDecomposition_equation', '');
+  const [solution, setSolution] = useLocalStorage('SingularValueDecomposition_solution', '');
+  const [result, setResult] = useLocalStorage('SingularValueDecomposition_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('SingularValueDecomposition_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('SingularValueDecomposition_showSteps', true);
+  const [note, setNote] = useLocalStorage('SingularValueDecomposition_note', undefined);
   useEffect(() => {
     const vals = getSearchParams(false);
     if (vals.a) {

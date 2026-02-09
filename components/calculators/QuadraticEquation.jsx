@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -24,16 +25,16 @@ import {
 } from '../../helpers/matrixHelper';
 
 const QuadraticEquation = () => {
-  const [a, setA] = useState('1');
-  const [b, setB] = useState('9');
-  const [c, setE3] = useState('20');
+  const [a, setA] = useLocalStorage('QuadraticEquation_a', '1');
+  const [b, setB] = useLocalStorage('QuadraticEquation_b', '9');
+  const [c, setE3] = useLocalStorage('QuadraticEquation_c', '20');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('QuadraticEquation_equation', '');
+  const [solution, setSolution] = useLocalStorage('QuadraticEquation_solution', '');
+  const [result, setResult] = useLocalStorage('QuadraticEquation_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('QuadraticEquation_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('QuadraticEquation_showSteps', true);
+  const [note, setNote] = useLocalStorage('QuadraticEquation_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

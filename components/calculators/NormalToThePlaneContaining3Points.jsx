@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -17,22 +18,22 @@ import {
 } from '../../helpers/matrixHelper';
 
 const NormalToThePlaneContaining3Points = () => {
-  const [x1, setX1] = useState('1');
-  const [y1, setY1] = useState('2');
-  const [z1, setZ1] = useState('\\sqrt{1}');
-  const [x2, setX2] = useState('1');
-  const [y2, setY2] = useState('e^5');
-  const [z2, setZ2] = useState('4');
-  const [x3, setX3] = useState('2');
-  const [y3, setY3] = useState('\\sqrt{1}');
-  const [z3, setZ3] = useState('8');
-  const [result, setResult] = useState();
+  const [x1, setX1] = useLocalStorage('NormalToThePlaneContaining3Points_x1', '1');
+  const [y1, setY1] = useLocalStorage('NormalToThePlaneContaining3Points_y1', '2');
+  const [z1, setZ1] = useLocalStorage('NormalToThePlaneContaining3Points_z1', '\\sqrt{1}');
+  const [x2, setX2] = useLocalStorage('NormalToThePlaneContaining3Points_x2', '1');
+  const [y2, setY2] = useLocalStorage('NormalToThePlaneContaining3Points_y2', 'e^5');
+  const [z2, setZ2] = useLocalStorage('NormalToThePlaneContaining3Points_z2', '4');
+  const [x3, setX3] = useLocalStorage('NormalToThePlaneContaining3Points_x3', '2');
+  const [y3, setY3] = useLocalStorage('NormalToThePlaneContaining3Points_y3', '\\sqrt{1}');
+  const [z3, setZ3] = useLocalStorage('NormalToThePlaneContaining3Points_z3', '8');
+  const [result, setResult] = useLocalStorage('NormalToThePlaneContaining3Points_result', undefined);
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('NormalToThePlaneContaining3Points_equation', '');
+  const [solution, setSolution] = useLocalStorage('NormalToThePlaneContaining3Points_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('NormalToThePlaneContaining3Points_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('NormalToThePlaneContaining3Points_showSteps', true);
+  const [note, setNote] = useLocalStorage('NormalToThePlaneContaining3Points_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

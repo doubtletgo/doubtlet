@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -80,18 +81,18 @@ function eigen(mat) {
   }
 }
 const DiagonalizeMatrix = () => {
-  const [row, setRow] = useState('3');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('DiagonalizeMatrix_row', '3');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('DiagonalizeMatrix_frstMatrix', [
     ['1', '1', '3'],
     ['1', '5', '7'],
     ['3', '1', '1'],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('DiagonalizeMatrix_equation', '');
+  const [solution, setSolution] = useLocalStorage('DiagonalizeMatrix_solution', '');
+  const [result, setResult] = useLocalStorage('DiagonalizeMatrix_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('DiagonalizeMatrix_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('DiagonalizeMatrix_showSteps', true);
+  const [note, setNote] = useLocalStorage('DiagonalizeMatrix_note', undefined);
   useEffect(() => {
     const vals = getSearchParams(false);
     if (vals.a) {

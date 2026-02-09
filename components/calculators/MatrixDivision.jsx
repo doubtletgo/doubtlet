@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -24,22 +25,22 @@ const config = {};
 const math = create(all, config);
 
 const MatrixDivision = () => {
-  const [row, setRow] = useState('2');
-  const [clm, setClm] = useState('2');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('MatrixDivision_row', '2');
+  const [clm, setClm] = useLocalStorage('MatrixDivision_clm', '2');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('MatrixDivision_frstMatrix', [
     ['1.5', '\\frac{2}{3}'],
     ['3', '2.1'],
   ]);
-  const [scndMatrix, setScndMatrix] = useState([
+  const [scndMatrix, setScndMatrix] = useLocalStorage('MatrixDivision_scndMatrix', [
     ['2', '\\frac{2}{3}'],
     ['4', '2'],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('MatrixDivision_equation', '');
+  const [solution, setSolution] = useLocalStorage('MatrixDivision_solution', '');
+  const [result, setResult] = useLocalStorage('MatrixDivision_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('MatrixDivision_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('MatrixDivision_showSteps', true);
+  const [note, setNote] = useLocalStorage('MatrixDivision_note', undefined);
 
   const dtrmntValue = (arr) => {
     try {

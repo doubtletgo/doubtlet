@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -39,24 +40,22 @@ const hasMultipleVariables = (expression: string) => {
 };
 
 const EulerMethodCalculator = () => {
-  const [expression, setExpression] = useState('3t(e^{-y})');
-  const [hValue, setHValue] = useState('0.2');
-  const [t0Value, setT0Value] = useState('0');
-  const [y0Value, setY0Value] = useState('2');
-  const [t1Value, setT1Value] = useState('0.6');
-  const [methodType, setMethodType] = useState<'Number-of-steps' | 'Step-size'>(
-    'Step-size'
-  );
+  const [expression, setExpression] = useLocalStorage('EulersMethod_expression', '3t(e^{-y})');
+  const [hValue, setHValue] = useLocalStorage('EulersMethod_hValue', '0.2');
+  const [t0Value, setT0Value] = useLocalStorage('EulersMethod_t0Value', '0');
+  const [y0Value, setY0Value] = useLocalStorage('EulersMethod_y0Value', '2');
+  const [t1Value, setT1Value] = useLocalStorage('EulersMethod_t1Value', '0.6');
+  const [methodType, setMethodType] = useLocalStorage<'Number-of-steps' | 'Step-size'>('EulersMethod_methodType', 'Step-size');
 
-  const [equation, setEquation] = useState('');
-  const [note, setNote] = useState('');
-  const [answer, setAnswer] = useState('');
-  const [solution, setSolution] = useState('');
-  const [error, setError] = useState('');
-  const [invalidInput, setInvalidInput] = useState(false);
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(false);
-  const [isInvalid, setIsInvalid] = useState(false);
+  const [equation, setEquation] = useLocalStorage('EulersMethod_equation', '');
+  const [note, setNote] = useLocalStorage('EulersMethod_note', '');
+  const [answer, setAnswer] = useLocalStorage('EulersMethod_answer', '');
+  const [solution, setSolution] = useLocalStorage('EulersMethod_solution', '');
+  const [error, setError] = useLocalStorage('EulersMethod_error', '');
+  const [invalidInput, setInvalidInput] = useLocalStorage('EulersMethod_invalidInput', false);
+  const [showResult, setShowResult] = useLocalStorage('EulersMethod_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('EulersMethod_showSteps', false);
+  const [isInvalid, setIsInvalid] = useLocalStorage('EulersMethod_isInvalid', false);
 
   const hasValue =
     !!expression &&

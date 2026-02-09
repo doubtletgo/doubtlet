@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 
@@ -19,19 +20,19 @@ import {
 import { convertToKatex } from '../../helpers/SolveRoot';
 
 const DistanceOfPointFrom2DLine = () => {
-  const [a, setA] = useState('2');
-  const [b, setB] = useState('4');
-  const [c, setC] = useState('2');
-  const [x, setX] = useState('3');
-  const [y, setY] = useState('3');
+  const [a, setA] = useLocalStorage('DistanceOfPointFrom2DLine_a', '2');
+  const [b, setB] = useLocalStorage('DistanceOfPointFrom2DLine_b', '4');
+  const [c, setC] = useLocalStorage('DistanceOfPointFrom2DLine_c', '2');
+  const [x, setX] = useLocalStorage('DistanceOfPointFrom2DLine_x', '3');
+  const [y, setY] = useLocalStorage('DistanceOfPointFrom2DLine_y', '3');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [note, setNote] = useState();
-  const [result, setResult] = useState('');
+  const [equation, setEquation] = useLocalStorage('DistanceOfPointFrom2DLine_equation', '');
+  const [solution, setSolution] = useLocalStorage('DistanceOfPointFrom2DLine_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('DistanceOfPointFrom2DLine_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('DistanceOfPointFrom2DLine_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('DistanceOfPointFrom2DLine_isPointSame', false);
+  const [note, setNote] = useLocalStorage('DistanceOfPointFrom2DLine_note', undefined);
+  const [result, setResult] = useLocalStorage('DistanceOfPointFrom2DLine_result', '');
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

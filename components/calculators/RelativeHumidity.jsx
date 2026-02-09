@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -9,14 +10,14 @@ import { parseNumber } from '../../helpers/decimal';
 import NotesHelpButton from '../common/Notes/NotesHelpButton';
 
 const RelativeHumidity = () => {
-  const [dB, setDB] = useState('3');
-  const [wB, setWB] = useState('45');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [dB, setDB] = useLocalStorage('RelativeHumidity_dB', '3');
+  const [wB, setWB] = useLocalStorage('RelativeHumidity_wB', '45');
+  const [equation, setEquation] = useLocalStorage('RelativeHumidity_equation', '');
+  const [solution, setSolution] = useLocalStorage('RelativeHumidity_solution', '');
+  const [result, setResult] = useLocalStorage('RelativeHumidity_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('RelativeHumidity_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('RelativeHumidity_showSteps', true);
+  const [note, setNote] = useLocalStorage('RelativeHumidity_note', undefined);
 
   useEffect(() => {
     setNote(

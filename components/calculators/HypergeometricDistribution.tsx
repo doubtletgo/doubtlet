@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -14,16 +15,16 @@ import Input from '../common/input';
 import { jStat } from 'jstat';
 
 const HypergeometricDistribution = () => {
-  const [populationSize, setPopulationSize] = useState('25');
-  const [populationK, setPopulationK] = useState('13');
-  const [sampleSize, setSampleSize] = useState('14');
-  const [sampleK, setSampleK] = useState('7');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [populationSize, setPopulationSize] = useLocalStorage('HypergeometricDistribution_populationSize', '25');
+  const [populationK, setPopulationK] = useLocalStorage('HypergeometricDistribution_populationK', '13');
+  const [sampleSize, setSampleSize] = useLocalStorage('HypergeometricDistribution_sampleSize', '14');
+  const [sampleK, setSampleK] = useLocalStorage('HypergeometricDistribution_sampleK', '7');
+  const [equation, setEquation] = useLocalStorage('HypergeometricDistribution_equation', '');
+  const [solution, setSolution] = useLocalStorage('HypergeometricDistribution_solution', '');
+  const [result, setResult] = useLocalStorage('HypergeometricDistribution_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('HypergeometricDistribution_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('HypergeometricDistribution_showSteps', true);
+  const [note, setNote] = useLocalStorage('HypergeometricDistribution_note', undefined);
 
   useEffect(() => {
     const vals: Record<string, string> = getSearchParams(false);

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -16,15 +17,15 @@ import {
 } from '../../helpers/matrixHelper';
 
 const AreaOfRegularPentagon = () => {
-  const [b, setB] = useState('\\sqrt{3}');
-  const [h, setH] = useState('\\pi');
+  const [b, setB] = useLocalStorage('AreaOfTriangle_b', '\\sqrt{3}');
+  const [h, setH] = useLocalStorage('AreaOfTriangle_h', '\\pi');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('AreaOfTriangle_equation', '');
+  const [solution, setSolution] = useLocalStorage('AreaOfTriangle_solution', '');
+  const [result, setResult] = useLocalStorage('AreaOfTriangle_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('AreaOfTriangle_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('AreaOfTriangle_showSteps', true);
+  const [note, setNote] = useLocalStorage('AreaOfTriangle_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   //to get values from other calculator

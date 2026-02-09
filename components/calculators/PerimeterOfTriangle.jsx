@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 
@@ -17,17 +18,17 @@ import {
 } from '../../helpers/matrixHelper';
 
 const PerimeterOfTriangle = () => {
-  const [a, setA] = useState('4');
-  const [b, setB] = useState('\\sqrt{3}');
-  const [c, setC] = useState('5');
+  const [a, setA] = useLocalStorage('PerimeterOfTriangle_a', '4');
+  const [b, setB] = useLocalStorage('PerimeterOfTriangle_b', '\\sqrt{3}');
+  const [c, setC] = useLocalStorage('PerimeterOfTriangle_c', '5');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('PerimeterOfTriangle_equation', '');
+  const [solution, setSolution] = useLocalStorage('PerimeterOfTriangle_solution', '');
+  const [result, setResult] = useLocalStorage('PerimeterOfTriangle_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('PerimeterOfTriangle_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('PerimeterOfTriangle_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('PerimeterOfTriangle_isPointSame', false);
+  const [note, setNote] = useLocalStorage('PerimeterOfTriangle_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

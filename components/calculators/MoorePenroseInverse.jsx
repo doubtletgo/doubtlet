@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -74,18 +75,18 @@ function stringToArray(str) {
 }
 
 const MoorePenroseInverse = () => {
-  const [row, setRow] = useState('2');
-  const [column, setColumn] = useState('3');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('MoorePenroseInverse_row', '2');
+  const [column, setColumn] = useLocalStorage('MoorePenroseInverse_column', '3');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('MoorePenroseInverse_frstMatrix', [
     ['1', '2', '3'],
     ['4', '1', '7'],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('MoorePenroseInverse_equation', '');
+  const [solution, setSolution] = useLocalStorage('MoorePenroseInverse_solution', '');
+  const [result, setResult] = useLocalStorage('MoorePenroseInverse_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('MoorePenroseInverse_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('MoorePenroseInverse_showSteps', true);
+  const [note, setNote] = useLocalStorage('MoorePenroseInverse_note', undefined);
   useEffect(() => {
     const vals = getSearchParams(false);
     if (vals.a) {

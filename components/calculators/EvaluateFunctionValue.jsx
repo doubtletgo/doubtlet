@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -24,16 +25,16 @@ function evaluateExpression(expression) {
   }
 }
 const EvaluateFunctionValue = () => {
-  const [variables, setVariables] = useState('x,y');
-  const [expression, setExpression] = useState('x^2 + 2y +4');
-  const [values, setValues] = useState('5,3');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [invalidInput, setInvalidInput] = useState(false);
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [variables, setVariables] = useLocalStorage('EvaluateFunctionValue_variables', 'x,y');
+  const [expression, setExpression] = useLocalStorage('EvaluateFunctionValue_expression', 'x^2 + 2y +4');
+  const [values, setValues] = useLocalStorage('EvaluateFunctionValue_values', '5,3');
+  const [equation, setEquation] = useLocalStorage('EvaluateFunctionValue_equation', '');
+  const [solution, setSolution] = useLocalStorage('EvaluateFunctionValue_solution', '');
+  const [answer, setAnswer] = useLocalStorage('EvaluateFunctionValue_answer', undefined);
+  const [invalidInput, setInvalidInput] = useLocalStorage('EvaluateFunctionValue_invalidInput', false);
+  const [showResult, setShowResult] = useLocalStorage('EvaluateFunctionValue_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('EvaluateFunctionValue_showSteps', true);
+  const [note, setNote] = useLocalStorage('EvaluateFunctionValue_note', undefined);
 
   useEffect(() => {
     const vals = getSearchParams(false);

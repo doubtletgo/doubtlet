@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -11,15 +12,15 @@ import { getSearchParams } from '../../helpers/general';
 import { putSpace } from '../../helpers/general';
 
 const Sine = () => {
-  const [a, setA] = useState('15');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [usePI, setUsePI] = useState(false);
-  const [order, setOrder] = useState('Degree');
+  const [a, setA] = useLocalStorage('Sine_a', '15');
+  const [equation, setEquation] = useLocalStorage('Sine_equation', '');
+  const [solution, setSolution] = useLocalStorage('Sine_solution', '');
+  const [result, setResult] = useLocalStorage('Sine_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('Sine_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('Sine_showSteps', true);
+  const [note, setNote] = useLocalStorage('Sine_note', undefined);
+  const [usePI, setUsePI] = useLocalStorage('Sine_usePI', false);
+  const [order, setOrder] = useLocalStorage('Sine_order', 'Degree');
   let [p, q = 1] = a.split('/');
   useEffect(() => {
     const vals = getSearchParams(false);

@@ -1,23 +1,22 @@
 'use client';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
 import Input from '../common/input';
 
 const NthRootFunction = () => {
-  const [functionType, setFunctionType] = useState<'square' | 'cube' | 'n'>(
-    'square'
-  );
-  const [number, setNumber] = useState('6');
-  const [base, setBase] = useState('2');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [functionType, setFunctionType] = useLocalStorage<'square' | 'cube' | 'n'>('NthRootFunction_functionType', 'square');
+  const [number, setNumber] = useLocalStorage('NthRootFunction_number', '6');
+  const [base, setBase] = useLocalStorage('NthRootFunction_base', '2');
+  const [equation, setEquation] = useLocalStorage('NthRootFunction_equation', '');
+  const [solution, setSolution] = useLocalStorage('NthRootFunction_solution', '');
+  const [result, setResult] = useLocalStorage('NthRootFunction_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('NthRootFunction_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('NthRootFunction_showSteps', true);
+  const [note, setNote] = useLocalStorage('NthRootFunction_note', undefined);
 
   const hasValue = [number].some((v) => (!!v && !isNaN(+v)) || v == '0');
 

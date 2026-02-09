@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 
@@ -18,18 +19,18 @@ import {
 } from '../../helpers/matrixHelper';
 
 const MidPointOfLineJoiningTwoPoints = () => {
-  const [x1, setx1] = useState('4');
-  const [x2, setx2] = useState('\\sqrt{3}');
-  const [y1, sety1] = useState('5');
-  const [y2, sety2] = useState('1');
+  const [x1, setx1] = useLocalStorage('MidPointOfLineJoiningTwoPoints_x1', '4');
+  const [x2, setx2] = useLocalStorage('MidPointOfLineJoiningTwoPoints_x2', '\\sqrt{3}');
+  const [y1, sety1] = useLocalStorage('MidPointOfLineJoiningTwoPoints_y1', '5');
+  const [y2, sety2] = useLocalStorage('MidPointOfLineJoiningTwoPoints_y2', '1');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('MidPointOfLineJoiningTwoPoints_equation', '');
+  const [solution, setSolution] = useLocalStorage('MidPointOfLineJoiningTwoPoints_solution', '');
+  const [result, setResult] = useLocalStorage('MidPointOfLineJoiningTwoPoints_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('MidPointOfLineJoiningTwoPoints_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('MidPointOfLineJoiningTwoPoints_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('MidPointOfLineJoiningTwoPoints_isPointSame', false);
+  const [note, setNote] = useLocalStorage('MidPointOfLineJoiningTwoPoints_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

@@ -2,19 +2,20 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { parseNumber } from '../../helpers/decimal';
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 
 const DecimalNumberAddition = () => {
-  const [a, setA] = useState('13.719,94.850,6.020');
-  const [value, setValue] = useState([]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [a, setA] = useLocalStorage('DecimalNumberAddition_a', '13.719,94.850,6.020');
+  const [value, setValue] = useLocalStorage('DecimalNumberAddition_value', []);
+  const [equation, setEquation] = useLocalStorage('DecimalNumberAddition_equation', '');
+  const [solution, setSolution] = useLocalStorage('DecimalNumberAddition_solution', '');
+  const [result, setResult] = useLocalStorage('DecimalNumberAddition_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('DecimalNumberAddition_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('DecimalNumberAddition_showSteps', true);
+  const [note, setNote] = useLocalStorage('DecimalNumberAddition_note', undefined);
 
   useEffect(() => {
     const numbers = a

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MathInput from 'react-math-keyboard';
@@ -17,14 +18,14 @@ import { MathField } from '@/types/mathfield.types';
 import { jStat } from 'jstat';
 
 const ExponentialDistribution = () => {
-  const [a, setA] = useState('2.5');
-  const [b, setB] = useState('1.6');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [a, setA] = useLocalStorage('ExponentialDistribution_a', '2.5');
+  const [b, setB] = useLocalStorage('ExponentialDistribution_b', '1.6');
+  const [equation, setEquation] = useLocalStorage('ExponentialDistribution_equation', '');
+  const [solution, setSolution] = useLocalStorage('ExponentialDistribution_solution', '');
+  const [result, setResult] = useLocalStorage('ExponentialDistribution_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('ExponentialDistribution_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('ExponentialDistribution_showSteps', true);
+  const [note, setNote] = useLocalStorage('ExponentialDistribution_note', undefined);
   const mf1 = useRef<MathField | null>(null);
   const mf2 = useRef<MathField | null>(null);
 

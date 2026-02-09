@@ -3,6 +3,7 @@ import AdComponent from '../AdSense';
 import Link from 'next/link';
 
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { parseNumber } from '../../helpers/decimal';
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
@@ -10,14 +11,14 @@ import NotesHelpButton from '../common/Notes/NotesHelpButton';
 import { getSearchParams } from '../../helpers/general';
 
 const ArithmeticMean = () => {
-  const [n, setN] = useState('5,6,7,3,2');
-  const [parsedNum, setParsedNum] = useState([]);
+  const [n, setN] = useLocalStorage('arithmeticMean_n', '5,6,7,3,2');
+  const [parsedNum, setParsedNum] = useLocalStorage('arithmeticMean_parsedNum', []);
 
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
+  const [equation, setEquation] = useLocalStorage('arithmeticMean_equation', '');
+  const [solution, setSolution] = useLocalStorage('arithmeticMean_solution', '');
+  const [result, setResult] = useLocalStorage('arithmeticMean_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('arithmeticMean_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('arithmeticMean_showSteps', true);
 
   useEffect(() => {
     const vals = getSearchParams(false);

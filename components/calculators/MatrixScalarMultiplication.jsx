@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import Input from '../common/input';
@@ -43,19 +44,19 @@ function matrixWithValues(matrix, value) {
 }
 
 const MatrixScalarMultiplication = () => {
-  const [row, setRow] = useState('2');
-  const [column, setColumn] = useState('2');
-  const [scalar, setScalar] = useState('\\frac{4}{7}');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('MatrixScalarMultiplication_row', '2');
+  const [column, setColumn] = useLocalStorage('MatrixScalarMultiplication_column', '2');
+  const [scalar, setScalar] = useLocalStorage('MatrixScalarMultiplication_scalar', '\\frac{4}{7}');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('MatrixScalarMultiplication_frstMatrix', [
     ['1.5', '\\frac{2}{3}'],
     ['3', '-\\frac{2}{3}'],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('MatrixScalarMultiplication_equation', '');
+  const [solution, setSolution] = useLocalStorage('MatrixScalarMultiplication_solution', '');
+  const [result, setResult] = useLocalStorage('MatrixScalarMultiplication_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('MatrixScalarMultiplication_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('MatrixScalarMultiplication_showSteps', true);
+  const [note, setNote] = useLocalStorage('MatrixScalarMultiplication_note', undefined);
   useEffect(() => {
     const vals = getSearchParams(false);
     if (vals.a) {

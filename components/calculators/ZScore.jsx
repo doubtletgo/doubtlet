@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -20,19 +21,19 @@ const validateInput = (input) => {
   return validRegex.test(input);
 };
 const ZScore = () => {
-  const [x1, setX1] = useState('2');
-  const [xValues, setXValues] = useState('6,-2,10.5,7,0,5,9.1');
-  const [pMean, setPMean] = useState('1.5');
-  const [pStandardDeviation, setPStandardDeviation] = useState('0.4');
-  const [sampleSize, setSampleSize] = useState('7');
+  const [x1, setX1] = useLocalStorage('ZScore_x1', '2');
+  const [xValues, setXValues] = useLocalStorage('ZScore_xValues', '6,-2,10.5,7,0,5,9.1');
+  const [pMean, setPMean] = useLocalStorage('ZScore_pMean', '1.5');
+  const [pStandardDeviation, setPStandardDeviation] = useLocalStorage('ZScore_pStandardDeviation', '0.4');
+  const [sampleSize, setSampleSize] = useLocalStorage('ZScore_sampleSize', '7');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [answer, setAnswer] = useState('');
-  const [method, setMethod] = useState('Data Value');
+  const [equation, setEquation] = useLocalStorage('ZScore_equation', '');
+  const [solution, setSolution] = useLocalStorage('ZScore_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('ZScore_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('ZScore_showSteps', true);
+  const [note, setNote] = useLocalStorage('ZScore_note', undefined);
+  const [answer, setAnswer] = useLocalStorage('ZScore_answer', '');
+  const [method, setMethod] = useLocalStorage('ZScore_method', 'Data Value');
 
   const mf1 = useRef();
   //to get values from other calculator

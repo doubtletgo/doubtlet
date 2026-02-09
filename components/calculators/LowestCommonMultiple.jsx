@@ -2,21 +2,22 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { parseNumber } from '../../helpers/decimal';
 import { getSearchParams } from '../../helpers/general';
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 
 const LowestCommonMultiple = () => {
-  const [a, setA] = useState('53,6,3,4,1');
-  const [parsedNum, setParsedNum] = useState([]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [method, setMethod] = useState('PrimeFactors');
+  const [a, setA] = useLocalStorage('LowestCommonMultiple_a', '53,6,3,4,1');
+  const [parsedNum, setParsedNum] = useLocalStorage('LowestCommonMultiple_parsedNum', []);
+  const [equation, setEquation] = useLocalStorage('LowestCommonMultiple_equation', '');
+  const [solution, setSolution] = useLocalStorage('LowestCommonMultiple_solution', '');
+  const [result, setResult] = useLocalStorage('LowestCommonMultiple_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('LowestCommonMultiple_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('LowestCommonMultiple_showSteps', true);
+  const [note, setNote] = useLocalStorage('LowestCommonMultiple_note', undefined);
+  const [method, setMethod] = useLocalStorage('LowestCommonMultiple_method', 'PrimeFactors');
 
   const isPrimeFactors = method === 'PrimeFactors';
   useEffect(() => {

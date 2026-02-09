@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -10,15 +11,15 @@ import { FindCosineData } from '../../utils/constants/Angle-table';
 import { getSearchParams, putSpace } from '../../helpers/general';
 
 const Cosine = () => {
-  const [a, setA] = useState('75');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [usePI, setUsePI] = useState(false);
-  const [order, setOrder] = useState('Degree');
+  const [a, setA] = useLocalStorage('Cosine_a', '75');
+  const [equation, setEquation] = useLocalStorage('Cosine_equation', '');
+  const [solution, setSolution] = useLocalStorage('Cosine_solution', '');
+  const [result, setResult] = useLocalStorage('Cosine_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('Cosine_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('Cosine_showSteps', true);
+  const [note, setNote] = useLocalStorage('Cosine_note', undefined);
+  const [usePI, setUsePI] = useLocalStorage('Cosine_usePI', false);
+  const [order, setOrder] = useLocalStorage('Cosine_order', 'Degree');
 
   let [p, q = 1] = a.split('/');
 

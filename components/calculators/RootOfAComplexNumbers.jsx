@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { pluralise, putSpace } from '../../helpers/general';
@@ -19,15 +20,15 @@ import {
 import MathInput from 'react-math-keyboard';
 
 const RootOfAComplexNumbers = () => {
-  const [a, setA] = useState('1');
-  const [b, setB] = useState('2');
-  const [n, setN] = useState('4');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [a, setA] = useLocalStorage('RootOfAComplexNumbers_a', '1');
+  const [b, setB] = useLocalStorage('RootOfAComplexNumbers_b', '2');
+  const [n, setN] = useLocalStorage('RootOfAComplexNumbers_n', '4');
+  const [equation, setEquation] = useLocalStorage('RootOfAComplexNumbers_equation', '');
+  const [solution, setSolution] = useLocalStorage('RootOfAComplexNumbers_solution', '');
+  const [result, setResult] = useLocalStorage('RootOfAComplexNumbers_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('RootOfAComplexNumbers_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('RootOfAComplexNumbers_showSteps', true);
+  const [note, setNote] = useLocalStorage('RootOfAComplexNumbers_note', undefined);
   const isInvalid = useRef();
   const mf1 = useRef();
   const mf2 = useRef();

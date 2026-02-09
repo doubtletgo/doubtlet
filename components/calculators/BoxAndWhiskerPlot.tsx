@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState, useRef } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -21,14 +22,14 @@ const validateInput = (input: string) => {
 };
 
 const BoxAndWhiskerPlot = () => {
-  const [xValues, setXValues] = useState('5.3,11,6,-2,-8,0,7,3/2');
-  const [yValues, setYValues] = useState('10,-2,2.3,7/4,5,7');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [xValues, setXValues] = useLocalStorage('BoxAndWhiskerPlot_xValues', '5.3,11,6,-2,-8,0,7,3/2');
+  const [yValues, setYValues] = useLocalStorage('BoxAndWhiskerPlot_yValues', '10,-2,2.3,7/4,5,7');
+  const [equation, setEquation] = useLocalStorage('BoxAndWhiskerPlot_equation', '');
+  const [solution, setSolution] = useLocalStorage('BoxAndWhiskerPlot_solution', '');
+  const [result, setResult] = useLocalStorage('BoxAndWhiskerPlot_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('BoxAndWhiskerPlot_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('BoxAndWhiskerPlot_showSteps', true);
+  const [note, setNote] = useLocalStorage('BoxAndWhiskerPlot_note', undefined);
   const x1Ref = useRef<Statistics | null>(null);
   const x2Ref = useRef<Statistics | null>(null);
 

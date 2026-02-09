@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -37,15 +38,15 @@ const replaceAndEvaluate = (expression, value) => {
 };
 
 const AverageRateOfChange = () => {
-  const [expression, setExpression] = useState('x^2 + 1');
-  const [values, setValues] = useState('-2,5');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [invalidInput, setInvalidInput] = useState(false);
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [expression, setExpression] = useLocalStorage('AverageRateOfChange_expression', 'x^2 + 1');
+  const [values, setValues] = useLocalStorage('AverageRateOfChange_values', '-2,5');
+  const [equation, setEquation] = useLocalStorage('AverageRateOfChange_equation', '');
+  const [solution, setSolution] = useLocalStorage('AverageRateOfChange_solution', '');
+  const [answer, setAnswer] = useLocalStorage('AverageRateOfChange_answer', undefined);
+  const [invalidInput, setInvalidInput] = useLocalStorage('AverageRateOfChange_invalidInput', false);
+  const [showResult, setShowResult] = useLocalStorage('AverageRateOfChange_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('AverageRateOfChange_showSteps', true);
+  const [note, setNote] = useLocalStorage('AverageRateOfChange_note', undefined);
 
   const allValues = values?.split(',') || [values];
   useEffect(() => {

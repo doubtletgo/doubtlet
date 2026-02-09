@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useRef, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MathInput from 'react-math-keyboard';
@@ -22,18 +23,18 @@ const numberWithAlternate = (num, alt) => {
 };
 
 const AnglesBetweenTwoLinesIn3D = () => {
-  const [a, setA] = useState('4');
-  const [b, setB] = useState('6');
-  const [c, setC] = useState('5');
-  const [d, setD] = useState('6');
-  const [e, setE] = useState('2');
-  const [f, setF] = useState('\\sqrt{144}');
-  const [l, setL] = useState('2');
-  const [m, setM] = useState('2');
-  const [n, setN] = useState('3');
-  const [p, setP] = useState('2');
-  const [q, setQ] = useState('1');
-  const [r, setR] = useState('5');
+  const [a, setA] = useLocalStorage('AnglesBetweenTwoLinesIn3D_a', '4');
+  const [b, setB] = useLocalStorage('AnglesBetweenTwoLinesIn3D_b', '6');
+  const [c, setC] = useLocalStorage('AnglesBetweenTwoLinesIn3D_c', '5');
+  const [d, setD] = useLocalStorage('AnglesBetweenTwoLinesIn3D_d', '6');
+  const [e, setE] = useLocalStorage('AnglesBetweenTwoLinesIn3D_e', '2');
+  const [f, setF] = useLocalStorage('AnglesBetweenTwoLinesIn3D_f', '\\sqrt{144}');
+  const [l, setL] = useLocalStorage('AnglesBetweenTwoLinesIn3D_l', '2');
+  const [m, setM] = useLocalStorage('AnglesBetweenTwoLinesIn3D_m', '2');
+  const [n, setN] = useLocalStorage('AnglesBetweenTwoLinesIn3D_n', '3');
+  const [p, setP] = useLocalStorage('AnglesBetweenTwoLinesIn3D_p', '2');
+  const [q, setQ] = useLocalStorage('AnglesBetweenTwoLinesIn3D_q', '1');
+  const [r, setR] = useLocalStorage('AnglesBetweenTwoLinesIn3D_r', '5');
   const isInvalid = useRef();
   const mf1 = useRef();
   const mf2 = useRef();
@@ -64,12 +65,12 @@ const AnglesBetweenTwoLinesIn3D = () => {
     if (vals.p) setP(vals.p);
     if (vals.q) setQ(vals.q);
   }, []);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('AnglesBetweenTwoLinesIn3D_equation', '');
+  const [solution, setSolution] = useLocalStorage('AnglesBetweenTwoLinesIn3D_solution', '');
+  const [result, setResult] = useLocalStorage('AnglesBetweenTwoLinesIn3D_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('AnglesBetweenTwoLinesIn3D_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('AnglesBetweenTwoLinesIn3D_showSteps', true);
+  const [note, setNote] = useLocalStorage('AnglesBetweenTwoLinesIn3D_note', undefined);
   useEffect(() => {
     setNote(
       renderSteps([

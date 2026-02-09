@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -16,12 +17,12 @@ import {
 } from '../../helpers/matrixHelper';
 
 const SectionFormula = () => {
-  const [x1, setX1] = useState('2');
-  const [y1, setY1] = useState('-5');
-  const [x2, setX2] = useState('7');
-  const [y2, setY2] = useState('4');
-  const [m, setM] = useState('5');
-  const [n, setN] = useState('3');
+  const [x1, setX1] = useLocalStorage('SectionFormula_x1', '2');
+  const [y1, setY1] = useLocalStorage('SectionFormula_y1', '-5');
+  const [x2, setX2] = useLocalStorage('SectionFormula_x2', '7');
+  const [y2, setY2] = useLocalStorage('SectionFormula_y2', '4');
+  const [m, setM] = useLocalStorage('SectionFormula_m', '5');
+  const [n, setN] = useLocalStorage('SectionFormula_n', '3');
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();
@@ -29,15 +30,15 @@ const SectionFormula = () => {
   const mf5 = useRef();
   const mf6 = useRef();
 
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
+  const [equation, setEquation] = useLocalStorage('SectionFormula_equation', '');
+  const [solution, setSolution] = useLocalStorage('SectionFormula_solution', '');
+  const [result, setResult] = useLocalStorage('SectionFormula_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('SectionFormula_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('SectionFormula_showSteps', true);
   const isInvalid = useRef();
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [note, setNote] = useState();
-  const [division, setDivision] = useState('Internal');
+  const [isPointSame, setIsPointSame] = useLocalStorage('SectionFormula_isPointSame', false);
+  const [note, setNote] = useLocalStorage('SectionFormula_note', undefined);
+  const [division, setDivision] = useLocalStorage('SectionFormula_division', 'Internal');
   const isInternal = division === 'Internal';
 
   //to get values from other calculator

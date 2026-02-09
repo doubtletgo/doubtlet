@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -17,16 +18,16 @@ import { isMatValid } from '../../helpers/Validations';
 import MatrixInput from '../MatrixInput';
 
 const SimpsonOneThirdRuleForATable = () => {
-  const [xPoints, setXPoints] = useState([['0', '2', '4', '6', '8']]);
-  const [fPoints, setFPoints] = useState([['-1', '5', '0', '2', '7']]);
-  const [interval, setSubIntervals] = useState(5);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [invalidInput, setInvalidInput] = useState(false);
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [xPoints, setXPoints] = useLocalStorage('SimpsonOneThirdRuleForATable_xPoints', [['0', '2', '4', '6', '8']]);
+  const [fPoints, setFPoints] = useLocalStorage('SimpsonOneThirdRuleForATable_fPoints', [['-1', '5', '0', '2', '7']]);
+  const [interval, setSubIntervals] = useLocalStorage('SimpsonOneThirdRuleForATable_interval', 5);
+  const [equation, setEquation] = useLocalStorage('SimpsonOneThirdRuleForATable_equation', '');
+  const [solution, setSolution] = useLocalStorage('SimpsonOneThirdRuleForATable_solution', '');
+  const [answer, setAnswer] = useLocalStorage('SimpsonOneThirdRuleForATable_answer', undefined);
+  const [invalidInput, setInvalidInput] = useLocalStorage('SimpsonOneThirdRuleForATable_invalidInput', false);
+  const [showResult, setShowResult] = useLocalStorage('SimpsonOneThirdRuleForATable_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('SimpsonOneThirdRuleForATable_showSteps', true);
+  const [note, setNote] = useLocalStorage('SimpsonOneThirdRuleForATable_note', undefined);
 
   useEffect(() => {
     const sortedF = JSON.parse(JSON.stringify(fPoints.flat()));

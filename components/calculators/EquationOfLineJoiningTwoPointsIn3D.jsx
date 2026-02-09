@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { addSymbol, minusSymbol } from '../../helpers/decimal';
@@ -19,18 +20,18 @@ import { putSpace } from '../../helpers/general';
 const withT = (val) => (val ? `${val}t` : val);
 
 const EquationOfLineJoiningTwoPointsIn3D = () => {
-  const [x1, setX1] = useState('2');
-  const [y1, setY1] = useState('-1');
-  const [z1, setZ1] = useState('\\frac{2}{3}');
-  const [x2, setX2] = useState('5');
-  const [y2, setY2] = useState('2.4');
-  const [z2, setZ2] = useState('7');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [x1, setX1] = useLocalStorage('EquationOfLineJoiningTwoPointsIn3D_x1', '2');
+  const [y1, setY1] = useLocalStorage('EquationOfLineJoiningTwoPointsIn3D_y1', '-1');
+  const [z1, setZ1] = useLocalStorage('EquationOfLineJoiningTwoPointsIn3D_z1', '\\frac{2}{3}');
+  const [x2, setX2] = useLocalStorage('EquationOfLineJoiningTwoPointsIn3D_x2', '5');
+  const [y2, setY2] = useLocalStorage('EquationOfLineJoiningTwoPointsIn3D_y2', '2.4');
+  const [z2, setZ2] = useLocalStorage('EquationOfLineJoiningTwoPointsIn3D_z2', '7');
+  const [equation, setEquation] = useLocalStorage('EquationOfLineJoiningTwoPointsIn3D_equation', '');
+  const [solution, setSolution] = useLocalStorage('EquationOfLineJoiningTwoPointsIn3D_solution', '');
+  const [result, setResult] = useLocalStorage('EquationOfLineJoiningTwoPointsIn3D_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('EquationOfLineJoiningTwoPointsIn3D_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('EquationOfLineJoiningTwoPointsIn3D_showSteps', true);
+  const [note, setNote] = useLocalStorage('EquationOfLineJoiningTwoPointsIn3D_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

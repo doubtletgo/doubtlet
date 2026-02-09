@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState, useRef } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import {
@@ -23,16 +24,16 @@ import {
 import KatexInput from '../common/katexInput';
 
 const DistanceBetweenTwoParallelLines = () => {
-  const [m, setM] = useState('\\sqrt{5}');
-  const [c1, setC1] = useState('\\frac{3}{2}');
-  const [c2, setC2] = useState('2.2');
+  const [m, setM] = useLocalStorage('DistanceBetweenTwoParallelLines_m', '\\sqrt{5}');
+  const [c1, setC1] = useLocalStorage('DistanceBetweenTwoParallelLines_c1', '\\frac{3}{2}');
+  const [c2, setC2] = useLocalStorage('DistanceBetweenTwoParallelLines_c2', '2.2');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('DistanceBetweenTwoParallelLines_equation', '');
+  const [solution, setSolution] = useLocalStorage('DistanceBetweenTwoParallelLines_solution', '');
+  const [result, setResult] = useLocalStorage('DistanceBetweenTwoParallelLines_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('DistanceBetweenTwoParallelLines_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('DistanceBetweenTwoParallelLines_showSteps', true);
+  const [note, setNote] = useLocalStorage('DistanceBetweenTwoParallelLines_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

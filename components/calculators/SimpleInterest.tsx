@@ -2,22 +2,23 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
 import Input from '../common/input';
 
 const SimpleInterest = () => {
-  const [principalAmount, setprincipalAmount] = useState('100000');
-  const [rateOfInterest, setrateOfInterest] = useState('6.2');
-  const [timePeriod, settimePeriod] = useState('5.5');
+  const [principalAmount, setprincipalAmount] = useLocalStorage('SimpleInterest_principalAmount', '100000');
+  const [rateOfInterest, setrateOfInterest] = useLocalStorage('SimpleInterest_rateOfInterest', '6.2');
+  const [timePeriod, settimePeriod] = useLocalStorage('SimpleInterest_timePeriod', '5.5');
 
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('SimpleInterest_equation', '');
+  const [solution, setSolution] = useLocalStorage('SimpleInterest_solution', '');
+  const [result, setResult] = useLocalStorage('SimpleInterest_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('SimpleInterest_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('SimpleInterest_showSteps', true);
+  const [note, setNote] = useLocalStorage('SimpleInterest_note', undefined);
 
   const hasValue =
     principalAmount &&

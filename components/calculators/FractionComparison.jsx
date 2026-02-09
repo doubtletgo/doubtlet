@@ -2,19 +2,20 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
 
 const FractionComparison = () => {
-  const [l, setL] = useState('5,6,7,2,3,4');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [order, setOrder] = useState('Ascending');
+  const [l, setL] = useLocalStorage('FractionComparison_l', '5,6,7,2,3,4');
+  const [equation, setEquation] = useLocalStorage('FractionComparison_equation', '');
+  const [solution, setSolution] = useLocalStorage('FractionComparison_solution', '');
+  const [result, setResult] = useLocalStorage('FractionComparison_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('FractionComparison_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('FractionComparison_showSteps', true);
+  const [note, setNote] = useLocalStorage('FractionComparison_note', undefined);
+  const [order, setOrder] = useLocalStorage('FractionComparison_order', 'Ascending');
 
   const isAscending = order === 'Ascending';
 

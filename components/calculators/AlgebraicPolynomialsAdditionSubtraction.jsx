@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import MathInput from 'react-math-keyboard';
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
@@ -65,17 +66,17 @@ function fraction(numR, denumR) {
 }
 
 const AlgebraicPolynomialsAdditionSubtraction = () => {
-  const [firstPoly, setFirstPoly] = useState('');
-  const [secondPoly, setSecondPoly] = useState('');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [firstInvalid, setFirstInvalid] = useState(false);
-  const [secondInvalid, setSecondInvalid] = useState(false);
-  const [order, setOrder] = useState('Addition');
+  const [firstPoly, setFirstPoly] = useLocalStorage('AlgebraicPolynomialsAdditionSubtraction_firstPoly', '');
+  const [secondPoly, setSecondPoly] = useLocalStorage('AlgebraicPolynomialsAdditionSubtraction_secondPoly', '');
+  const [equation, setEquation] = useLocalStorage('AlgebraicPolynomialsAdditionSubtraction_equation', '');
+  const [solution, setSolution] = useLocalStorage('AlgebraicPolynomialsAdditionSubtraction_solution', '');
+  const [result, setResult] = useLocalStorage('AlgebraicPolynomialsAdditionSubtraction_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('AlgebraicPolynomialsAdditionSubtraction_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('AlgebraicPolynomialsAdditionSubtraction_showSteps', true);
+  const [note, setNote] = useLocalStorage('AlgebraicPolynomialsAdditionSubtraction_note', undefined);
+  const [firstInvalid, setFirstInvalid] = useLocalStorage('AlgebraicPolynomialsAdditionSubtraction_firstInvalid', false);
+  const [secondInvalid, setSecondInvalid] = useLocalStorage('AlgebraicPolynomialsAdditionSubtraction_secondInvalid', false);
+  const [order, setOrder] = useLocalStorage('AlgebraicPolynomialsAdditionSubtraction_order', 'Addition');
 
   const isAddition = order === 'Addition';
 

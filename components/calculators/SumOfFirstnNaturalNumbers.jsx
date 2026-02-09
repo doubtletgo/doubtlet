@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -10,12 +11,12 @@ import NotesHelpButton from '../common/Notes/NotesHelpButton';
 import { putSpace } from '../../helpers/general';
 
 const SumOfFirstnNaturalNumbers = () => {
-  const [n, setN] = useState('43');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
+  const [n, setN] = useLocalStorage('SumOfFirstnNaturalNumbers_n', '43');
+  const [equation, setEquation] = useLocalStorage('SumOfFirstnNaturalNumbers_equation', '');
+  const [solution, setSolution] = useLocalStorage('SumOfFirstnNaturalNumbers_solution', '');
+  const [result, setResult] = useLocalStorage('SumOfFirstnNaturalNumbers_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('SumOfFirstnNaturalNumbers_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('SumOfFirstnNaturalNumbers_showSteps', true);
 
   useEffect(() => {
     const isInvalid = [n].some((x) => isNaN(x));

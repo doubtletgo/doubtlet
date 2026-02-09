@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 
@@ -18,21 +19,21 @@ import {
 import { convertToKatex } from '../../helpers/SolveRoot';
 
 const DistanceOfPointFromPlane = () => {
-  const [a, setA] = useState('3');
-  const [b, setB] = useState('\\pi');
-  const [c, setC] = useState('1');
-  const [d, setD] = useState('4');
-  const [x, setX] = useState('2');
-  const [y, setY] = useState('\\sqrt{34}');
-  const [z, setZ] = useState('7');
+  const [a, setA] = useLocalStorage('DistanceOfPointFromPlane_a', '3');
+  const [b, setB] = useLocalStorage('DistanceOfPointFromPlane_b', '\\pi');
+  const [c, setC] = useLocalStorage('DistanceOfPointFromPlane_c', '1');
+  const [d, setD] = useLocalStorage('DistanceOfPointFromPlane_d', '4');
+  const [x, setX] = useLocalStorage('DistanceOfPointFromPlane_x', '2');
+  const [y, setY] = useLocalStorage('DistanceOfPointFromPlane_y', '\\sqrt{34}');
+  const [z, setZ] = useLocalStorage('DistanceOfPointFromPlane_z', '7');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [note, setNote] = useState();
-  const [result, setResult] = useState('');
+  const [equation, setEquation] = useLocalStorage('DistanceOfPointFromPlane_equation', '');
+  const [solution, setSolution] = useLocalStorage('DistanceOfPointFromPlane_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('DistanceOfPointFromPlane_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('DistanceOfPointFromPlane_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('DistanceOfPointFromPlane_isPointSame', false);
+  const [note, setNote] = useLocalStorage('DistanceOfPointFromPlane_note', undefined);
+  const [result, setResult] = useLocalStorage('DistanceOfPointFromPlane_result', '');
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

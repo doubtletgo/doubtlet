@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -18,16 +19,14 @@ const validateInput = (input: string) => {
 };
 
 const StandardDeviation = () => {
-  const [xValues, setXValues] = useState('5.3,11,6,-2,-8');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [methodType, setMethodType] = useState<'Sample' | 'Population'>(
-    'Sample'
-  );
+  const [xValues, setXValues] = useLocalStorage('StandardDeviation_xValues', '5.3,11,6,-2,-8');
+  const [equation, setEquation] = useLocalStorage('StandardDeviation_equation', '');
+  const [solution, setSolution] = useLocalStorage('StandardDeviation_solution', '');
+  const [result, setResult] = useLocalStorage('StandardDeviation_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('StandardDeviation_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('StandardDeviation_showSteps', true);
+  const [note, setNote] = useLocalStorage('StandardDeviation_note', undefined);
+  const [methodType, setMethodType] = useLocalStorage<'Sample' | 'Population'>('StandardDeviation_methodType', 'Sample');
 
   useEffect(() => {
     const xVals: Record<string, string> = getSearchParams(false);

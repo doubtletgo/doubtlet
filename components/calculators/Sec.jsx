@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -9,15 +10,15 @@ import { abs, parseNumber } from '../../helpers/decimal';
 import { FindSecData } from '../../utils/constants/Angle-table';
 
 const Sec = () => {
-  const [a, setA] = useState('3');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [usePI, setUsePI] = useState(false);
-  const [order, setOrder] = useState('Degree');
+  const [a, setA] = useLocalStorage('Sec_a', '3');
+  const [equation, setEquation] = useLocalStorage('Sec_equation', '');
+  const [solution, setSolution] = useLocalStorage('Sec_solution', '');
+  const [result, setResult] = useLocalStorage('Sec_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('Sec_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('Sec_showSteps', true);
+  const [note, setNote] = useLocalStorage('Sec_note', undefined);
+  const [usePI, setUsePI] = useLocalStorage('Sec_usePI', false);
+  const [order, setOrder] = useLocalStorage('Sec_order', 'Degree');
 
   let [p, q = 1] = a.split('/');
 

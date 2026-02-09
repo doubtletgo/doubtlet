@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -23,16 +24,16 @@ import { convertToKatex } from '../../helpers/SolveRoot';
 import { parseNumber } from '../../helpers/decimal';
 
 const Slopeofline = () => {
-  const [x1, setx1] = useState('3');
-  const [x2, setx2] = useState('4');
-  const [y1, sety1] = useState('5');
-  const [y2, sety2] = useState('1');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [result, setResult] = useState('');
+  const [x1, setx1] = useLocalStorage('Slopeofline_x1', '3');
+  const [x2, setx2] = useLocalStorage('Slopeofline_x2', '4');
+  const [y1, sety1] = useLocalStorage('Slopeofline_y1', '5');
+  const [y2, sety2] = useLocalStorage('Slopeofline_y2', '1');
+  const [equation, setEquation] = useLocalStorage('Slopeofline_equation', '');
+  const [solution, setSolution] = useLocalStorage('Slopeofline_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('Slopeofline_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('Slopeofline_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('Slopeofline_isPointSame', false);
+  const [result, setResult] = useLocalStorage('Slopeofline_result', '');
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

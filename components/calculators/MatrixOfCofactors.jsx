@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -23,18 +24,18 @@ import NotesHelpButton from '../common/Notes/NotesHelpButton';
 import { isMatValid } from '../../helpers/Validations';
 
 const MatrixOfCofactors = () => {
-  const [row, setRow] = useState('3');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('MatrixOfCofactors_row', '3');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('MatrixOfCofactors_frstMatrix', [
     ['1.5', '\\frac{2}{3}', '2'],
     ['3', '2.1', '-\\frac{2}{3}'],
     ['1', '4', '\\frac{2}{5}'],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('MatrixOfCofactors_equation', '');
+  const [solution, setSolution] = useLocalStorage('MatrixOfCofactors_solution', '');
+  const [result, setResult] = useLocalStorage('MatrixOfCofactors_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('MatrixOfCofactors_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('MatrixOfCofactors_showSteps', true);
+  const [note, setNote] = useLocalStorage('MatrixOfCofactors_note', undefined);
   useEffect(() => {
     const vals = getSearchParams(false);
     if (vals.a) {

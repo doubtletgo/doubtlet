@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -11,18 +12,18 @@ import Input from '../common/input';
 import { convertFromLatex, evalToDecimals } from '../../helpers/matrixHelper';
 
 const PValue = () => {
-  const [x1, setX1] = useState('2.11');
-  const [degreesOfFreedom, setDegreesOfFreedom] = useState('2');
-  const [degreesOfFreedomSecond, setDegreesOfFreedomSecond] = useState('3');
+  const [x1, setX1] = useLocalStorage('PValue_x1', '2.11');
+  const [degreesOfFreedom, setDegreesOfFreedom] = useLocalStorage('PValue_degreesOfFreedom', '2');
+  const [degreesOfFreedomSecond, setDegreesOfFreedomSecond] = useLocalStorage('PValue_degreesOfFreedomSecond', '3');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [answer, setAnswer] = useState('');
-  const [distributionType, setDistributionType] = useState('Z-Value');
-  const [pValueType, setPValueType] = useState('Two-Tailed');
+  const [equation, setEquation] = useLocalStorage('PValue_equation', '');
+  const [solution, setSolution] = useLocalStorage('PValue_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('PValue_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('PValue_showSteps', true);
+  const [note, setNote] = useLocalStorage('PValue_note', undefined);
+  const [answer, setAnswer] = useLocalStorage('PValue_answer', '');
+  const [distributionType, setDistributionType] = useLocalStorage('PValue_distributionType', 'Z-Value');
+  const [pValueType, setPValueType] = useLocalStorage('PValue_pValueType', 'Two-Tailed');
 
   const mf1 = useRef();
   //to get values from other calculator

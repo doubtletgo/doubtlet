@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -14,13 +15,13 @@ const validateInput = (input: string) => {
 };
 
 const RootMeanSquare = () => {
-  const [values, setValues] = useState('6, -4, 3, 0, 7, 6/3');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [values, setValues] = useLocalStorage('RootMeanSquare_values', '6, -4, 3, 0, 7, 6/3');
+  const [equation, setEquation] = useLocalStorage('RootMeanSquare_equation', '');
+  const [solution, setSolution] = useLocalStorage('RootMeanSquare_solution', '');
+  const [result, setResult] = useLocalStorage('RootMeanSquare_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('RootMeanSquare_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('RootMeanSquare_showSteps', true);
+  const [note, setNote] = useLocalStorage('RootMeanSquare_note', undefined);
 
   useEffect(() => {
     setNote(

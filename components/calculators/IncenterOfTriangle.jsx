@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -16,19 +17,19 @@ import {
 import {} from '../../helpers/decimal';
 
 const IncenterOfTriangle = () => {
-  const [x1, setX1] = useState('e^2');
-  const [x2, setX2] = useState('4');
-  const [x3, setX3] = useState('\\sqrt{5}');
-  const [y1, setY1] = useState('\\sqrt{5}');
-  const [y2, setY2] = useState('\\sqrt{7}');
-  const [y3, setY3] = useState('\\sqrt{7}');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [result, setResult] = useState('');
-  const [note, setNote] = useState();
+  const [x1, setX1] = useLocalStorage('IncenterOfTriangle_x1', 'e^2');
+  const [x2, setX2] = useLocalStorage('IncenterOfTriangle_x2', '4');
+  const [x3, setX3] = useLocalStorage('IncenterOfTriangle_x3', '\\sqrt{5}');
+  const [y1, setY1] = useLocalStorage('IncenterOfTriangle_y1', '\\sqrt{5}');
+  const [y2, setY2] = useLocalStorage('IncenterOfTriangle_y2', '\\sqrt{7}');
+  const [y3, setY3] = useLocalStorage('IncenterOfTriangle_y3', '\\sqrt{7}');
+  const [equation, setEquation] = useLocalStorage('IncenterOfTriangle_equation', '');
+  const [solution, setSolution] = useLocalStorage('IncenterOfTriangle_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('IncenterOfTriangle_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('IncenterOfTriangle_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('IncenterOfTriangle_isPointSame', false);
+  const [result, setResult] = useLocalStorage('IncenterOfTriangle_result', '');
+  const [note, setNote] = useLocalStorage('IncenterOfTriangle_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

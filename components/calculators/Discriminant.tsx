@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -19,15 +20,15 @@ import {
 import { MathField } from '@/types/mathfield.types';
 
 const Discriminant = () => {
-  const [a, setA] = useState('1');
-  const [b, setB] = useState('9');
-  const [c, setC] = useState('20');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [a, setA] = useLocalStorage('Discriminant_a', '1');
+  const [b, setB] = useLocalStorage('Discriminant_b', '9');
+  const [c, setC] = useLocalStorage('Discriminant_c', '20');
+  const [equation, setEquation] = useLocalStorage('Discriminant_equation', '');
+  const [solution, setSolution] = useLocalStorage('Discriminant_solution', '');
+  const [result, setResult] = useLocalStorage('Discriminant_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('Discriminant_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('Discriminant_showSteps', true);
+  const [note, setNote] = useLocalStorage('Discriminant_note', undefined);
   const mf1 = useRef<MathField>(null);
   const mf2 = useRef<MathField>(null);
   const mf3 = useRef<MathField>(null);

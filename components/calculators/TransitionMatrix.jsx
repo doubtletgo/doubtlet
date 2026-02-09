@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -322,21 +323,21 @@ function makeUpperTriangularZero(mat, mat2) {
   }
 }
 const TransitionMatrix = () => {
-  const [row, setRow] = useState('2');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('TransitionMatrix_row', '2');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('TransitionMatrix_frstMatrix', [
     ['-3', '4'],
     ['2', '-2'],
   ]);
-  const [scndMatrix, setScndMatrix] = useState([
+  const [scndMatrix, setScndMatrix] = useLocalStorage('TransitionMatrix_scndMatrix', [
     ['0', '2'],
     ['3', '-2'],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('TransitionMatrix_equation', '');
+  const [solution, setSolution] = useLocalStorage('TransitionMatrix_solution', '');
+  const [result, setResult] = useLocalStorage('TransitionMatrix_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('TransitionMatrix_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('TransitionMatrix_showSteps', true);
+  const [note, setNote] = useLocalStorage('TransitionMatrix_note', undefined);
 
   useEffect(() => {
     const vals = getSearchParams(false);

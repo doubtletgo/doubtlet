@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -12,14 +13,14 @@ import { isInputInvalid } from '@/helpers/Validations';
 import { MathField } from '@/types/mathfield.types';
 
 const CubeRoot = () => {
-  const [value, setValue] = useState('-17.5');
-  const [precision, setPrecision] = useState('7');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [value, setValue] = useLocalStorage('CubeRoot_value', '-17.5');
+  const [precision, setPrecision] = useLocalStorage('CubeRoot_precision', '7');
+  const [equation, setEquation] = useLocalStorage('CubeRoot_equation', '');
+  const [solution, setSolution] = useLocalStorage('CubeRoot_solution', '');
+  const [result, setResult] = useLocalStorage('CubeRoot_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('CubeRoot_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('CubeRoot_showSteps', true);
+  const [note, setNote] = useLocalStorage('CubeRoot_note', undefined);
   const inputRef = useRef<MathField>(null);
 
   useEffect(() => {

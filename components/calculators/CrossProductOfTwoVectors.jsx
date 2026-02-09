@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MathInput from 'react-math-keyboard';
@@ -17,18 +18,18 @@ import { putSpace, getSearchParams } from '../../helpers/general';
 import { addSymbol, minusSymbol } from '../../helpers/decimal';
 
 const CrossProductOfTwoVectors = () => {
-  const [x1, setX1] = useState('2');
-  const [y1, setY1] = useState('5');
-  const [z1, setZ1] = useState('2');
-  const [x2, setX2] = useState('5');
-  const [y2, setY2] = useState('2');
-  const [z2, setZ2] = useState('7');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [x1, setX1] = useLocalStorage('CrossProductOfTwoVectors_x1', '2');
+  const [y1, setY1] = useLocalStorage('CrossProductOfTwoVectors_y1', '5');
+  const [z1, setZ1] = useLocalStorage('CrossProductOfTwoVectors_z1', '2');
+  const [x2, setX2] = useLocalStorage('CrossProductOfTwoVectors_x2', '5');
+  const [y2, setY2] = useLocalStorage('CrossProductOfTwoVectors_y2', '2');
+  const [z2, setZ2] = useLocalStorage('CrossProductOfTwoVectors_z2', '7');
+  const [equation, setEquation] = useLocalStorage('CrossProductOfTwoVectors_equation', '');
+  const [solution, setSolution] = useLocalStorage('CrossProductOfTwoVectors_solution', '');
+  const [result, setResult] = useLocalStorage('CrossProductOfTwoVectors_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('CrossProductOfTwoVectors_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('CrossProductOfTwoVectors_showSteps', true);
+  const [note, setNote] = useLocalStorage('CrossProductOfTwoVectors_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

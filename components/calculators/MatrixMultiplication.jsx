@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -125,17 +126,17 @@ function multiplyMatrices(m1, m2) {
   }
 }
 const MatrixMultiplication = () => {
-  const [row, setRow] = useState('3');
-  const [column, setColumn] = useState('3');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('MatrixMultiplication_row', '3');
+  const [column, setColumn] = useLocalStorage('MatrixMultiplication_column', '3');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('MatrixMultiplication_frstMatrix', [
     // ["1.5", "\\frac{2}{3}", "-2"],
     // ["3", "2.1", "-\\frac{2}{3}"],
     ['\\frac{1}{\\sqrt{6}}', '\\frac{1}{\\sqrt{6}}', '\\frac{1}{\\sqrt{6}}'],
     ['\\frac{1}{\\sqrt{3}}', '\\frac{1}{\\sqrt{3}}', '-\\frac{1}{\\sqrt{3}}'],
     ['\\frac{1}{\\sqrt{2}}', '-\\frac{1}{\\sqrt{2}}', '0'],
   ]);
-  const [columnB, setColumnB] = useState('3');
-  const [scndMatrix, setScndMatrix] = useState([
+  const [columnB, setColumnB] = useLocalStorage('MatrixMultiplication_columnB', '3');
+  const [scndMatrix, setScndMatrix] = useLocalStorage('MatrixMultiplication_scndMatrix', [
     // ["2", "\\frac{2}{3}"],
     // ["4", "2"],
     // ["6", "-3"],
@@ -143,12 +144,12 @@ const MatrixMultiplication = () => {
     [1, 3, 1],
     [2, 1, 7],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('MatrixMultiplication_equation', '');
+  const [solution, setSolution] = useLocalStorage('MatrixMultiplication_solution', '');
+  const [result, setResult] = useLocalStorage('MatrixMultiplication_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('MatrixMultiplication_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('MatrixMultiplication_showSteps', true);
+  const [note, setNote] = useLocalStorage('MatrixMultiplication_note', undefined);
 
   useEffect(() => {
     const vals = getSearchParams(false);

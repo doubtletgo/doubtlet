@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { addSymbol, minusSymbol } from '../../helpers/decimal';
@@ -17,14 +18,14 @@ import MathInput from 'react-math-keyboard';
 import { putSpace } from '../../helpers/general';
 
 const LineOfIntersectionOfTwoPlanes = () => {
-  const [a, setA] = useState('\\sqrt{3}');
-  const [b, setB] = useState('3');
-  const [c, setC] = useState('5');
-  const [d, setD] = useState('2');
-  const [p, setP] = useState('\\sqrt{7}');
-  const [q, setQ] = useState('\\sqrt{3}');
-  const [r, setR] = useState('6');
-  const [s, setS] = useState('4');
+  const [a, setA] = useLocalStorage('LineOfIntersectionOfTwoPlanes_a', '\\sqrt{3}');
+  const [b, setB] = useLocalStorage('LineOfIntersectionOfTwoPlanes_b', '3');
+  const [c, setC] = useLocalStorage('LineOfIntersectionOfTwoPlanes_c', '5');
+  const [d, setD] = useLocalStorage('LineOfIntersectionOfTwoPlanes_d', '2');
+  const [p, setP] = useLocalStorage('LineOfIntersectionOfTwoPlanes_p', '\\sqrt{7}');
+  const [q, setQ] = useLocalStorage('LineOfIntersectionOfTwoPlanes_q', '\\sqrt{3}');
+  const [r, setR] = useLocalStorage('LineOfIntersectionOfTwoPlanes_r', '6');
+  const [s, setS] = useLocalStorage('LineOfIntersectionOfTwoPlanes_s', '4');
   const mf1 = useRef('');
   const mf2 = useRef('');
   const mf3 = useRef('');
@@ -33,13 +34,13 @@ const LineOfIntersectionOfTwoPlanes = () => {
   const mf6 = useRef('');
   const mf7 = useRef('');
   const mf8 = useRef('');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('LineOfIntersectionOfTwoPlanes_equation', '');
+  const [solution, setSolution] = useLocalStorage('LineOfIntersectionOfTwoPlanes_solution', '');
+  const [isPointSame, setIsPointSame] = useLocalStorage('LineOfIntersectionOfTwoPlanes_isPointSame', false);
+  const [result, setResult] = useLocalStorage('LineOfIntersectionOfTwoPlanes_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('LineOfIntersectionOfTwoPlanes_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('LineOfIntersectionOfTwoPlanes_showSteps', true);
+  const [note, setNote] = useLocalStorage('LineOfIntersectionOfTwoPlanes_note', undefined);
 
   useEffect(() => {
     setNote(

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState, useRef } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { addSymbol, minusSymbol } from '../../helpers/decimal';
@@ -18,14 +19,14 @@ import { putSpace } from '../../helpers/general';
 import MathInput from 'react-math-keyboard';
 
 const ConjugateOfComplexNumber = () => {
-  const [a, setA] = useState('5');
-  const [b, setB] = useState('3');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [a, setA] = useLocalStorage('ConjugateOfComplexNumber_a', '5');
+  const [b, setB] = useLocalStorage('ConjugateOfComplexNumber_b', '3');
+  const [equation, setEquation] = useLocalStorage('ConjugateOfComplexNumber_equation', '');
+  const [solution, setSolution] = useLocalStorage('ConjugateOfComplexNumber_solution', '');
+  const [result, setResult] = useLocalStorage('ConjugateOfComplexNumber_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('ConjugateOfComplexNumber_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('ConjugateOfComplexNumber_showSteps', true);
+  const [note, setNote] = useLocalStorage('ConjugateOfComplexNumber_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   useEffect(() => {

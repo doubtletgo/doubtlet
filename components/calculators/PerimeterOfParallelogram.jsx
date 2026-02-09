@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MathInput from 'react-math-keyboard';
@@ -15,15 +16,15 @@ import {
 import { putSpace } from '../../helpers/general';
 
 const PerimeterOfParallelogram = () => {
-  const [a, setA] = useState('2');
-  const [b, setB] = useState('\\pi');
+  const [a, setA] = useLocalStorage('PerimeterOfParallelogram_a', '2');
+  const [b, setB] = useLocalStorage('PerimeterOfParallelogram_b', '\\pi');
 
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('PerimeterOfParallelogram_equation', '');
+  const [solution, setSolution] = useLocalStorage('PerimeterOfParallelogram_solution', '');
+  const [result, setResult] = useLocalStorage('PerimeterOfParallelogram_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('PerimeterOfParallelogram_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('PerimeterOfParallelogram_showSteps', true);
+  const [note, setNote] = useLocalStorage('PerimeterOfParallelogram_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
 

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -62,13 +63,13 @@ const getHighestPower = (expr: string): number => {
   return highestPower;
 };
 const DegreeAndLeadingCoefficient = () => {
-  const [expression, setExpression] = useState('2x^2-x^5-4x^3+x+15');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [expression, setExpression] = useLocalStorage('DegreeAndLeadingCoefficient_expression', '2x^2-x^5-4x^3+x+15');
+  const [equation, setEquation] = useLocalStorage('DegreeAndLeadingCoefficient_equation', '');
+  const [solution, setSolution] = useLocalStorage('DegreeAndLeadingCoefficient_solution', '');
+  const [result, setResult] = useLocalStorage('DegreeAndLeadingCoefficient_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('DegreeAndLeadingCoefficient_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('DegreeAndLeadingCoefficient_showSteps', true);
+  const [note, setNote] = useLocalStorage('DegreeAndLeadingCoefficient_note', undefined);
   const inputRef = useRef<MathField>(null);
 
   useEffect(() => {

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -17,16 +18,16 @@ import {
 } from '../../helpers/matrixHelper';
 
 const SumOfFirstNTermsOfAPByL = () => {
-  const [a, setA] = useState('1');
-  const [d, setD] = useState('\\sqrt{9}');
-  const [n, setN] = useState('20');
+  const [a, setA] = useLocalStorage('SumOfFirstNTermsOfAPByL_a', '1');
+  const [d, setD] = useLocalStorage('SumOfFirstNTermsOfAPByL_d', '\\sqrt{9}');
+  const [n, setN] = useLocalStorage('SumOfFirstNTermsOfAPByL_n', '20');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
+  const [equation, setEquation] = useLocalStorage('SumOfFirstNTermsOfAPByL_equation', '');
+  const [solution, setSolution] = useLocalStorage('SumOfFirstNTermsOfAPByL_solution', '');
+  const [result, setResult] = useLocalStorage('SumOfFirstNTermsOfAPByL_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('SumOfFirstNTermsOfAPByL_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('SumOfFirstNTermsOfAPByL_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('SumOfFirstNTermsOfAPByL_isPointSame', false);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

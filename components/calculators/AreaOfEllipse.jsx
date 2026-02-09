@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -16,15 +17,15 @@ import {
 } from '../../helpers/matrixHelper';
 
 const AreaOfEllipse = () => {
-  const [a, setA] = useState('3');
-  const [b, setB] = useState('2');
+  const [a, setA] = useLocalStorage('AreaOfEllipse_a', '3');
+  const [b, setB] = useLocalStorage('AreaOfEllipse_b', '2');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('AreaOfEllipse_equation', '');
+  const [solution, setSolution] = useLocalStorage('AreaOfEllipse_solution', '');
+  const [result, setResult] = useLocalStorage('AreaOfEllipse_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('AreaOfEllipse_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('AreaOfEllipse_showSteps', true);
+  const [note, setNote] = useLocalStorage('AreaOfEllipse_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   //to get values from other calculator

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -15,17 +16,17 @@ import {
 } from '@/helpers/matrixHelper';
 
 const MarginOfError = () => {
-  const [n, setN] = useState('46');
-  const [confidence, setConfidence] = useState('90');
-  const [deviation, setDeviation] = useState('19/4');
-  const [distributionType, setDistributionType] = useState('Normal');
+  const [n, setN] = useLocalStorage('MarginOfError_n', '46');
+  const [confidence, setConfidence] = useLocalStorage('MarginOfError_confidence', '90');
+  const [deviation, setDeviation] = useLocalStorage('MarginOfError_deviation', '19/4');
+  const [distributionType, setDistributionType] = useLocalStorage('MarginOfError_distributionType', 'Normal');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [answer, setAnswer] = useState('');
+  const [equation, setEquation] = useLocalStorage('MarginOfError_equation', '');
+  const [solution, setSolution] = useLocalStorage('MarginOfError_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('MarginOfError_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('MarginOfError_showSteps', true);
+  const [note, setNote] = useLocalStorage('MarginOfError_note', undefined);
+  const [answer, setAnswer] = useLocalStorage('MarginOfError_answer', '');
 
   const mf1 = useRef();
   //to get values from other calculator

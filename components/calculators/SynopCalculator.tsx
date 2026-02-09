@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect, useCallback } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import styles from './SynopCalculator.module.css';
 import {
     STATION_NAMES,
@@ -157,6 +158,24 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({ name, value, op
                     e.target.select();
                     setIsOpen(true);
                 }}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        const filteredOptions = options.filter(opt => {
+                            if (bypass) return true;
+                            const s = search.toLowerCase();
+                            return opt.label.toLowerCase().includes(s) || opt.value.toLowerCase().includes(s);
+                        });
+                        if (filteredOptions.length > 0) {
+                            const bestMatch = filteredOptions[0];
+                            onChange({ target: { name, value: bestMatch.value } });
+                            setIsOpen(false);
+                            setBypass(false);
+                            // Need to update search because effect runs on value change, but we want immediate feedback
+                            setSearch(bestMatch.label);
+                        }
+                    }
+                }}
                 placeholder={placeholder}
                 autoComplete="off"
                 disabled={disabled}
@@ -306,7 +325,7 @@ const WeatherTimeSelector: React.FC<{
 
 const SynopCalculator = () => {
     // --- State ---
-    const [formData, setFormData] = useState<SynopFormData>({
+    const [formData, setFormData] = useLocalStorage<SynopFormData>('SynopCalculator_formData', {
         station: '42542', // Default to Dabok/Udaipur
         observationDate: new Date().toISOString().split('T')[0],
         timeFormat: '12',
@@ -317,16 +336,16 @@ const SynopCalculator = () => {
         synopTime: '00',
 
         barReading: '',
-        slp: '956.5',
-        mslp: '1016.8',
-        pressureChange: '-0.5',
+        slp: '',
+        mslp: '',
+        pressureChange: '',
 
-        dryBulb: '25.6',
+        dryBulb: '',
         wetBulb: '',
-        maxTemp: '35.0',
-        minTemp: '16.5',
-        dewPoint: '16.6',
-        relativeHumidity: '66',
+        maxTemp: '',
+        minTemp: '',
+        dewPoint: '',
+        relativeHumidity: '',
         vapourPressure: '',
 
         windDirection: '00',
@@ -357,7 +376,7 @@ const SynopCalculator = () => {
 
     const dateInputRef = React.useRef<HTMLInputElement>(null);
 
-    const [cloudLayers, setCloudLayers] = useState<CloudLayer[]>([
+    const [cloudLayers, setCloudLayers] = useLocalStorage<CloudLayer[]>('SynopCalculator_cloudLayers', [
         { id: 1, form: '0', amount: '0', height: '99' },
         { id: 2, form: '0', amount: '0', height: '99' },
         { id: 3, form: '0', amount: '0', height: '99' },
@@ -368,8 +387,8 @@ const SynopCalculator = () => {
     const [statusMessage, setStatusMessage] = useState<{ text: string, type: 'success' | 'error' | 'info' } | null>(null);
 
     // Weather Timing State
-    const [weatherTimeFormat, setWeatherTimeFormat] = useState<'12' | '24' | 'UTC'>('24');
-    const [weatherTimings, setWeatherTimings] = useState<WeatherTiming[]>([
+    const [weatherTimeFormat, setWeatherTimeFormat] = useLocalStorage<'12' | '24' | 'UTC'>('SynopCalculator_weatherTimeFormat', '24');
+    const [weatherTimings, setWeatherTimings] = useLocalStorage<WeatherTiming[]>('SynopCalculator_weatherTimings', [
         { id: 1, weatherCode: '', startTime: '', endTime: '' }
     ]);
 
@@ -418,16 +437,18 @@ const SynopCalculator = () => {
 
     // Filtered lists for searchable dropdowns
     // Filtered lists for searchable dropdowns - bypass flags allow showing all options on button click
-    const [stationSearch, setStationSearch] = useState('');
-    const [showStationDropdown, setShowStationDropdown] = useState(false);
-    const [bypassStationFilter, setBypassStationFilter] = useState(false);
-    const [weatherSearch, setWeatherSearch] = useState('');
-    const [showWeatherDropdown, setShowWeatherDropdown] = useState(false);
-    const [bypassWeatherFilter, setBypassWeatherFilter] = useState(false);
-    const [showPastWeather1Dropdown, setShowPastWeather1Dropdown] = useState(false);
-    const [bypassPastWeather1Filter, setBypassPastWeather1Filter] = useState(false);
-    const [showPastWeather2Dropdown, setShowPastWeather2Dropdown] = useState(false);
-    const [bypassPastWeather2Filter, setBypassPastWeather2Filter] = useState(false);
+    // Filtered lists for searchable dropdowns
+    // Filtered lists for searchable dropdowns - bypass flags allow showing all options on button click
+    const [stationSearch, setStationSearch] = useLocalStorage('SynopCalculator_stationSearch', '');
+    const [showStationDropdown, setShowStationDropdown] = useLocalStorage('SynopCalculator_showStationDropdown', false);
+    const [bypassStationFilter, setBypassStationFilter] = useLocalStorage('SynopCalculator_bypassStationFilter', false);
+    const [weatherSearch, setWeatherSearch] = useLocalStorage('SynopCalculator_weatherSearch', '');
+    const [showWeatherDropdown, setShowWeatherDropdown] = useLocalStorage('SynopCalculator_showWeatherDropdown', false);
+    const [bypassWeatherFilter, setBypassWeatherFilter] = useLocalStorage('SynopCalculator_bypassWeatherFilter', false);
+    const [showPastWeather1Dropdown, setShowPastWeather1Dropdown] = useLocalStorage('SynopCalculator_showPastWeather1Dropdown', false);
+    const [bypassPastWeather1Filter, setBypassPastWeather1Filter] = useLocalStorage('SynopCalculator_bypassPastWeather1Filter', false);
+    const [showPastWeather2Dropdown, setShowPastWeather2Dropdown] = useLocalStorage('SynopCalculator_showPastWeather2Dropdown', false);
+    const [bypassPastWeather2Filter, setBypassPastWeather2Filter] = useLocalStorage('SynopCalculator_bypassPastWeather2Filter', false);
 
     // Ref for detecting clicks outside
     const stationRef = React.useRef<HTMLDivElement>(null);
@@ -599,6 +620,47 @@ const SynopCalculator = () => {
         }
     }, [formData.manualVisibility]);
 
+    // Auto-fetch from other calculators on mount
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        try {
+            const barDataStr = window.localStorage.getItem('BarCorrection_calculatedValues');
+            const dewDataStr = window.localStorage.getItem('DewPoint_calculatedValues');
+
+            const updates: Partial<SynopFormData> = {};
+            let hasUpdates = false;
+
+            if (barDataStr) {
+                const barData = JSON.parse(barDataStr);
+                // Only update if current field is empty
+                if (!formData.slp && barData.slp) { updates.slp = barData.slp; hasUpdates = true; }
+                if (!formData.mslp && barData.mslp) { updates.mslp = barData.mslp; hasUpdates = true; }
+                if (!formData.pressureChange && barData.pressureChange) { updates.pressureChange = barData.pressureChange; hasUpdates = true; }
+            }
+
+            if (dewDataStr) {
+                const dewData = JSON.parse(dewDataStr);
+                if (!formData.dryBulb && dewData.dryBulb) { updates.dryBulb = String(dewData.dryBulb); hasUpdates = true; }
+                if (!formData.dewPoint && dewData.dewPoint) { updates.dewPoint = String(dewData.dewPoint); hasUpdates = true; }
+                if (!formData.relativeHumidity && dewData.relativeHumidity) { updates.relativeHumidity = String(dewData.relativeHumidity); hasUpdates = true; }
+                if (!formData.vapourPressure && dewData.vapourPressure) { updates.vapourPressure = String(dewData.vapourPressure); hasUpdates = true; }
+            }
+
+            if (hasUpdates) {
+                setFormData(prev => ({ ...prev, ...updates }));
+            }
+        } catch (e) {
+            console.error("Error auto-fetching data", e);
+        }
+    }, [
+        // We only want to run this once on mount, effectively. 
+        // But to be safe, if we put empty dependency array, it runs on mount.
+        // If we want it to run when `formData` is initially loaded (which useLocalStorage handles),
+        // we might need to be careful not to overwrite user input.
+        // The checks `!formData.field` protect us.
+    ]);
+
     // Auto-fetch/Format time when format changes
     useEffect(() => {
         const now = new Date();
@@ -721,7 +783,7 @@ const SynopCalculator = () => {
             day = prevDate.getDate();
         }
         const formattedDay = pad(day, 2);
-        const randomNumber = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+        const randomNumber = Math.floor(Math.random() * 100).toString().padStart(3, '0');
         const headerType = ["03", "09", "15", "21"].includes(synopTime) ? "SIIN90" : "SMIN90";
 
         // Section 1
@@ -865,12 +927,12 @@ const SynopCalculator = () => {
         let msg = `ZCZC ${randomNumber}\n`;
         msg += `${headerType} VIJP ${formattedDay}${synopTime}00\n`;
         msg += `AAXX ${formattedDay}${synopTime}4\n`;
-        msg += `${stationCode} ${rainStatus}${wxStatus}${cloudHeight}${visibilityCode} ${cloudAmount}${wd}${ws} ${DBH}${DB} ${DPH}${DP} ${slpGroup}${mslpGroup}${prwxGroup}${cloudGroup}${section333}${pressureSection}${rfGroup}${layersCode}${section555}\n`;
+        msg += `${stationCode} ${rainStatus}${wxStatus}${cloudHeight}${visibilityCode} ${cloudAmount}${wd}${ws} ${DBH}${DB} ${DPH}${DP} ${slpGroup}${mslpGroup}${prwxGroup}${cloudGroup}${section333}${pressureSection}${rfGroup}${layersCode}${section555}=\n`;
         msg += `NNNN`;
 
         // Add extra message for 03 and 12 UTC
         if (synopTime === "03" || synopTime === "12") {
-            const nextNumber = pad(parseInt(randomNumber) + 1, 2);
+            const nextNumber = pad(parseInt(randomNumber) + 1, 3);
             msg += `\nZCZC ${nextNumber}\n`;
             msg += `SXIN90 VIJP ${formattedDay}${synopTime}00\n`;
             msg += `${stationCode} RH = ${data.relativeHumidity}%${synopTime === '12' ? ' RH MAX = %  RH MIN = %' : ''}\n`;

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 
@@ -17,14 +18,14 @@ import {
 } from '../../helpers/matrixHelper';
 
 const SurfaceAreaOfCube = () => {
-  const [a, setA] = useState('\\sqrt{4}');
+  const [a, setA] = useLocalStorage('SurfaceAreaOfCube_a', '\\sqrt{4}');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('SurfaceAreaOfCube_equation', '');
+  const [solution, setSolution] = useLocalStorage('SurfaceAreaOfCube_solution', '');
+  const [result, setResult] = useLocalStorage('SurfaceAreaOfCube_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('SurfaceAreaOfCube_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('SurfaceAreaOfCube_showSteps', true);
+  const [note, setNote] = useLocalStorage('SurfaceAreaOfCube_note', undefined);
   const mf1 = useRef();
 
   //to get values from other calculator

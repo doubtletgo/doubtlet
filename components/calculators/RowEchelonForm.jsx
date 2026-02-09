@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, pluralise, putSpace } from '../../helpers/general';
@@ -20,19 +21,19 @@ import Input from '../common/input';
 const config = {};
 const math = create(all, config);
 const RowEchelonForm = () => {
-  const [row, setRow] = useState('3');
-  const [column, setColumn] = useState('3');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('RowEchelonForm_row', '3');
+  const [column, setColumn] = useLocalStorage('RowEchelonForm_column', '3');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('RowEchelonForm_frstMatrix', [
     [0, 1, 2],
     [-4, 6, 7],
     [2, 8, 9],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('RowEchelonForm_equation', '');
+  const [solution, setSolution] = useLocalStorage('RowEchelonForm_solution', '');
+  const [answer, setAnswer] = useLocalStorage('RowEchelonForm_answer', undefined);
+  const [showResult, setShowResult] = useLocalStorage('RowEchelonForm_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('RowEchelonForm_showSteps', true);
+  const [note, setNote] = useLocalStorage('RowEchelonForm_note', undefined);
 
   useEffect(() => {
     const vals = getSearchParams(false);

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -21,22 +22,22 @@ import { solveWithLeastRoots } from '../../helpers/SolveRoot';
 import { MathField } from '@/types/mathfield.types';
 
 const DistanceBetweenTwoParallelPlanes = () => {
-  const [a1, setA1] = useState('1');
-  const [b1, setB1] = useState('2');
-  const [c1, setC1] = useState('\\sqrt{1}');
-  const [d1, setD1] = useState('1');
-  const [a2, setA2] = useState('e^5');
-  const [b2, setB2] = useState('4');
-  const [c2, setC2] = useState('2');
-  const [d2, setD2] = useState('\\sqrt{1}');
+  const [a1, setA1] = useLocalStorage('AngleBetweenTwoPlanes_a1', '1');
+  const [b1, setB1] = useLocalStorage('AngleBetweenTwoPlanes_b1', '2');
+  const [c1, setC1] = useLocalStorage('AngleBetweenTwoPlanes_c1', '\\sqrt{1}');
+  const [d1, setD1] = useLocalStorage('AngleBetweenTwoPlanes_d1', '1');
+  const [a2, setA2] = useLocalStorage('AngleBetweenTwoPlanes_a2', 'e^5');
+  const [b2, setB2] = useLocalStorage('AngleBetweenTwoPlanes_b2', '4');
+  const [c2, setC2] = useLocalStorage('AngleBetweenTwoPlanes_c2', '2');
+  const [d2, setD2] = useLocalStorage('AngleBetweenTwoPlanes_d2', '\\sqrt{1}');
 
-  const [result, setResult] = useState();
+  const [result, setResult] = useLocalStorage('AngleBetweenTwoPlanes_result', undefined);
   const isInvalid = useRef<boolean>(true);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('AngleBetweenTwoPlanes_equation', '');
+  const [solution, setSolution] = useLocalStorage('AngleBetweenTwoPlanes_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('AngleBetweenTwoPlanes_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('AngleBetweenTwoPlanes_showSteps', true);
+  const [note, setNote] = useLocalStorage('AngleBetweenTwoPlanes_note', undefined);
   const mf1 = useRef<MathField | null>(null);
   const mf2 = useRef<MathField | null>(null);
   const mf3 = useRef<MathField | null>(null);

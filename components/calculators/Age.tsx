@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { putSpace } from '../../helpers/general';
@@ -10,17 +11,15 @@ function getFormattedDate(date: Date) {
   return date.toISOString().split('T')[0];
 }
 const AgeCalculator = () => {
-  const [dateOfBirth, setDateOfBirth] = useState(new Date('06-21-1994'));
-  const [calculationDate, setCalculationDate] = useState(
-    new Date('01-24-2025')
-  );
+  const [dateOfBirth, setDateOfBirth] = useLocalStorage('Age_dateOfBirth', new Date('06-21-1994'));
+  const [calculationDate, setCalculationDate] = useLocalStorage('Age_calculationDate', new Date('01-24-2025'));
 
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState('');
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(false);
-  const [note, setNote] = useState('');
+  const [equation, setEquation] = useLocalStorage('Age_equation', '');
+  const [solution, setSolution] = useLocalStorage('Age_solution', '');
+  const [result, setResult] = useLocalStorage('Age_result', '');
+  const [showResult, setShowResult] = useLocalStorage('Age_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('Age_showSteps', false);
+  const [note, setNote] = useLocalStorage('Age_note', '');
 
   const hasValue = dateOfBirth && calculationDate;
 

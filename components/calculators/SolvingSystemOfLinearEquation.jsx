@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -53,19 +54,19 @@ function multiplyMatrixByValue(matrix, value) {
 }
 
 const SolvingSystemOfLinearEquation = () => {
-  const [variables, setVariables] = useState('2');
-  const [eqnMatrix, setEqnMatrix] = useState([
+  const [variables, setVariables] = useLocalStorage('SolvingSystemOfLinearEquation_variables', '2');
+  const [eqnMatrix, setEqnMatrix] = useLocalStorage('SolvingSystemOfLinearEquation_eqnMatrix', [
     ['1', '2'],
     ['2', '1'],
   ]);
-  const [resultMatrix, setResultMatrix] = useState([['3'], ['4']]);
-  const [equation, setEquation] = useState('4');
-  const [solution, setSolution] = useState('3');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [method, setMethodType] = useState('Inverse Matrix Method');
+  const [resultMatrix, setResultMatrix] = useLocalStorage('SolvingSystemOfLinearEquation_resultMatrix', [['3'], ['4']]);
+  const [equation, setEquation] = useLocalStorage('SolvingSystemOfLinearEquation_equation', '4');
+  const [solution, setSolution] = useLocalStorage('SolvingSystemOfLinearEquation_solution', '3');
+  const [result, setResult] = useLocalStorage('SolvingSystemOfLinearEquation_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('SolvingSystemOfLinearEquation_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('SolvingSystemOfLinearEquation_showSteps', true);
+  const [note, setNote] = useLocalStorage('SolvingSystemOfLinearEquation_note', undefined);
+  const [method, setMethodType] = useLocalStorage('SolvingSystemOfLinearEquation_method', 'Inverse Matrix Method');
   let varArr = ['x', 'y', 'z', 'p', 'q'];
   let abc = ['A', 'B', 'C', 'D', 'E'];
 

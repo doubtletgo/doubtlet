@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MathInput from 'react-math-keyboard';
@@ -15,15 +16,15 @@ import {
 import { putSpace } from '../../helpers/general';
 
 const PerimeterOfRectangle = () => {
-  const [a, setA] = useState('2');
-  const [b, setB] = useState('\\pi');
+  const [a, setA] = useLocalStorage('PerimeterOfRectangle_a', '2');
+  const [b, setB] = useLocalStorage('PerimeterOfRectangle_b', '\\pi');
 
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('PerimeterOfRectangle_equation', '');
+  const [solution, setSolution] = useLocalStorage('PerimeterOfRectangle_solution', '');
+  const [result, setResult] = useLocalStorage('PerimeterOfRectangle_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('PerimeterOfRectangle_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('PerimeterOfRectangle_showSteps', true);
+  const [note, setNote] = useLocalStorage('PerimeterOfRectangle_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
 

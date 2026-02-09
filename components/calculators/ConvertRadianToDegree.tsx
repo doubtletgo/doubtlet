@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -16,14 +17,14 @@ import { MathField } from '@/types/mathfield.types';
 import { isInputInvalid } from '@/helpers/Validations';
 
 const ConvertRadianToDegree = () => {
-  const [a, setA] = useState('\\frac{4\\pi}{6}');
+  const [a, setA] = useLocalStorage('ConvertRadianToDegree_a', '\\frac{4\\pi}{6}');
 
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('ConvertRadianToDegree_equation', '');
+  const [solution, setSolution] = useLocalStorage('ConvertRadianToDegree_solution', '');
+  const [result, setResult] = useLocalStorage('ConvertRadianToDegree_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('ConvertRadianToDegree_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('ConvertRadianToDegree_showSteps', true);
+  const [note, setNote] = useLocalStorage('ConvertRadianToDegree_note', undefined);
   const mf1 = useRef<MathField>(null);
 
   //to get values from other calculator

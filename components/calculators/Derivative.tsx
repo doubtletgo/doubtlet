@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { useState, useEffect, useCallback, ChangeEvent, useRef } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { Equation } from '../Equation';
 import NotesHelpButton from '../common/Notes/NotesHelpButton';
 import MathInput from 'react-math-keyboard';
@@ -139,15 +140,15 @@ const replaceInverse = (s: string) => {
 };
 
 const Derivative = () => {
-  const [expression, setExpression] = useState('\\log(x,10)');
-  const [variable, setVariable] = useState('x');
-  const [order, setOrder] = useState('1');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(false);
-  const [note, setNote] = useState();
+  const [expression, setExpression] = useLocalStorage('Derivative_expression', '\\log(x,10)');
+  const [variable, setVariable] = useLocalStorage('Derivative_variable', 'x');
+  const [order, setOrder] = useLocalStorage('Derivative_order', '1');
+  const [equation, setEquation] = useLocalStorage('Derivative_equation', '');
+  const [solution, setSolution] = useLocalStorage('Derivative_solution', '');
+  const [result, setResult] = useLocalStorage('Derivative_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('Derivative_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('Derivative_showSteps', false);
+  const [note, setNote] = useLocalStorage('Derivative_note', undefined);
   const ref = useRef(null);
 
   useEffect(() => {

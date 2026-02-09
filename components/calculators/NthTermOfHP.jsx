@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -17,16 +18,16 @@ import {
 } from '../../helpers/matrixHelper';
 
 const NthTermOfHP = () => {
-  const [a, setA] = useState('2');
-  const [d, setD] = useState('4');
-  const [n, setN] = useState('3');
+  const [a, setA] = useLocalStorage('NthTermOfHP_a', '2');
+  const [d, setD] = useLocalStorage('NthTermOfHP_d', '4');
+  const [n, setN] = useLocalStorage('NthTermOfHP_n', '3');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
+  const [equation, setEquation] = useLocalStorage('NthTermOfHP_equation', '');
+  const [solution, setSolution] = useLocalStorage('NthTermOfHP_solution', '');
+  const [result, setResult] = useLocalStorage('NthTermOfHP_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('NthTermOfHP_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('NthTermOfHP_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('NthTermOfHP_isPointSame', false);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -26,13 +27,13 @@ const getRoots = (expression: string, variable: 'x' | 'y') => {
 };
 
 const XAndYIntercepts = () => {
-  const [expression, setExpression] = useState('x^{2} + y^{2} + 5x – 3y -1 ');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [expression, setExpression] = useLocalStorage('XAndYIntercepts_expression', 'x^{2} + y^{2} + 5x – 3y -1 ');
+  const [equation, setEquation] = useLocalStorage('XAndYIntercepts_equation', '');
+  const [solution, setSolution] = useLocalStorage('XAndYIntercepts_solution', '');
+  const [result, setResult] = useLocalStorage('XAndYIntercepts_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('XAndYIntercepts_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('XAndYIntercepts_showSteps', true);
+  const [note, setNote] = useLocalStorage('XAndYIntercepts_note', undefined);
   const inputRef = useRef<MathField>(null);
 
   useEffect(() => {

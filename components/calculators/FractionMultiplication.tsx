@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -11,13 +12,13 @@ import { putSpace } from '../../helpers/general';
 import { convertIntoLatex } from '@/helpers/matrixHelper';
 
 const FractionMultiplication = () => {
-  const [l, setL] = useState('1/3,3/5');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [l, setL] = useLocalStorage('FractionMultiplication_l', '1/3,3/5');
+  const [equation, setEquation] = useLocalStorage('FractionMultiplication_equation', '');
+  const [solution, setSolution] = useLocalStorage('FractionMultiplication_solution', '');
+  const [result, setResult] = useLocalStorage('FractionMultiplication_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('FractionMultiplication_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('FractionMultiplication_showSteps', true);
+  const [note, setNote] = useLocalStorage('FractionMultiplication_note', undefined);
 
   useEffect(() => {
     const vals = getSearchParams(false) as { a: string };

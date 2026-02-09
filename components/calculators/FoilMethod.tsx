@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -43,16 +44,16 @@ const generateTokens = (exp: string) => {
 };
 
 const FoilMethod = () => {
-  const [expression, setExpression] = useState('\\frac{2}{3}z^2-1');
-  const [expressionTwo, setExpressionTwo] = useState('-5xy-\\frac{7}{4}');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [isAInvalid, setIsAInvalid] = useState(false);
-  const [isBInvalid, setIsBInvalid] = useState(false);
+  const [expression, setExpression] = useLocalStorage('FoilMethod_expression', '\\frac{2}{3}z^2-1');
+  const [expressionTwo, setExpressionTwo] = useLocalStorage('FoilMethod_expressionTwo', '-5xy-\\frac{7}{4}');
+  const [equation, setEquation] = useLocalStorage('FoilMethod_equation', '');
+  const [solution, setSolution] = useLocalStorage('FoilMethod_solution', '');
+  const [answer, setAnswer] = useLocalStorage('FoilMethod_answer', undefined);
+  const [showResult, setShowResult] = useLocalStorage('FoilMethod_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('FoilMethod_showSteps', true);
+  const [note, setNote] = useLocalStorage('FoilMethod_note', undefined);
+  const [isAInvalid, setIsAInvalid] = useLocalStorage('FoilMethod_isAInvalid', false);
+  const [isBInvalid, setIsBInvalid] = useLocalStorage('FoilMethod_isBInvalid', false);
 
   const inputRef1 = useRef<MathField>(null);
   const inputRef2 = useRef<MathField>(null);

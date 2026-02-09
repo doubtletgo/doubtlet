@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -15,14 +16,14 @@ import {
 } from '../../helpers/matrixHelper';
 
 const AreaOfARegularHexagon = () => {
-  const [a, setA] = useState('\\sqrt{4}');
+  const [a, setA] = useLocalStorage('AreaOfARegularHexagon_a', '\\sqrt{4}');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('AreaOfARegularHexagon_equation', '');
+  const [solution, setSolution] = useLocalStorage('AreaOfARegularHexagon_solution', '');
+  const [result, setResult] = useLocalStorage('AreaOfARegularHexagon_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('AreaOfARegularHexagon_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('AreaOfARegularHexagon_showSteps', true);
+  const [note, setNote] = useLocalStorage('AreaOfARegularHexagon_note', undefined);
   const mf1 = useRef();
 
   //to get values from other calculator

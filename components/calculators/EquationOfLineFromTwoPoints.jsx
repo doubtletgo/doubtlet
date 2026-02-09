@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -25,17 +26,17 @@ import {
 import { convertToKatex } from '../../helpers/SolveRoot';
 
 const EquationOfLineFromTwoPoints = () => {
-  const [x1, setx1] = useState('1.4');
-  const [x2, setx2] = useState('7');
-  const [y1, sety1] = useState('5');
-  const [y2, sety2] = useState('2');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [result, setResult] = useState('');
-  const [calcType, setCalcType] = useState('intercept');
+  const [x1, setx1] = useLocalStorage('EquationOfLineFromTwoPoints_x1', '1.4');
+  const [x2, setx2] = useLocalStorage('EquationOfLineFromTwoPoints_x2', '7');
+  const [y1, sety1] = useLocalStorage('EquationOfLineFromTwoPoints_y1', '5');
+  const [y2, sety2] = useLocalStorage('EquationOfLineFromTwoPoints_y2', '2');
+  const [equation, setEquation] = useLocalStorage('EquationOfLineFromTwoPoints_equation', '');
+  const [solution, setSolution] = useLocalStorage('EquationOfLineFromTwoPoints_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('EquationOfLineFromTwoPoints_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('EquationOfLineFromTwoPoints_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('EquationOfLineFromTwoPoints_isPointSame', false);
+  const [result, setResult] = useLocalStorage('EquationOfLineFromTwoPoints_result', '');
+  const [calcType, setCalcType] = useLocalStorage('EquationOfLineFromTwoPoints_calcType', 'intercept');
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

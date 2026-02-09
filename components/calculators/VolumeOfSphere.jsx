@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 
@@ -17,14 +18,14 @@ import {
 } from '../../helpers/matrixHelper';
 
 const VolumeOfSphere = () => {
-  const [r, setR] = useState('\\sqrt{4}');
+  const [r, setR] = useLocalStorage('VolumeOfSphere_r', '\\sqrt{4}');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('VolumeOfSphere_equation', '');
+  const [solution, setSolution] = useLocalStorage('VolumeOfSphere_solution', '');
+  const [result, setResult] = useLocalStorage('VolumeOfSphere_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('VolumeOfSphere_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('VolumeOfSphere_showSteps', true);
+  const [note, setNote] = useLocalStorage('VolumeOfSphere_note', undefined);
   const mf1 = useRef();
 
   //to get values from other calculator

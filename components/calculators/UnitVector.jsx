@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -18,16 +19,16 @@ import { solveWithLeastRoots } from '../../helpers/SolveRoot';
 import { addSymbol } from '../../helpers/decimal';
 
 const UnitVector = () => {
-  const [x1, setX1] = useState('4');
-  const [y1, setY1] = useState('5');
-  const [z1, setZ1] = useState('2');
+  const [x1, setX1] = useLocalStorage('UnitVector_x1', '4');
+  const [y1, setY1] = useLocalStorage('UnitVector_y1', '5');
+  const [z1, setZ1] = useLocalStorage('UnitVector_z1', '2');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('UnitVector_equation', '');
+  const [solution, setSolution] = useLocalStorage('UnitVector_solution', '');
+  const [result, setResult] = useLocalStorage('UnitVector_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('UnitVector_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('UnitVector_showSteps', true);
+  const [note, setNote] = useLocalStorage('UnitVector_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

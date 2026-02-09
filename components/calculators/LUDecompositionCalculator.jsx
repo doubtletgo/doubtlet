@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -147,9 +148,9 @@ const replaceMat = (mat = [], obj = {}) => {
 };
 
 const LUDecompositionCalculator = () => {
-  const [row, setRow] = useState('4');
-  const [column, setColumn] = useState('5');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('LUDecompositionCalculator_row', '4');
+  const [column, setColumn] = useLocalStorage('LUDecompositionCalculator_column', '5');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('LUDecompositionCalculator_frstMatrix', [
     // ["1", "4", "-3"],
     // ["-2", "8", "5"],
     // ["3", "4", "7"],
@@ -173,12 +174,12 @@ const LUDecompositionCalculator = () => {
     // [1, 4, 5, -2],
     // [5, 3, 0, 7],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('LUDecompositionCalculator_equation', '');
+  const [solution, setSolution] = useLocalStorage('LUDecompositionCalculator_solution', '');
+  const [result, setResult] = useLocalStorage('LUDecompositionCalculator_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('LUDecompositionCalculator_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('LUDecompositionCalculator_showSteps', true);
+  const [note, setNote] = useLocalStorage('LUDecompositionCalculator_note', undefined);
   useEffect(() => {
     const vals = getSearchParams(false);
     if (vals.a) {

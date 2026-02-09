@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -10,15 +11,15 @@ import { FindCosecData } from '../../utils/constants/Angle-table';
 import { putSpace } from '../../helpers/general';
 
 const Cosec = () => {
-  const [a, setA] = useState('9');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [usePI, setUsePI] = useState(false);
-  const [order, setOrder] = useState('Degree');
+  const [a, setA] = useLocalStorage('Cosec_a', '9');
+  const [equation, setEquation] = useLocalStorage('Cosec_equation', '');
+  const [solution, setSolution] = useLocalStorage('Cosec_solution', '');
+  const [result, setResult] = useLocalStorage('Cosec_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('Cosec_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('Cosec_showSteps', true);
+  const [note, setNote] = useLocalStorage('Cosec_note', undefined);
+  const [usePI, setUsePI] = useLocalStorage('Cosec_usePI', false);
+  const [order, setOrder] = useLocalStorage('Cosec_order', 'Degree');
 
   let [p, q = 1] = a.split('/');
 

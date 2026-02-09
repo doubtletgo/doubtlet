@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -9,13 +10,13 @@ import { parseNumber } from '../../helpers/decimal';
 import { getSearchParams } from '../../helpers/general';
 
 const Factorial = () => {
-  const [p, setP] = useState('3');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [p, setP] = useLocalStorage('Factorial_p', '3');
+  const [equation, setEquation] = useLocalStorage('Factorial_equation', '');
+  const [solution, setSolution] = useLocalStorage('Factorial_solution', '');
+  const [result, setResult] = useLocalStorage('Factorial_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('Factorial_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('Factorial_showSteps', true);
+  const [note, setNote] = useLocalStorage('Factorial_note', undefined);
 
   useEffect(() => {
     const vals = getSearchParams(false);

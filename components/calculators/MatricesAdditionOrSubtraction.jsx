@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -25,23 +26,23 @@ function showAddEquation(arr1, arr2, add) {
 }
 
 const MatricesAdditionOrSubtraction = () => {
-  const [row, setRow] = useState('2');
-  const [column, setColumn] = useState('2');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('MatricesAdditionOrSubtraction_row', '2');
+  const [column, setColumn] = useLocalStorage('MatricesAdditionOrSubtraction_column', '2');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('MatricesAdditionOrSubtraction_frstMatrix', [
     ['1.5', '\\frac{2}{3}'],
     ['3', '\\sqrt{2}'],
   ]);
-  const [scndMatrix, setScndMatrix] = useState([
+  const [scndMatrix, setScndMatrix] = useLocalStorage('MatricesAdditionOrSubtraction_scndMatrix', [
     ['1.5', '\\frac{2}{3}'],
     ['3', '\\sqrt{2}'],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(false);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [order, setOrder] = useState('Addition');
+  const [equation, setEquation] = useLocalStorage('MatricesAdditionOrSubtraction_equation', '');
+  const [solution, setSolution] = useLocalStorage('MatricesAdditionOrSubtraction_solution', '');
+  const [result, setResult] = useLocalStorage('MatricesAdditionOrSubtraction_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('MatricesAdditionOrSubtraction_showResult', false);
+  const [showSteps, setShowSteps] = useLocalStorage('MatricesAdditionOrSubtraction_showSteps', true);
+  const [note, setNote] = useLocalStorage('MatricesAdditionOrSubtraction_note', undefined);
+  const [order, setOrder] = useLocalStorage('MatricesAdditionOrSubtraction_order', 'Addition');
   const isAddition = order === 'Addition';
   useEffect(() => {
     setNote(

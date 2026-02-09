@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -28,19 +29,19 @@ const findColSpace = (mat = [], original) => {
   return nonZeroRow;
 };
 const ColumnSpaceOfAMatrix = () => {
-  const [row, setRow] = useState('3');
-  const [column, setColumn] = useState('3');
-  const [frstMatrix, setFrstMatrix] = useState([
+  const [row, setRow] = useLocalStorage('ColumnSpaceOfAMatrix_row', '3');
+  const [column, setColumn] = useLocalStorage('ColumnSpaceOfAMatrix_column', '3');
+  const [frstMatrix, setFrstMatrix] = useLocalStorage('ColumnSpaceOfAMatrix_frstMatrix', [
     [1, 2, 3],
     [2, 5, 4],
     [1, 1, 5],
   ]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('ColumnSpaceOfAMatrix_equation', '');
+  const [solution, setSolution] = useLocalStorage('ColumnSpaceOfAMatrix_solution', '');
+  const [answer, setAnswer] = useLocalStorage('ColumnSpaceOfAMatrix_answer', undefined);
+  const [showResult, setShowResult] = useLocalStorage('ColumnSpaceOfAMatrix_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('ColumnSpaceOfAMatrix_showSteps', true);
+  const [note, setNote] = useLocalStorage('ColumnSpaceOfAMatrix_note', undefined);
 
   useEffect(() => {
     const vals = getSearchParams(false);

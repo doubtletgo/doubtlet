@@ -3,6 +3,7 @@ import AdComponent from '../AdSense';
 import Link from 'next/link';
 
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 // Utility to check leap year
 const isLeapYear = (year) =>
@@ -18,13 +19,13 @@ const PeriodDateCalculator = () => {
   // --------------------------
   // STATE HOOKS
   // --------------------------
-  const [month, setMonth] = useState(defaultMonth);
-  const [date, setDate] = useState(defaultDate);
-  const [year, setYear] = useState(defaultYear);
-  const [periodDuration, setPeriodDuration] = useState('5');
-  const [cycleLength, setCycleLength] = useState('28');
-  const [result, setResult] = useState([]);
-  const [showResult, setShowResult] = useState(true);
+  const [month, setMonth] = useLocalStorage('Period_month', defaultMonth);
+  const [date, setDate] = useLocalStorage('Period_date', defaultDate);
+  const [year, setYear] = useLocalStorage('Period_year', defaultYear);
+  const [periodDuration, setPeriodDuration] = useLocalStorage('Period_periodDuration', '5');
+  const [cycleLength, setCycleLength] = useLocalStorage('Period_cycleLength', '28');
+  const [result, setResult] = useLocalStorage('Period_result', []);
+  const [showResult, setShowResult] = useLocalStorage('Period_showResult', true);
 
   // ---------------------------------------------------
   // GENERATE DATE OPTIONS

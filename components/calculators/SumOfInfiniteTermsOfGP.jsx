@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import Input from '../common/input';
@@ -18,15 +19,15 @@ import {
 } from '../../helpers/matrixHelper';
 
 const SumOfInfinteTermsOfGP = () => {
-  const [a, setA] = useState('1');
-  const [r, setR] = useState('\\sqrt{9}');
+  const [a, setA] = useLocalStorage('SumOfInfiniteTermsOfGP_a', '1');
+  const [r, setR] = useLocalStorage('SumOfInfiniteTermsOfGP_r', '\\sqrt{9}');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
+  const [equation, setEquation] = useLocalStorage('SumOfInfiniteTermsOfGP_equation', '');
+  const [solution, setSolution] = useLocalStorage('SumOfInfiniteTermsOfGP_solution', '');
+  const [result, setResult] = useLocalStorage('SumOfInfiniteTermsOfGP_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('SumOfInfiniteTermsOfGP_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('SumOfInfiniteTermsOfGP_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('SumOfInfiniteTermsOfGP_isPointSame', false);
   const mf1 = useRef();
   const mf2 = useRef();
 

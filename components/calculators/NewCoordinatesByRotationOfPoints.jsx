@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -30,18 +31,18 @@ import {
 const config = {};
 const math = create(all, config);
 const NewCoordinatesByRotationOfPoints = () => {
-  const [x, setX] = useState('7');
-  const [y, setY] = useState('3');
-  const [r, setR] = useState('2');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [usePI, setUsePI] = useState(false);
-  const [order, setOrder] = useState('Degree');
-  const [clock, setClock] = useState('Clockwise');
+  const [x, setX] = useLocalStorage('NewCoordinatesByRotationOfPoints_x', '7');
+  const [y, setY] = useLocalStorage('NewCoordinatesByRotationOfPoints_y', '3');
+  const [r, setR] = useLocalStorage('NewCoordinatesByRotationOfPoints_r', '2');
+  const [equation, setEquation] = useLocalStorage('NewCoordinatesByRotationOfPoints_equation', '');
+  const [solution, setSolution] = useLocalStorage('NewCoordinatesByRotationOfPoints_solution', '');
+  const [result, setResult] = useLocalStorage('NewCoordinatesByRotationOfPoints_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('NewCoordinatesByRotationOfPoints_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('NewCoordinatesByRotationOfPoints_showSteps', true);
+  const [note, setNote] = useLocalStorage('NewCoordinatesByRotationOfPoints_note', undefined);
+  const [usePI, setUsePI] = useLocalStorage('NewCoordinatesByRotationOfPoints_usePI', false);
+  const [order, setOrder] = useLocalStorage('NewCoordinatesByRotationOfPoints_order', 'Degree');
+  const [clock, setClock] = useLocalStorage('NewCoordinatesByRotationOfPoints_clock', 'Clockwise');
 
   const isDegree = order === 'Degree';
   const isClokwise = clock === 'Clockwise';

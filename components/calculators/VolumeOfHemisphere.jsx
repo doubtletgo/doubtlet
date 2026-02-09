@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 
@@ -17,14 +18,14 @@ import {
 } from '../../helpers/matrixHelper';
 
 const VolumeOfHemisphere = () => {
-  const [r, setR] = useState('\\sqrt{4}');
+  const [r, setR] = useLocalStorage('VolumeOfHemisphere_r', '\\sqrt{4}');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('VolumeOfHemisphere_equation', '');
+  const [solution, setSolution] = useLocalStorage('VolumeOfHemisphere_solution', '');
+  const [result, setResult] = useLocalStorage('VolumeOfHemisphere_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('VolumeOfHemisphere_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('VolumeOfHemisphere_showSteps', true);
+  const [note, setNote] = useLocalStorage('VolumeOfHemisphere_note', undefined);
   const mf1 = useRef();
 
   //to get values from other calculator

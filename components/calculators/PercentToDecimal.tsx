@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -9,13 +10,13 @@ import { putSpace } from '../../helpers/general';
 import { evalToDecimals } from '@/helpers/matrixHelper';
 
 const PercentToDecimal = () => {
-  const [a, setA] = useState('345.435');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [a, setA] = useLocalStorage('PercentToDecimal_a', '345.435');
+  const [equation, setEquation] = useLocalStorage('PercentToDecimal_equation', '');
+  const [solution, setSolution] = useLocalStorage('PercentToDecimal_solution', '');
+  const [result, setResult] = useLocalStorage('PercentToDecimal_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('PercentToDecimal_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('PercentToDecimal_showSteps', true);
+  const [note, setNote] = useLocalStorage('PercentToDecimal_note', undefined);
   useEffect(() => {
     setNote(
       renderSteps([

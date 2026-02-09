@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { parseNumber } from '../../helpers/decimal';
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
@@ -9,13 +10,13 @@ import NotesHelpButton from '../common/Notes/NotesHelpButton';
 import { putSpace } from '../../helpers/general';
 
 const GeometricMean = () => {
-  const [n, setN] = useState('4,5,7,1,8,9');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [parsedNum, setParsedNum] = useState([]);
+  const [n, setN] = useLocalStorage('geometricMean_n', '4,5,7,1,8,9');
+  const [equation, setEquation] = useLocalStorage('geometricMean_equation', '');
+  const [solution, setSolution] = useLocalStorage('geometricMean_solution', '');
+  const [result, setResult] = useLocalStorage('geometricMean_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('geometricMean_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('geometricMean_showSteps', true);
+  const [parsedNum, setParsedNum] = useLocalStorage('geometricMean_parsedNum', []);
 
   useEffect(() => {
     const numbers = n

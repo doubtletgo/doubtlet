@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -21,18 +22,18 @@ import { MathField } from '@/types/mathfield.types';
 import { isInputInvalid } from '@/helpers/Validations';
 
 const PointOfIntersectionOfTwoLinesIn2D = () => {
-  const [m1, setM1] = useState('12');
-  const [m2, setM2] = useState('6');
-  const [c1, setC1] = useState('-5');
-  const [c2, setC2] = useState('4');
+  const [m1, setM1] = useLocalStorage('PointOfIntersectionOfTwoLinesIn2D_m1', '12');
+  const [m2, setM2] = useLocalStorage('PointOfIntersectionOfTwoLinesIn2D_m2', '6');
+  const [c1, setC1] = useLocalStorage('PointOfIntersectionOfTwoLinesIn2D_c1', '-5');
+  const [c2, setC2] = useLocalStorage('PointOfIntersectionOfTwoLinesIn2D_c2', '4');
 
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [isPointSame, setIsPointSame] = useState(false);
-  const [note, setNote] = useState();
-  const [result, setResult] = useState('');
+  const [equation, setEquation] = useLocalStorage('PointOfIntersectionOfTwoLinesIn2D_equation', '');
+  const [solution, setSolution] = useLocalStorage('PointOfIntersectionOfTwoLinesIn2D_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('PointOfIntersectionOfTwoLinesIn2D_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('PointOfIntersectionOfTwoLinesIn2D_showSteps', true);
+  const [isPointSame, setIsPointSame] = useLocalStorage('PointOfIntersectionOfTwoLinesIn2D_isPointSame', false);
+  const [note, setNote] = useLocalStorage('PointOfIntersectionOfTwoLinesIn2D_note', undefined);
+  const [result, setResult] = useLocalStorage('PointOfIntersectionOfTwoLinesIn2D_result', '');
   const mf1 = useRef<MathField>(null);
   const mf2 = useRef<MathField>(null);
   const mf3 = useRef<MathField>(null);

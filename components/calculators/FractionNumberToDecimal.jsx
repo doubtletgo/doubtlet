@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import Input from '../common/input';
 import { Equation } from '../Equation';
@@ -11,16 +12,16 @@ import { putSpace } from '../../helpers/general';
 const kSpace = (count = 2) => '\\space'.repeat(count);
 
 const FractionNumberToDecimal = () => {
-  const [l, setL] = useState('1.00/4');
+  const [l, setL] = useLocalStorage('FractionNumberToDecimal_l', '1.00/4');
   let [p, q] = l.split('/');
-  const [r, setR] = useState('3');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [decimalValue, setDecimalValue] = useState('');
+  const [r, setR] = useLocalStorage('FractionNumberToDecimal_r', '3');
+  const [equation, setEquation] = useLocalStorage('FractionNumberToDecimal_equation', '');
+  const [solution, setSolution] = useLocalStorage('FractionNumberToDecimal_solution', '');
+  const [result, setResult] = useLocalStorage('FractionNumberToDecimal_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('FractionNumberToDecimal_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('FractionNumberToDecimal_showSteps', true);
+  const [note, setNote] = useLocalStorage('FractionNumberToDecimal_note', undefined);
+  const [decimalValue, setDecimalValue] = useLocalStorage('FractionNumberToDecimal_decimalValue', '');
 
   useEffect(() => {
     setNote(

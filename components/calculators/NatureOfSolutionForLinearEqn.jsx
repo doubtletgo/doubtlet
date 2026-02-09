@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import MatrixInput from '../MatrixInput';
@@ -24,18 +25,18 @@ const findRank = (mat = []) => {
   return arr.filter((itm) => !itm.every((el) => el == '0'))?.length;
 };
 const NatureOfSolutionForLinearEqn = () => {
-  const [variables, setVariables] = useState('2');
-  const [eqnMatrix, setEqnMatrix] = useState([
+  const [variables, setVariables] = useLocalStorage('NatureOfSolutionForLinearEqn_variables', '2');
+  const [eqnMatrix, setEqnMatrix] = useLocalStorage('NatureOfSolutionForLinearEqn_eqnMatrix', [
     ['1', '2'],
     ['3', '4'],
   ]);
-  const [resultMatrix, setResultMatrix] = useState([['3'], ['8']]);
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [resultMatrix, setResultMatrix] = useLocalStorage('NatureOfSolutionForLinearEqn_resultMatrix', [['3'], ['8']]);
+  const [equation, setEquation] = useLocalStorage('NatureOfSolutionForLinearEqn_equation', '');
+  const [solution, setSolution] = useLocalStorage('NatureOfSolutionForLinearEqn_solution', '');
+  const [result, setResult] = useLocalStorage('NatureOfSolutionForLinearEqn_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('NatureOfSolutionForLinearEqn_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('NatureOfSolutionForLinearEqn_showSteps', true);
+  const [note, setNote] = useLocalStorage('NatureOfSolutionForLinearEqn_note', undefined);
   let abc = ['A', 'B', 'C', 'D', 'E', 'F'];
 
   const withSymbol = (val, symbol) =>

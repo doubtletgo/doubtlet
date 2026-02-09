@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -15,14 +16,14 @@ import {
 } from '../../helpers/matrixHelper';
 
 const VolumeOfCube = () => {
-  const [r, setA] = useState('\\sqrt{4}');
+  const [r, setA] = useLocalStorage('VolumeOfCube_r', '\\sqrt{4}');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('VolumeOfCube_equation', '');
+  const [solution, setSolution] = useLocalStorage('VolumeOfCube_solution', '');
+  const [result, setResult] = useLocalStorage('VolumeOfCube_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('VolumeOfCube_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('VolumeOfCube_showSteps', true);
+  const [note, setNote] = useLocalStorage('VolumeOfCube_note', undefined);
   const mf1 = useRef();
 
   //to get values from other calculator

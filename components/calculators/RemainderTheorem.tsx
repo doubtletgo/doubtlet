@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState, useRef } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -12,17 +13,15 @@ import ExpressionInput from '../expression-input';
 import { polynomialDivide } from '@/helpers';
 
 const RemainderTheorem = () => {
-  const [expression, setExpression] = useState('0.5x^3 - \\frac{5}{2}x^2 - 3');
-  const [a, setA] = useState('7');
-  const [methodType, setMethodType] = useState<'remainder' | 'long-divison'>(
-    'remainder'
-  );
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [answer, setAnswer] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [expression, setExpression] = useLocalStorage('RemainderTheorem_expression', '0.5x^3 - \\frac{5}{2}x^2 - 3');
+  const [a, setA] = useLocalStorage('RemainderTheorem_a', '7');
+  const [methodType, setMethodType] = useLocalStorage<'remainder' | 'long-divison'>('RemainderTheorem_methodType', 'remainder');
+  const [equation, setEquation] = useLocalStorage('RemainderTheorem_equation', '');
+  const [solution, setSolution] = useLocalStorage('RemainderTheorem_solution', '');
+  const [answer, setAnswer] = useLocalStorage('RemainderTheorem_answer', undefined);
+  const [showResult, setShowResult] = useLocalStorage('RemainderTheorem_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('RemainderTheorem_showSteps', true);
+  const [note, setNote] = useLocalStorage('RemainderTheorem_note', undefined);
   const inputRef = useRef<MathField>(null);
 
   useEffect(() => {

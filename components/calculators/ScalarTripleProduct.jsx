@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -17,22 +18,22 @@ import {
 } from '../../helpers/matrixHelper';
 
 const ScalarTripleProduct = () => {
-  const [x1, setX1] = useState('2');
-  const [y1, setY1] = useState('3');
-  const [z1, setZ1] = useState('3');
-  const [x2, setX2] = useState('2');
-  const [y2, setY2] = useState('4');
-  const [z2, setZ2] = useState('6');
-  const [x3, setX3] = useState('7');
-  const [y3, setY3] = useState('8');
-  const [z3, setZ3] = useState('8');
+  const [x1, setX1] = useLocalStorage('ScalarTripleProduct_x1', '2');
+  const [y1, setY1] = useLocalStorage('ScalarTripleProduct_y1', '3');
+  const [z1, setZ1] = useLocalStorage('ScalarTripleProduct_z1', '3');
+  const [x2, setX2] = useLocalStorage('ScalarTripleProduct_x2', '2');
+  const [y2, setY2] = useLocalStorage('ScalarTripleProduct_y2', '4');
+  const [z2, setZ2] = useLocalStorage('ScalarTripleProduct_z2', '6');
+  const [x3, setX3] = useLocalStorage('ScalarTripleProduct_x3', '7');
+  const [y3, setY3] = useLocalStorage('ScalarTripleProduct_y3', '8');
+  const [z3, setZ3] = useLocalStorage('ScalarTripleProduct_z3', '8');
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
-  const [answer, setAnswer] = useState('');
+  const [equation, setEquation] = useLocalStorage('ScalarTripleProduct_equation', '');
+  const [solution, setSolution] = useLocalStorage('ScalarTripleProduct_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('ScalarTripleProduct_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('ScalarTripleProduct_showSteps', true);
+  const [note, setNote] = useLocalStorage('ScalarTripleProduct_note', undefined);
+  const [answer, setAnswer] = useLocalStorage('ScalarTripleProduct_answer', '');
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

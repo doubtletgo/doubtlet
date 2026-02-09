@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import MathInput from 'react-math-keyboard';
 import { Equation } from '../Equation';
@@ -17,22 +18,22 @@ import {
 } from '../../helpers/matrixHelper';
 
 const ConcurrencyOfStraightLine = () => {
-  const [a1, setA1] = useState('1');
-  const [b1, setB1] = useState('2');
-  const [c1, setC1] = useState('\\sqrt{1}');
-  const [a2, setA2] = useState('1');
-  const [b2, setB2] = useState('e^5');
-  const [c2, setC2] = useState('4');
-  const [a3, setA3] = useState('2');
-  const [b3, setB3] = useState('\\sqrt{1}');
-  const [c3, setC3] = useState('8');
-  const [result, setResult] = useState();
+  const [a1, setA1] = useLocalStorage('ConcurrencyOfStraightLine_a1', '1');
+  const [b1, setB1] = useLocalStorage('ConcurrencyOfStraightLine_b1', '2');
+  const [c1, setC1] = useLocalStorage('ConcurrencyOfStraightLine_c1', '\\sqrt{1}');
+  const [a2, setA2] = useLocalStorage('ConcurrencyOfStraightLine_a2', '1');
+  const [b2, setB2] = useLocalStorage('ConcurrencyOfStraightLine_b2', 'e^5');
+  const [c2, setC2] = useLocalStorage('ConcurrencyOfStraightLine_c2', '4');
+  const [a3, setA3] = useLocalStorage('ConcurrencyOfStraightLine_a3', '2');
+  const [b3, setB3] = useLocalStorage('ConcurrencyOfStraightLine_b3', '\\sqrt{1}');
+  const [c3, setC3] = useLocalStorage('ConcurrencyOfStraightLine_c3', '8');
+  const [result, setResult] = useLocalStorage('ConcurrencyOfStraightLine_result', undefined);
   const isInvalid = useRef();
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [equation, setEquation] = useLocalStorage('ConcurrencyOfStraightLine_equation', '');
+  const [solution, setSolution] = useLocalStorage('ConcurrencyOfStraightLine_solution', '');
+  const [showResult, setShowResult] = useLocalStorage('ConcurrencyOfStraightLine_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('ConcurrencyOfStraightLine_showSteps', true);
+  const [note, setNote] = useLocalStorage('ConcurrencyOfStraightLine_note', undefined);
   const mf1 = useRef();
   const mf2 = useRef();
   const mf3 = useRef();

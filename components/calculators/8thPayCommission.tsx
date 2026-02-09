@@ -2,22 +2,23 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
 import Input from '../common/input';
 
 const EightthPayCommission = () => {
-  const [basicSalary, setBasicSalary] = useState('50200');
-  const [fitmentFactor, setFitmentFactor] = useState('1.86');
-  const [expectedDA, setExpectedDA] = useState('0');
-  const [hraCityClass, setHraCityClass] = useState<'X' | 'Y' | 'Z'>('X');
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [basicSalary, setBasicSalary] = useLocalStorage('8thPayCommission_basicSalary', '50200');
+  const [fitmentFactor, setFitmentFactor] = useLocalStorage('8thPayCommission_fitmentFactor', '1.86');
+  const [expectedDA, setExpectedDA] = useLocalStorage('8thPayCommission_expectedDA', '0');
+  const [hraCityClass, setHraCityClass] = useLocalStorage<'X' | 'Y' | 'Z'>('8thPayCommission_hraCityClass', 'X');
+  const [equation, setEquation] = useLocalStorage('8thPayCommission_equation', '');
+  const [solution, setSolution] = useLocalStorage('8thPayCommission_solution', '');
+  const [result, setResult] = useLocalStorage('8thPayCommission_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('8thPayCommission_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('8thPayCommission_showSteps', true);
+  const [note, setNote] = useLocalStorage('8thPayCommission_note', undefined);
 
   const hasValue =
     basicSalary &&

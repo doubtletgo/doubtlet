@@ -2,6 +2,7 @@
 import AdComponent from '../AdSense';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { renderSteps } from '../../helpers/katex';
 import { Equation } from '../Equation';
 import { getSearchParams, putSpace } from '../../helpers/general';
@@ -11,15 +12,13 @@ import nerdamer, { convertFromLaTeX } from 'nerdamer-prime';
 import 'nerdamer-prime/Extra';
 
 const LaplaceTransform = () => {
-  const [expression, setExpression] = useState(
-    'e^{-2t}\\left(sin\\left({3t}\\right)\\right)'
-  );
-  const [equation, setEquation] = useState('');
-  const [solution, setSolution] = useState('');
-  const [result, setResult] = useState();
-  const [showResult, setShowResult] = useState(true);
-  const [showSteps, setShowSteps] = useState(true);
-  const [note, setNote] = useState();
+  const [expression, setExpression] = useLocalStorage('LaplaceTransform_expression', 'e^{-2t}\\left(sin\\left({3t}\\right)\\right)');
+  const [equation, setEquation] = useLocalStorage('LaplaceTransform_equation', '');
+  const [solution, setSolution] = useLocalStorage('LaplaceTransform_solution', '');
+  const [result, setResult] = useLocalStorage('LaplaceTransform_result', undefined);
+  const [showResult, setShowResult] = useLocalStorage('LaplaceTransform_showResult', true);
+  const [showSteps, setShowSteps] = useLocalStorage('LaplaceTransform_showSteps', true);
+  const [note, setNote] = useLocalStorage('LaplaceTransform_note', undefined);
   const inputRef = useRef<MathField>(null);
 
   useEffect(() => {
